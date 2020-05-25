@@ -1,0 +1,17 @@
+{
+    "version": 2,
+    "alias": "nom-nom-app",
+    "name": "nom-nom-app",
+    "routes": [
+        {
+            "src": "^/static/(.*)",
+            "dest": "/static/$1"
+        },
+        {
+            "src": ".*",
+            "dest": "/index.html"
+        }       
+    ]
+}
+
+
