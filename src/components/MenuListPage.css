@@ -1,3 +1,16 @@
 .MenuListPage {
     border: 1px solid black
 }
+
+.menuCategory {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+ul {
+    list-style: none;
+}
+
+summary:focus {
+    outline: none;
+}
