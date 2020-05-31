@@ -8,30 +8,32 @@ class EditMenuItem extends React.Component {
                 <h1>Edit Menu Item</h1>
                 <section>
                     <form>
-                        <label for="name"> Name: </label>
+                        <label htmlFor="name"> Name: </label>
                         <input type="text" id="name" name="name"/><br/>
 
-                        <label for="calories"> Calories: </label>
+                        <label htmlFor="calories"> Calories: </label>
                         <input type="text" id="calories" name="calories"/><br/>
 
-                        <label for="carbs"> Carbs(g): </label>
+                        <label htmlFor="carbs"> Carbs(g): </label>
                         <input type="text" id="carbs" name="carbs"/><br/>
 
-                        <label for="protein"> Protein(g): </label>
+                        <label htmlFor="protein"> Protein(g): </label>
                         <input type="text" id="protein" name="protein"/><br/>
 
-                        <label for="fat"> Fat(g): </label>
+                        <label htmlFor="fat"> Fat(g): </label>
                         <input type="text" id="fat" name="fat"/><br/>
 
-                        <label for="category">Category: </label>
-                            <select id="category" name="category">
+                        <label htmlFor="category">Category: </label>
+                            <select id="category" name="category" defaultValue="Lunch">
                                 <option value="Breakfast">Breakfast</option>
-                                <option value="Lunch" selected>Lunch</option>
+                                <option value="Lunch">Lunch</option>
                                 <option value="Dinner">Dinner</option>
                             </select><br/>
-                        <button>Update</button>
-                        <button>Cancel</button>
+                        <button onClick={e => e.preventDefault()}>Update</button>
                     </form>
+                        <a href='/menu'>
+                            <button>Cancel</button>
+                        </a>
                 </section>
             </div>
         )

@@ -19,7 +19,8 @@ class MealPlanPage extends React.Component {
         const breakfasts = this.props.items.filter(item => item.category === 'Breakfast')
                                            .map((item, i) => 
                                                     <li key={i}>
-                                                        <span>{item.name}</span>
+                                                        <span>{item.name}</span> <br/>
+                                                        {item.url ? <img src={item.url} alt={`${item.name}`}/> : "" }
                                                         <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g  <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
                                                         <button>Remove from Today's Meal Plan</button>
                                                     </li>)
@@ -28,7 +29,8 @@ class MealPlanPage extends React.Component {
         const lunches = this.props.items.filter(item => item.category === 'Lunch')
                                         .map((item, i) => 
                                                     <li key={i}>
-                                                        <span>{item.name}</span>
+                                                        <span>{item.name}</span> <br/>
+                                                        {item.url ? <img src={item.url} alt={`${item.name}`}/> : "" }
                                                         <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g  <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
                                                         <button>Remove from Today's Meal Plan</button>
                                                     </li>)
@@ -37,7 +39,8 @@ class MealPlanPage extends React.Component {
         const dinners = this.props.items.filter(item => item.category === 'Dinner')
                                         .map((item, i) => 
                                                     <li key={i}>
-                                                        <span>{item.name}</span>
+                                                        <span>{item.name}</span> <br/>
+                                                        {item.url ? <img src={item.url} alt={`${item.name}`}/> : "" }
                                                         <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g  <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
                                                         <button>Remove from Today's Meal Plan</button>
                                                     </li>)                                                  

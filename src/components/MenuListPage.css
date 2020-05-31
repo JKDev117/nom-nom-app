@@ -14,3 +14,9 @@ ul {
 summary:focus {
     outline: none;
 }
+
+img {
+    height: 200px;
+    width: 200px;
+    object-fit: contain;
+}

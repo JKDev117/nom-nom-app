@@ -9,8 +9,9 @@ import NotFoundPage from './components/NotFoundPage';
 import { LIST, PLAN } from './store.js'
 
 class App extends React.Component {
+  
   render(){
-    console.log(this.props)
+    console.log(LIST[0].url)
     return (
        <main className='App'>
          <Switch>

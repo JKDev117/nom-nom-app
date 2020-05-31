@@ -1,17 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import './MenuListPage.css';
 
-
 class MenuListPage extends React.Component {
+
     render(){
         const breakfasts = this.props.items.filter(item => item.category === 'Breakfast')
                                            .map((item, i) => 
                                                     <li key={i}>
                                                         <details>
                                                             <summary>{item.name}</summary>
+                                                            {item.url ? <img src={item.url} alt={`${item.name}`}/> : "" }
+
                                                             <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g   <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
+
                                                         </details>
+
                                                         <button>Add to Today's Meal Plan</button>
                                                         <button>Remove from Today's Meal Plan</button>
                                                         <a href='/edit-menu-item'>
@@ -25,6 +29,8 @@ class MenuListPage extends React.Component {
                                                     <li key={i}>
                                                         <details>
                                                             <summary>{item.name}</summary>
+                                                            {item.url ? <img src={item.url} alt={`${item.name}`}/> : "" }
+
                                                             <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g   <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
                                                         </details>
                                                         <button>Add to Today's Meal Plan</button>
@@ -41,6 +47,8 @@ class MenuListPage extends React.Component {
                                                     <li key={i}>
                                                         <details>
                                                             <summary>{item.name}</summary>
+                                                            {item.url ? <img src={item.url} alt={`${item.name}`}/> : "" }
+
                                                             <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g   <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
                                                         </details>
                                                         <button>Add to Today's Meal Plan</button>
