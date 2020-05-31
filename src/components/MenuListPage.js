@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './MenuListPage.css';
 
+
 class MenuListPage extends React.Component {
     
     render(){
@@ -63,12 +64,6 @@ class MenuListPage extends React.Component {
 
         return(
             <div className="MenuListPage">
-                <nav>
-                    <Link to="/">Home</Link>
-                    {" "}
-                    <Link to="/meal-plan">My Meal Plan</Link>
-                </nav>
-
                 <h1>My Nom Nom Menu</h1>
                 <section className="menuCategory">Breakfast Menu <br/>
                     <ul>

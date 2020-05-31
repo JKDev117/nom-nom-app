@@ -48,12 +48,6 @@ class MealPlanPage extends React.Component {
 
         return(
             <div className="MenuListPage">
-                <nav>
-                    <Link to="/">Home</Link>
-                    {" "}
-                    <Link to="/menu">My Menu</Link>
-                </nav>
-
                 <h1>Today's Meal Plan</h1>
                 <section className="menuCategory">Breakfast <br/>
                     <ul>

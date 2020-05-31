@@ -6,13 +6,16 @@ import MealPlanPage from './components/MealPlanPage';
 import AddMenuItem from './components/AddMenuItem';
 import EditMenuItem from './components/EditMenuItem';
 import NotFoundPage from './components/NotFoundPage';
-import { LIST, PLAN } from './store.js'
+import Nav from './components/Nav';
+import { LIST, PLAN } from './store.js';
+
 
 class App extends React.Component {
   
   render(){
     return (
        <main className='App'>
+         <Nav />
          <Switch>
             <Route exact path='/' component={LandingPage} /> 
             <Route path='/menu' 
