@@ -1,5 +1,5 @@
 import React from 'react';
-//import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './MealPlanPage.css';
 
 class MealPlanPage extends React.Component {
@@ -49,9 +49,9 @@ class MealPlanPage extends React.Component {
         return(
             <div className="MenuListPage">
                 <nav>
-                    <a href="/">Home</a>
+                    <Link to="/">Home</Link>
                     {" "}
-                    <a href="/menu">My Menu</a>
+                    <Link to="/menu">My Menu</Link>
                 </nav>
 
                 <h1>Today's Meal Plan</h1>

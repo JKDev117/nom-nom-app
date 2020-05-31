@@ -1,5 +1,5 @@
 import React from 'react';
-//import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './LandingPage.css'
 
 class LandingPage extends React.Component {
@@ -8,8 +8,8 @@ class LandingPage extends React.Component {
             <div className="LandingPage">
                 <h1>My Nom Nom Menu & Meal Planner</h1>
                 <p>This app lets you create your own menu & plan what you want to eat today.</p>
-                <a href='/menu'>Go To My Menu</a><br/>
-                <a href='/meal-plan'>Go To Today's Meal Plan</a>
+                <Link to='/menu'>Go To My Menu</Link><br/>
+                <Link to='/meal-plan'>Go To Today's Meal Plan</Link>
             </div>
         )
     }

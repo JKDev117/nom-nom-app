@@ -1,10 +1,11 @@
 import React from 'react';
-//import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './MenuListPage.css';
 
 class MenuListPage extends React.Component {
-
+    
     render(){
+        //console.log(this.props.location.pathname)
         const breakfasts = this.props.items.filter(item => item.category === 'Breakfast')
                                            .map((item, i) => 
                                                     <li key={i}>
@@ -18,9 +19,9 @@ class MenuListPage extends React.Component {
 
                                                         <button>Add to Today's Meal Plan</button>
                                                         <button>Remove from Today's Meal Plan</button>
-                                                        <a href='/edit-menu-item'>
+                                                        <Link to='/edit-menu-item'>
                                                             <button>Edit Meal Item</button>
-                                                        </a>    
+                                                        </Link>    
                                                     </li>)
         //console.log(breakfasts)
         
@@ -35,9 +36,9 @@ class MenuListPage extends React.Component {
                                                         </details>
                                                         <button>Add to Today's Meal Plan</button>
                                                         <button>Remove from Today's Meal Plan</button>
-                                                        <a href='/edit-menu-item'>
+                                                        <Link to='/edit-menu-item'>
                                                             <button>Edit Meal Item</button>
-                                                        </a> 
+                                                        </Link> 
 
                                                     </li>)
         //console.log(lunches)
@@ -53,9 +54,9 @@ class MenuListPage extends React.Component {
                                                         </details>
                                                         <button>Add to Today's Meal Plan</button>
                                                         <button>Remove from Today's Meal Plan</button>
-                                                        <a href='/edit-menu-item'>
+                                                        <Link to='/edit-menu-item'>
                                                             <button>Edit Meal Item</button>
-                                                        </a> 
+                                                        </Link> 
 
                                                     </li>)                                                   
         //console.log(dinners)
@@ -63,9 +64,9 @@ class MenuListPage extends React.Component {
         return(
             <div className="MenuListPage">
                 <nav>
-                    <a href="/">Home</a>
+                    <Link to="/">Home</Link>
                     {" "}
-                    <a href="/meal-plan">My Meal Plan</a>
+                    <Link to="/meal-plan">My Meal Plan</Link>
                 </nav>
 
                 <h1>My Nom Nom Menu</h1>
@@ -73,25 +74,25 @@ class MenuListPage extends React.Component {
                     <ul>
                         {breakfasts}
                     </ul>
-                    <a href='/add-menu-item'>
+                    <Link to='/add-menu-item'>
                         <button>+ Add New Menu Item</button>
-                    </a>
+                    </Link>
                 </section>
                 <section className="menuCategory">Lunch Menu <br/>
                     <ul>
                         {lunches}
                     </ul>
-                    <a href='/add-menu-item'>
+                    <Link to='/add-menu-item'>
                         <button>+ Add New Menu Item</button>
-                    </a>
+                    </Link>
                 </section>
                 <section className="menuCategory">Dinner Menu <br/>
                     <ul>
                         {dinners}
                     </ul>
-                    <a href='/add-menu-item'>
+                    <Link to='/add-menu-item'>
                         <button>+ Add New Menu Item</button>
-                    </a>
+                    </Link>
                 </section>
             </div>
         )
