@@ -11,6 +11,9 @@ class EditMenuItem extends React.Component {
                         <label htmlFor="name"> Name: </label>
                         <input type="text" id="name" name="name"/><br/>
 
+                        <label htmlFor="image-url"> Image URL: </label>
+                        <input type="url" id="image-url" name="image-url"/><br/>
+                        
                         <label htmlFor="calories"> Calories: </label>
                         <input type="text" id="calories" name="calories"/><br/>
 
