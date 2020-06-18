@@ -12,7 +12,7 @@ class MenuListPage extends React.Component {
                                                     <li key={i}>
                                                         <details>
                                                             <summary>{item.name}</summary>
-                                                            {item.url ? <img src={item.url} alt={`${item.name}`}/> : "" }
+                                                            {item.image_url ? <img src={item.image_url} alt={`${item.name}`}/> : "" }
 
                                                             <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g   <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
 
@@ -31,7 +31,7 @@ class MenuListPage extends React.Component {
                                                     <li key={i}>
                                                         <details>
                                                             <summary>{item.name}</summary>
-                                                            {item.url ? <img src={item.url} alt={`${item.name}`}/> : "" }
+                                                            {item.image_url ? <img src={item.image_url} alt={`${item.name}`}/> : "" }
 
                                                             <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g   <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
                                                         </details>
@@ -49,7 +49,7 @@ class MenuListPage extends React.Component {
                                                     <li key={i}>
                                                         <details>
                                                             <summary>{item.name}</summary>
-                                                            {item.url ? <img src={item.url} alt={`${item.name}`}/> : "" }
+                                                            {item.image_url ? <img src={item.image_url} alt={`${item.name}`}/> : "" }
 
                                                             <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g   <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
                                                         </details>
