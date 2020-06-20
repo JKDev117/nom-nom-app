@@ -1,13 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './MenuListPage.css';
-
+import MenuContext from '../MenuContext';
 
 class MenuListPage extends React.Component {
-    
+    static defaultProps = {
+        menu_items: []
+    }
+
+    static contextType = MenuContext;
+
     render(){
         //console.log(this.props.location.pathname)
-        const breakfasts = this.props.items.filter(item => item.category === 'Breakfast')
+        const { menu_items } = this.context
+        const breakfasts = menu_items.filter(item => item.category === 'Breakfast')
                                            .map((item, i) => 
                                                     <li key={i}>
                                                         <details>
@@ -26,7 +32,7 @@ class MenuListPage extends React.Component {
                                                     </li>)
         //console.log(breakfasts)
         
-        const lunches = this.props.items.filter(item => item.category === 'Lunch')
+        const lunches = menu_items.filter(item => item.category === 'Lunch')
                                         .map((item, i) => 
                                                     <li key={i}>
                                                         <details>
@@ -44,7 +50,7 @@ class MenuListPage extends React.Component {
                                                     </li>)
         //console.log(lunches)
         
-        const dinners = this.props.items.filter(item => item.category === 'Dinner')
+        const dinners = menu_items.filter(item => item.category === 'Dinner')
                                         .map((item, i) => 
                                                     <li key={i}>
                                                         <details>

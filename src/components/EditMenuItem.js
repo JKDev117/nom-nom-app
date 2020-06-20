@@ -2,6 +2,11 @@ import React from 'react';
 import './EditMenuItem.css'
 
 class EditMenuItem extends React.Component {
+
+    
+
+
+
     render(){
         return(
             <div className="EditMenuItem">
@@ -12,7 +17,7 @@ class EditMenuItem extends React.Component {
                         <input type="text" id="name" name="name"/><br/>
 
                         <label htmlFor="image-url"> Image URL: </label>
-                        <input type="url" id="image-url" name="image-url"/><br/>
+                        <input type="url" id="image_url" name="image_url"/><br/>
                         
                         <label htmlFor="calories"> Calories: </label>
                         <input type="text" id="calories" name="calories"/><br/>

@@ -1,18 +1,64 @@
 import React from 'react';
 import './AddMenuItem.css'
+import config from '../config'
 
 class AddMenuItem extends React.Component {
+
+    state = {
+        error: null
+    }
+
+    handleSubmit = e => {
+        e.preventDefault()
+        const { name, image_url, category } = e.target
+        const calories = parseInt(e.target.calories.value)
+        const carbs = parseInt(e.target.carbs.value)
+        const protein = parseInt(e.target.protein.value)
+        const fat = parseInt(e.target.fat.value)
+        const menu_item = {
+            name: name.value,
+            image_url: image_url.value,
+            calories: calories,
+            carbs: carbs,
+            protein: protein,
+            fat: fat,
+            category: category.value
+        }
+        const fetchUrl = config.REACT_APP_API_BASE_URL + '/menu'
+        fetch(fetchUrl, {
+            method: 'POST',
+            body: JSON.stringify(menu_item),
+            headers: {
+                "content-type": "application/json; charset=utf-8",
+                "Authorization": config.REACT_APP_API_KEY
+            }
+        })
+        .then(res => {
+            if(!res.ok) {
+                return  res.json().then(error => Promise.reject(error))
+            }
+            return res.json()
+        })
+        .then(data => {
+
+        })
+        .catch(error => {
+            this.setState({ error })
+        })
+    }
+
+    
     render(){
         return(
             <div className="AddMenuItem">
                 <h1>Add New Menu Item</h1>
                 <section>
-                    <form>
+                    <form onSubmit={this.handleSubmit}>
                         <label htmlFor="name"> Name: </label>
                         <input type="text" id="name" name="name"/><br/>
 
                         <label htmlFor="image-url"> Image URL: </label>
-                        <input type="url" id="image-url" name="image-url"/><br/>
+                        <input type="url" id="image_url" name="image_url"/><br/>
 
                         <label htmlFor="calories"> Calories: </label>
                         <input type="text" id="calories" name="calories"/><br/>
@@ -32,7 +78,7 @@ class AddMenuItem extends React.Component {
                                 <option value="Lunch">Lunch</option>
                                 <option value="Dinner">Dinner</option>
                             </select><br/>
-                        <button onClick={e => e.preventDefault()}>Add to Menu</button>
+                        <button type='submit'>Add to Menu</button>
                         <button onClick={e => {e.preventDefault(); this.props.history.push('/menu')}}>Cancel</button>
                     </form>
                     
