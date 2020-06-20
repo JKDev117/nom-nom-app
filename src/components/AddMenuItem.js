@@ -1,6 +1,7 @@
 import React from 'react';
 import './AddMenuItem.css'
 import config from '../config'
+import MenuContext from '../MenuContext'
 
 class AddMenuItem extends React.Component {
 
@@ -8,9 +9,12 @@ class AddMenuItem extends React.Component {
         error: null
     }
 
+    static contextType = MenuContext;
+
     handleSubmit = e => {
         e.preventDefault()
         const { name, image_url, category } = e.target
+        //console.log(typeof(image_url.value), image_url.value.length)
         const calories = parseInt(e.target.calories.value)
         const carbs = parseInt(e.target.carbs.value)
         const protein = parseInt(e.target.protein.value)
@@ -30,7 +34,7 @@ class AddMenuItem extends React.Component {
             body: JSON.stringify(menu_item),
             headers: {
                 "content-type": "application/json; charset=utf-8",
-                "Authorization": config.REACT_APP_API_KEY
+                "Authorization": `Bearer ${config.REACT_APP_API_KEY}`
             }
         })
         .then(res => {
@@ -40,14 +44,15 @@ class AddMenuItem extends React.Component {
             return res.json()
         })
         .then(data => {
-
+            this.context.addMenuItem(data)
+            this.props.history.push('/')
         })
         .catch(error => {
             this.setState({ error })
         })
     }
 
-    
+
     render(){
         return(
             <div className="AddMenuItem">
@@ -55,9 +60,9 @@ class AddMenuItem extends React.Component {
                 <section>
                     <form onSubmit={this.handleSubmit}>
                         <label htmlFor="name"> Name: </label>
-                        <input type="text" id="name" name="name"/><br/>
+                        <input type="text" id="name" name="name" required/><br/>
 
-                        <label htmlFor="image-url"> Image URL: </label>
+                        <label htmlFor="image_url"> Image URL: </label>
                         <input type="url" id="image_url" name="image_url"/><br/>
 
                         <label htmlFor="calories"> Calories: </label>
@@ -73,7 +78,7 @@ class AddMenuItem extends React.Component {
                         <input type="text" id="fat" name="fat"/><br/>
 
                         <label htmlFor="category">Category: </label>
-                            <select id="category" name="category" defaultValue="Lunch">
+                            <select id="category" name="category" defaultValue="Lunch" required>
                                 <option value="Breakfast">Breakfast</option>
                                 <option value="Lunch">Lunch</option>
                                 <option value="Dinner">Dinner</option>

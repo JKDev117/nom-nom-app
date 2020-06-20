@@ -27,6 +27,12 @@ class App extends React.Component {
     })
   }
 
+  addMenuItem = item => {
+    this.setState({
+      menu_items: [...this.state.menu_items, item]
+    })
+  }
+
   componentDidMount(){
     const url = config.REACT_APP_API_BASE_URL + '/menu';
     const options = {
@@ -50,6 +56,7 @@ class App extends React.Component {
   render(){
     const contextValue = {
       menu_items: this.state.menu_items,
+      addMenuItem: this.addMenuItem,
     }
 
     return (
