@@ -26,7 +26,7 @@ class MenuListPage extends React.Component {
 
                                                         <button>Add to Today's Meal Plan</button>
                                                         <button>Remove from Today's Meal Plan</button>
-                                                        <Link to='/edit-menu-item'>
+                                                        <Link to={`/edit-menu-item/${item.id}`}>
                                                             <button>Edit Meal Item</button>
                                                         </Link>    
                                                     </li>)
@@ -43,7 +43,7 @@ class MenuListPage extends React.Component {
                                                         </details>
                                                         <button>Add to Today's Meal Plan</button>
                                                         <button>Remove from Today's Meal Plan</button>
-                                                        <Link to='/edit-menu-item'>
+                                                        <Link to={`/edit-menu-item/${item.id}`}>
                                                             <button>Edit Meal Item</button>
                                                         </Link> 
 
@@ -61,7 +61,7 @@ class MenuListPage extends React.Component {
                                                         </details>
                                                         <button>Add to Today's Meal Plan</button>
                                                         <button>Remove from Today's Meal Plan</button>
-                                                        <Link to='/edit-menu-item'>
+                                                        <Link to={`/edit-menu-item/${item.id}`}>
                                                             <button>Edit Meal Item</button>
                                                         </Link> 
 

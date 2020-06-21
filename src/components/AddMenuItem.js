@@ -29,27 +29,30 @@ class AddMenuItem extends React.Component {
             category: category.value
         }
         const fetchUrl = config.REACT_APP_API_BASE_URL + '/menu'
-        fetch(fetchUrl, {
+
+        const options = {
             method: 'POST',
             body: JSON.stringify(menu_item),
             headers: {
                 "content-type": "application/json; charset=utf-8",
                 "Authorization": `Bearer ${config.REACT_APP_API_KEY}`
             }
-        })
-        .then(res => {
-            if(!res.ok) {
-                return  res.json().then(error => Promise.reject(error))
-            }
-            return res.json()
-        })
-        .then(data => {
-            this.context.addMenuItem(data)
-            this.props.history.push('/')
-        })
-        .catch(error => {
-            this.setState({ error })
-        })
+        }
+
+        fetch(fetchUrl, options)
+            .then(res => {
+                if(!res.ok) {
+                    return  res.json().then(error => Promise.reject(error))
+                }
+                return res.json()
+            })
+            .then(data => {
+                this.context.addMenuItem(data)
+                this.props.history.push('/menu')
+            })
+            .catch(error => {
+                this.setState({ error })
+            })
     }
 
 

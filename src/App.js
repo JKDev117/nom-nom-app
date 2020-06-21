@@ -70,7 +70,7 @@ class App extends React.Component {
                       render={()=> <MealPlanPage items={ PLAN }/>}
                 />
                 <Route path='/add-menu-item' component={AddMenuItem} />
-                <Route path='/edit-menu-item' component={EditMenuItem} />
+                <Route path='/edit-menu-item/:item_id' component={EditMenuItem} />
                 <Route component={NotFoundPage} />
             </Switch>
         </MenuContext.Provider>    
@@ -79,6 +79,7 @@ class App extends React.Component {
   }
 }
   
+
 
 export default App;
 
