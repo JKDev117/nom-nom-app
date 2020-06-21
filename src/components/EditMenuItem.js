@@ -1,8 +1,11 @@
 import React from 'react';
 import './EditMenuItem.css'
 import config from '../config'
+import MenuContext from '../MenuContext'
 
 class EditMenuItem extends React.Component {
+
+    static contextType = MenuContext;
 
     state = {
                 
@@ -18,6 +21,27 @@ class EditMenuItem extends React.Component {
         this.setState({
             [event.target.name]: event.target.value
         })
+    }
+
+    deleteMenuItem = id => {
+        const fetchUrl = config.REACT_APP_API_BASE_URL + '/menu/' + id
+        const options = { 
+            method: 'DELETE',
+            headers:{ 
+                "content-type": "application/json",
+                "Authorization": `Bearer ${config.REACT_APP_API_KEY}`
+            }
+        }
+        fetch(fetchUrl, options)
+            .then(res => {
+                if(!res.ok){
+                    return res.json().then(error =>  Promise.reject(error))
+                }
+                return;
+            })
+            .then(this.context.removeMenuItem(id))
+            .then(this.props.history.push('/menu'))
+            .catch(error => console.error(error))
     }
 
     componentDidMount(){
@@ -45,7 +69,7 @@ class EditMenuItem extends React.Component {
 
 
     render(){
-        const { name, image_url, calories, carbs, protein, fat, category } = this.state
+        const { id, name, image_url, calories, carbs, protein, fat, category } = this.state
         return(
             <div className="EditMenuItem">
                 <h1>Edit Menu Item</h1>
@@ -76,6 +100,7 @@ class EditMenuItem extends React.Component {
                                 <option value="Dinner">Dinner</option>
                             </select><br/>
                         <button onClick={e => e.preventDefault()}>Update</button>
+                        <button onClick={() => this.deleteMenuItem(id)}>Delete</button>
                         <button onClick={e => {e.preventDefault(); this.props.history.push('/menu')}}>Cancel</button>
                     </form>
                 </section>

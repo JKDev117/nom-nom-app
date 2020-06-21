@@ -19,7 +19,7 @@ class App extends React.Component {
     menu_plan: [],
     error: null
   }
-  
+
   setMenuItems = items => {
     this.setState({
       menu_items: items,
@@ -30,6 +30,15 @@ class App extends React.Component {
   addMenuItem = item => {
     this.setState({
       menu_items: [...this.state.menu_items, item]
+    })
+  }
+
+  removeMenuItem = itemId => {
+    const updatedMenuItems = this.state.menu_items.filter(itm => 
+      itm.id !== itemId
+    )
+    this.setState({
+      menu_items: updatedMenuItems
     })
   }
 
@@ -57,6 +66,7 @@ class App extends React.Component {
     const contextValue = {
       menu_items: this.state.menu_items,
       addMenuItem: this.addMenuItem,
+      removeMenuItem: this.removeMenuItem,
     }
 
     return (
