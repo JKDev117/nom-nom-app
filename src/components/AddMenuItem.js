@@ -87,7 +87,7 @@ class AddMenuItem extends React.Component {
                                 <option value="Dinner">Dinner</option>
                             </select><br/>
                         <button type='submit'>Add to Menu</button>
-                        <button onClick={e => {e.preventDefault(); this.props.history.push('/menu')}}>Cancel</button>
+                        <button onClick={() => this.props.history.push('/menu')}>Cancel</button>
                     </form>
                     
                 </section>

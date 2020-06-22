@@ -42,6 +42,18 @@ class App extends React.Component {
     })
   }
 
+  updateMenuItem = item => {
+    const updatedMenuItems = this.state.menu_items.map(itm => 
+      (itm.id === item.id) ?
+        item 
+          :
+        itm
+      )
+      this.setState({
+        menu_items: updatedMenuItems
+      })
+  }
+
   componentDidMount(){
     const url = config.REACT_APP_API_BASE_URL + '/menu';
     const options = {
@@ -67,6 +79,7 @@ class App extends React.Component {
       menu_items: this.state.menu_items,
       addMenuItem: this.addMenuItem,
       removeMenuItem: this.removeMenuItem,
+      updateMenuItem: this.updateMenuItem,
     }
 
     return (
@@ -88,7 +101,8 @@ class App extends React.Component {
     );
   }
 }
-  
+
+
 
 
 export default App;
