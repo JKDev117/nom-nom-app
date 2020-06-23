@@ -61,6 +61,17 @@ class App extends React.Component {
   }
 
   removeFromMenuPlan = itemId => {
+    const { menu_plan } = this.state
+    for(let i=0; i < menu_plan.length; i++){
+      if(menu_plan[i].id === itemId){
+        menu_plan.splice(i,1)
+        this.setState({
+          menu_plan: menu_plan
+        })
+        return
+      }
+    }
+    /*
     if(this.state.menu_plan.some(item => item.id === itemId)){
       const updatedMenuPlan = this.state.menu_plan.filter(itm => 
         itm.id !== itemId
@@ -69,6 +80,7 @@ class App extends React.Component {
         menu_plan: updatedMenuPlan
       })
     }
+    */
   }
 
   componentDidMount(){

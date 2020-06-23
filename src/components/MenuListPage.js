@@ -12,7 +12,7 @@ class MenuListPage extends React.Component {
 
     render(){
         //console.log(this.props.location.pathname)
-        const { menu_items, addToMenuPlan } = this.context
+        const { menu_items, addToMenuPlan, removeFromMenuPlan  } = this.context
         const breakfasts = menu_items.filter(item => item.category === 'Breakfast')
                                            .map((item, i) => 
                                                     <li key={i}>
@@ -25,7 +25,7 @@ class MenuListPage extends React.Component {
                                                         </details>
 
                                                         <button onClick={() => addToMenuPlan(item)}>Add to Today's Meal Plan</button>
-                                                        <button>Remove from Today's Meal Plan</button>
+                                                        <button onClick={()=>removeFromMenuPlan(item.id)}>Remove from Today's Meal Plan</button>
                                                         <Link to={`/edit-menu-item/${item.id}`}>
                                                             <button>Edit Meal Item</button>
                                                         </Link>    
@@ -42,7 +42,7 @@ class MenuListPage extends React.Component {
                                                             <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g   <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
                                                         </details>
                                                         <button onClick={() => addToMenuPlan(item)}>Add to Today's Meal Plan</button>
-                                                        <button>Remove from Today's Meal Plan</button>
+                                                        <button onClick={()=>removeFromMenuPlan(item.id)}>Remove from Today's Meal Plan</button>
                                                         <Link to={`/edit-menu-item/${item.id}`}>
                                                             <button>Edit Meal Item</button>
                                                         </Link> 
@@ -60,7 +60,7 @@ class MenuListPage extends React.Component {
                                                             <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g   <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
                                                         </details>
                                                         <button onClick={() => addToMenuPlan(item)}>Add to Today's Meal Plan</button>
-                                                        <button>Remove from Today's Meal Plan</button>
+                                                        <button onClick={()=>removeFromMenuPlan(item.id)}>Remove from Today's Meal Plan</button>
                                                         <Link to={`/edit-menu-item/${item.id}`}>
                                                             <button>Edit Meal Item</button>
                                                         </Link> 
