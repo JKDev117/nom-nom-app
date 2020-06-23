@@ -9,7 +9,7 @@ import NotFoundPage from './components/NotFoundPage';
 import Nav from './components/Nav';
 import config from './config';
 import MenuContext from './MenuContext'
-import { LIST, PLAN } from './store.js';
+//import { LIST, PLAN } from './store.js';
 
 
 class App extends React.Component {
@@ -60,6 +60,17 @@ class App extends React.Component {
     })
   }
 
+  removeFromMenuPlan = itemId => {
+    if(this.state.menu_plan.some(item => item.id === itemId)){
+      const updatedMenuPlan = this.state.menu_plan.filter(itm => 
+        itm.id !== itemId
+      )
+      this.setState({
+        menu_plan: updatedMenuPlan
+      })
+    }
+  }
+
   componentDidMount(){
     const url = config.REACT_APP_API_BASE_URL + '/menu';
     const options = {
@@ -88,6 +99,7 @@ class App extends React.Component {
       removeMenuItem: this.removeMenuItem,
       updateMenuItem: this.updateMenuItem,
       addToMenuPlan: this.addToMenuPlan,
+      removeFromMenuPlan: this.removeFromMenuPlan,
     }
 
     return (

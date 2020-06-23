@@ -7,7 +7,7 @@ class MealPlanPage extends React.Component {
     static contextType = MenuContext;
 
     render(){
-        const { menu_plan } = this.context
+        const { menu_plan, removeFromMenuPlan } = this.context
 
         //to calculate total
         let calories = 0;
@@ -27,7 +27,7 @@ class MealPlanPage extends React.Component {
                                                         <span>{item.name}</span> <br/>
                                                         {item.image_url ? <img src={item.image_url} alt={`${item.name}`}/> : "" }
                                                         <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g  <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
-                                                        <button>Remove from Today's Meal Plan</button>
+                                                        <button onClick={()=>removeFromMenuPlan(item.id)}>Remove from Today's Meal Plan</button>
                                                     </li>)
         //console.log(breakfasts)
         
@@ -37,7 +37,7 @@ class MealPlanPage extends React.Component {
                                                         <span>{item.name}</span> <br/>
                                                         {item.image_url ? <img src={item.image_url} alt={`${item.name}`}/> : "" }
                                                         <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g  <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
-                                                        <button>Remove from Today's Meal Plan</button>
+                                                        <button onClick={()=>removeFromMenuPlan(item.id)}>Remove from Today's Meal Plan</button>
                                                     </li>)
         //console.log(lunches)
         
@@ -47,7 +47,7 @@ class MealPlanPage extends React.Component {
                                                         <span>{item.name}</span> <br/>
                                                         {item.image_url ? <img src={item.image_url} alt={`${item.name}`}/> : "" }
                                                         <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g  <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
-                                                        <button>Remove from Today's Meal Plan</button>
+                                                        <button onClick={()=>removeFromMenuPlan(item.id)}>Remove from Today's Meal Plan</button>
                                                     </li>)                                                  
         //console.log(dinners)
 
