@@ -12,7 +12,7 @@ class MenuListPage extends React.Component {
 
     render(){
         //console.log(this.props.location.pathname)
-        const { menu_items } = this.context
+        const { menu_items, addToMenuPlan } = this.context
         const breakfasts = menu_items.filter(item => item.category === 'Breakfast')
                                            .map((item, i) => 
                                                     <li key={i}>
@@ -24,7 +24,7 @@ class MenuListPage extends React.Component {
 
                                                         </details>
 
-                                                        <button>Add to Today's Meal Plan</button>
+                                                        <button onClick={() => addToMenuPlan(item)}>Add to Today's Meal Plan</button>
                                                         <button>Remove from Today's Meal Plan</button>
                                                         <Link to={`/edit-menu-item/${item.id}`}>
                                                             <button>Edit Meal Item</button>

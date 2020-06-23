@@ -1,22 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './MealPlanPage.css';
+import MenuContext from '../MenuContext';
 
 class MealPlanPage extends React.Component {
+    static contextType = MenuContext;
+
     render(){
+        const { menu_plan } = this.context
+
+        //to calculate total
         let calories = 0;
         let carbs = 0;
         let protein = 0;
         let fat = 0;
-
-        this.props.items.forEach(item => {
+        menu_plan.forEach(item => {
             calories += item.calories;
             carbs += item.carbs;
             protein += item.protein;
             fat += item.fat;
         })
         
-        const breakfasts = this.props.items.filter(item => item.category === 'Breakfast')
+        const breakfasts = menu_plan.filter(item => item.category === 'Breakfast')
                                            .map((item, i) => 
                                                     <li key={i}>
                                                         <span>{item.name}</span> <br/>
@@ -26,7 +31,7 @@ class MealPlanPage extends React.Component {
                                                     </li>)
         //console.log(breakfasts)
         
-        const lunches = this.props.items.filter(item => item.category === 'Lunch')
+        const lunches = menu_plan.filter(item => item.category === 'Lunch')
                                         .map((item, i) => 
                                                     <li key={i}>
                                                         <span>{item.name}</span> <br/>
@@ -36,7 +41,7 @@ class MealPlanPage extends React.Component {
                                                     </li>)
         //console.log(lunches)
         
-        const dinners = this.props.items.filter(item => item.category === 'Dinner')
+        const dinners = menu_plan.filter(item => item.category === 'Dinner')
                                         .map((item, i) => 
                                                     <li key={i}>
                                                         <span>{item.name}</span> <br/>

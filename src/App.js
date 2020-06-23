@@ -54,6 +54,12 @@ class App extends React.Component {
       })
   }
 
+  addToMenuPlan = item => {
+    this.setState({
+      menu_plan: [...this.state.menu_plan, item]
+    })
+  }
+
   componentDidMount(){
     const url = config.REACT_APP_API_BASE_URL + '/menu';
     const options = {
@@ -77,9 +83,11 @@ class App extends React.Component {
   render(){
     const contextValue = {
       menu_items: this.state.menu_items,
+      menu_plan: this.state.menu_plan,
       addMenuItem: this.addMenuItem,
       removeMenuItem: this.removeMenuItem,
       updateMenuItem: this.updateMenuItem,
+      addToMenuPlan: this.addToMenuPlan,
     }
 
     return (
@@ -89,9 +97,7 @@ class App extends React.Component {
             <Switch>
                 <Route exact path='/' component={LandingPage} /> 
                 <Route path='/menu' component={MenuListPage}/>
-                <Route path='/meal-plan' 
-                      render={()=> <MealPlanPage items={ PLAN }/>}
-                />
+                <Route path='/meal-plan' component={MealPlanPage}/>
                 <Route path='/add-menu-item' component={AddMenuItem} />
                 <Route path='/edit-menu-item/:item_id' component={EditMenuItem} />
                 <Route component={NotFoundPage} />
