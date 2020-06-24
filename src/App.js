@@ -17,7 +17,8 @@ class App extends React.Component {
   state = {
     menu_items: [],
     menu_plan: [],
-    error: null
+    error: null,
+    item_counts: []
   }
 
   setMenuItems = items => {
@@ -55,9 +56,10 @@ class App extends React.Component {
   }
 
   addToMenuPlan = item => {
+    const { menu_plan } = this.state
     this.setState({
-      menu_plan: [...this.state.menu_plan, item]
-    })
+      menu_plan: [...menu_plan, item]
+    })    
   }
 
   removeFromMenuPlan = itemId => {
@@ -71,16 +73,6 @@ class App extends React.Component {
         return
       }
     }
-    /*
-    if(this.state.menu_plan.some(item => item.id === itemId)){
-      const updatedMenuPlan = this.state.menu_plan.filter(itm => 
-        itm.id !== itemId
-      )
-      this.setState({
-        menu_plan: updatedMenuPlan
-      })
-    }
-    */
   }
 
   componentDidMount(){
