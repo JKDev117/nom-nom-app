@@ -6,6 +6,7 @@ import MealPlanPage from './components/MealPlanPage';
 import AddMenuItem from './components/AddMenuItem';
 import EditMenuItem from './components/EditMenuItem';
 import NotFoundPage from './components/NotFoundPage';
+import LoginPage from './components/LoginPage';
 import Nav from './components/Nav';
 import config from './config';
 import MenuContext from './MenuContext'
@@ -112,6 +113,7 @@ class App extends React.Component {
          <MenuContext.Provider value={contextValue}>
             <Switch>
                 <Route exact path='/' component={LandingPage} /> 
+                <Route path='/login' component={LoginPage}/>
                 <Route path='/menu' component={MenuListPage}/>
                 <Route path='/meal-plan' component={MealPlanPage}/>
                 <Route path='/add-menu-item' component={AddMenuItem} />
