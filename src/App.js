@@ -10,6 +10,7 @@ import LoginPage from './components/LoginPage';
 import Nav from './components/Nav';
 import config from './config';
 import MenuContext from './MenuContext'
+import TokenService from './services/token-service';
 //import { LIST, PLAN } from './store.js';
 
 
@@ -81,8 +82,9 @@ class App extends React.Component {
     const options = {
       method: 'GET',
       headers: {
-        "Authorization": `Bearer ${config.REACT_APP_API_KEY}`,
-        "Content-Type": "application/json"
+        //"Authorization": `Bearer ${config.REACT_APP_API_KEY}`,
+        "Authorization": `Basic ${TokenService.getAuthToken()}`,
+        "Content-Type": "application/json",
       }
     }
     fetch(url, options)

@@ -2,6 +2,7 @@ import React from 'react';
 import './AddMenuItem.css'
 import config from '../config'
 import MenuContext from '../MenuContext'
+import TokenService from '../services/token-service';
 
 class AddMenuItem extends React.Component {
 
@@ -35,7 +36,8 @@ class AddMenuItem extends React.Component {
             body: JSON.stringify(menu_item),
             headers: {
                 "content-type": "application/json; charset=utf-8",
-                "Authorization": `Bearer ${config.REACT_APP_API_KEY}`
+                //"Authorization": `Bearer ${config.REACT_APP_API_KEY}`,
+                "Authorization": `Basic ${TokenService.getAuthToken()}`,
             }
         }
 

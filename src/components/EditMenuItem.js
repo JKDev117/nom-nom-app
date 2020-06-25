@@ -2,6 +2,7 @@ import React from 'react';
 import './EditMenuItem.css'
 import config from '../config'
 import MenuContext from '../MenuContext'
+import TokenService from '../services/token-service';
 
 class EditMenuItem extends React.Component {
 
@@ -23,7 +24,8 @@ class EditMenuItem extends React.Component {
             method: 'DELETE',
             headers:{ 
                 "content-type": "application/json",
-                "Authorization": `Bearer ${config.REACT_APP_API_KEY}`
+                //"Authorization": `Bearer ${config.REACT_APP_API_KEY}`,
+                "Authorization": `Basic ${TokenService.getAuthToken()}`,
             }
         }
         fetch(fetchUrl, options)
@@ -82,7 +84,8 @@ class EditMenuItem extends React.Component {
             body: JSON.stringify(this.state),
             headers:{ 
                 "content-type": "application/json",
-                "Authorization": `Bearer ${config.REACT_APP_API_KEY}`
+                //"Authorization": `Bearer ${config.REACT_APP_API_KEY}`,
+                "Authorization": `Basic ${TokenService.getAuthToken()}`,
             }
         }
         fetch(fetchUrl, options)
@@ -105,7 +108,8 @@ class EditMenuItem extends React.Component {
             method: 'GET',
             headers:{ 
                 "content-type": "application/json",
-                "Authorization": `Bearer ${config.REACT_APP_API_KEY}`
+                //"Authorization": `Bearer ${config.REACT_APP_API_KEY}`,
+                "Authorization": `Basic ${TokenService.getAuthToken()}`,
             }
         }
         fetch(fetchUrl, options)

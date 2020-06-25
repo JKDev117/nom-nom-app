@@ -1,4 +1,5 @@
 import React from 'react'
+import TokenService from '../services/token-service'
 
 class LoginPage extends React.Component {
 
@@ -14,10 +15,12 @@ class LoginPage extends React.Component {
         ev.preventDefault()
         const { user_name, password } = ev.target
 
-        console.log('login form submitted')
-        console.log(user_name.value, password.value)
+        //console.log('login form submitted')
+        //console.log(user_name.value, password.value)
     
-        
+        TokenService.saveAuthToken(
+            TokenService.makeBasicAuthToken(user_name.value, password.value)
+        )
     
     
     }

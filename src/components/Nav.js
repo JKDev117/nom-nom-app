@@ -1,10 +1,20 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import './Nav.css';
+//import TokenService from '../services/token-service';
 
 export default function Nav() {
   let location = useLocation()
   
-  if(location.pathname === '/menu') {
+  if(location.pathname === '/'){
+    return (
+        <nav className='login-register-nav'>
+            <Link to="/login">Login</Link>
+              {" "}
+            {/*<Link to={'/register'}>Register</Link>*/}
+        </nav>
+    )
+  } else if(location.pathname === '/menu') {
     return (
         <nav>
             <Link to="/">Home</Link>
