@@ -32,7 +32,7 @@ export default function Nav() {
                 renderLogOutLink()
                   :
                 <>  
-                  <Link to='/' className='register-link'>Register</Link>
+                  <Link to='/register' className='register-link'>Register</Link>
                   {' '}
                   {renderLogInLink()}
                 </> 
@@ -72,7 +72,7 @@ export default function Nav() {
               {renderLogOutLink()}
         </nav>
       )
-    case ('/login' || '/register'):
+    case '/login':
       return (
         <nav>
           <h1>
@@ -82,6 +82,16 @@ export default function Nav() {
           </h1>
         </nav>    
       )
+    case '/register':
+      return (
+        <nav>
+          <h1>
+            <Link to='/' className='logo'>
+              My Nom Nom Menu & Meal Planner
+            </Link>  
+          </h1>
+        </nav>    
+      )  
     default:
       return(
         <nav>

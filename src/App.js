@@ -7,6 +7,7 @@ import AddMenuItem from './components/AddMenuItem/AddMenuItem';
 import EditMenuItem from './components/EditMenuItem/EditMenuItem';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 import LoginPage from './components/LoginPage/LoginPage';
+import RegistrationPage from './components/RegistrationPage/RegistrationPage';
 import Nav from './components/Nav/Nav';
 import MenuContext from './MenuContext'
 import TokenService from './services/token-service';
@@ -14,6 +15,7 @@ import TokenService from './services/token-service';
 import PrivateRoute from './components/Utils/PrivateRoute';
 import PublicOnlyRoute from './components/Utils/PublicOnlyRoute';
 import config from './config';
+
 
 class App extends React.Component {
 
@@ -99,6 +101,7 @@ class App extends React.Component {
             <Switch>
                 <Route exact path='/' component={LandingPage} /> 
                 <PublicOnlyRoute path='/login' component={LoginPage}/>
+                <PublicOnlyRoute path='/register' component={RegistrationPage}/>
                 <PrivateRoute path='/menu' component={MenuListPage}/>
                 <PrivateRoute path='/meal-plan' component={MealPlanPage}/>
                 <PrivateRoute path='/add-menu-item' component={AddMenuItem} />
