@@ -1,14 +1,7 @@
-.login-register-links {
-    text-align: right;
-    margin-right: 10px;
-    margin-top: 10px;
-}
-
-.logout-link{
+.login-link, .logout-link, .register-link  {
     float: right;
     margin-right: 10px;
 }
-
 
 .logo {
     text-decoration: none

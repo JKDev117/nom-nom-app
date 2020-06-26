@@ -6,21 +6,40 @@ import TokenService from '../services/token-service';
 export default function Nav() {
   let location = useLocation()
   
+  function renderLogOutLink(){
+    return(
+        <Link to="/" className='logout-link'>Logout</Link>        
+    )
+  }
+
+  function renderLogInLink(){
+    return(
+      <Link to="/login" className='login-link'>Login</Link>
+    )
+  }
+
   switch (location.pathname) {
     case '/':
       return (
-        <nav className='login-register-links'>
+        <nav>
             { TokenService.hasAuthToken() ? 
-             <Link to="/">Logout</Link>
-                :
-             <>
-              <Link to="/login">Login</Link>
-              {' '}
-              <Link to='/'>Register</Link>
-             </>    
+                renderLogOutLink()
+                  :
+                <>  
+                  <Link to='/' className='register-link'>Register</Link>
+                  {' '}
+                  {renderLogInLink()}
+                </> 
             }
         </nav>
       )
+    case TokenService.hasAuthToken():
+        return (
+          <nav>
+                renderLogOutLink()
+
+          </nav>
+        )  
     case '/menu':
       return (
         <nav>
@@ -28,7 +47,7 @@ export default function Nav() {
             {" "}
             <Link to={'/meal-plan'}>My Meal Plan</Link>
             {" "}
-            <Link to="/" className='logout-link'>Logout</Link>
+            {renderLogOutLink()}
         </nav>        
       )
     case '/meal-plan':
@@ -38,16 +57,16 @@ export default function Nav() {
             {" "}
             <Link to={'/menu'}>My Menu</Link>
             {" "}
-            <Link to="/" className='logout-link'>Logout</Link>
+            {renderLogOutLink()}
         </nav>        
       )
-    case '/add-menu-item' || 'edit-menu-item':
+    case '/add-menu-item':
       return (
-        <nav className='login-register-nav'>
-             <Link to="/">Logout</Link>
+        <nav>
+              {renderLogOutLink()}
         </nav>
       )
-    case '/login' || '/register':
+    case ('/login' || '/register'):
       return (
         <nav>
           <h1>
@@ -58,7 +77,11 @@ export default function Nav() {
         </nav>    
       )
     default:
-      break; 
+      return(
+        <nav>
+              {renderLogOutLink()}
+        </nav>
+      )
   }
 
 }
