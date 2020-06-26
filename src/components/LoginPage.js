@@ -7,22 +7,26 @@ class LoginPage extends React.Component {
     static defaultProps = {
         onLoginSuccess: () => {}
     }
-
-    state = {error: null}
     */
 
+    //state = {error: null}
+
+    handleLoginSuccess = () => {
+        const { history } = this.props
+        history.push('/')
+    }
+    
     handleSubmitBasicAuth = ev => {
         ev.preventDefault()
         const { user_name, password } = ev.target
-
-        //console.log('login form submitted')
-        //console.log(user_name.value, password.value)
     
         TokenService.saveAuthToken(
             TokenService.makeBasicAuthToken(user_name.value, password.value)
         )
-    
-    
+        
+        user_name.value = ''
+        password.value = ''
+        this.handleLoginSuccess()  
     }
 
 
