@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './MenuListPage.css';
-import MenuContext from '../MenuContext';
+import MenuContext from '../../MenuContext';
 //import { element } from 'prop-types';
-import config from '../config';
-import TokenService from '../services/token-service';
+import config from '../../config';
+import TokenService from '../../services/token-service';
 
 class MenuListPage extends React.Component {
 
@@ -33,7 +33,7 @@ class MenuListPage extends React.Component {
       method: 'GET',
       headers: {
         //"Authorization": `Bearer ${config.REACT_APP_API_KEY}`,
-        "Authorization": `Basic ${TokenService.getAuthToken()}`,
+        "Authorization": `Bearer ${TokenService.getAuthToken()}`,
         "Content-Type": "application/json",
       }
     }

@@ -1,13 +1,13 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import LandingPage from './components/LandingPage';
-import MenuListPage from './components/MenuListPage';
-import MealPlanPage from './components/MealPlanPage';
-import AddMenuItem from './components/AddMenuItem';
-import EditMenuItem from './components/EditMenuItem';
-import NotFoundPage from './components/NotFoundPage';
-import LoginPage from './components/LoginPage';
-import Nav from './components/Nav';
+import LandingPage from './components/LandingPage/LandingPage';
+import MenuListPage from './components/MenuListPage/MenuListPage';
+import MealPlanPage from './components/MealPlanPage/MealPlanPage';
+import AddMenuItem from './components/AddMenuItem/AddMenuItem';
+import EditMenuItem from './components/EditMenuItem/EditMenuItem';
+import NotFoundPage from './components/NotFoundPage/NotFoundPage';
+import LoginPage from './components/LoginPage/LoginPage';
+import Nav from './components/Nav/Nav';
 import MenuContext from './MenuContext'
 import TokenService from './services/token-service';
 //import { LIST, PLAN } from './store.js';

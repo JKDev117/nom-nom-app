@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Nav.css';
-import TokenService from '../services/token-service';
+import TokenService from '../../services/token-service';
 
 export default function Nav() {
   let location = useLocation()

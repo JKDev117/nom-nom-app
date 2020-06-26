@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './MealPlanPage.css';
-import MenuContext from '../MenuContext';
+import MenuContext from '../../MenuContext';
 
 class MealPlanPage extends React.Component {
     static contextType = MenuContext;

@@ -1,6 +1,6 @@
 import React from 'react'
-import TokenService from '../services/token-service'
-import AuthApiService from '../services/auth-api-service'
+import TokenService from '../../services/token-service'
+import AuthApiService from '../../services/auth-api-service'
 
 
 class LoginPage extends React.Component {
