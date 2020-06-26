@@ -6,9 +6,15 @@ import TokenService from '../services/token-service';
 export default function Nav() {
   let location = useLocation()
   
+  function handleLogoutClick(){
+    TokenService.clearAuthToken()
+  }
+
   function renderLogOutLink(){
     return(
-        <Link to="/" className='logout-link'>Logout</Link>        
+        <Link to="/" 
+              className='logout-link' 
+              onClick={()=>handleLogoutClick()}>Logout</Link>        
     )
   }
 

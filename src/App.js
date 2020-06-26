@@ -13,7 +13,7 @@ import MenuContext from './MenuContext'
 import TokenService from './services/token-service';
 //import { LIST, PLAN } from './store.js';
 import PrivateRoute from './components/Utils/PrivateRoute';
-
+import PublicOnlyRoute from './components/Utils/PublicOnlyRoute';
 
 class App extends React.Component {
 
@@ -116,7 +116,7 @@ class App extends React.Component {
          <MenuContext.Provider value={contextValue}>
             <Switch>
                 <Route exact path='/' component={LandingPage} /> 
-                <Route path='/login' component={LoginPage}/>
+                <PublicOnlyRoute path='/login' component={LoginPage}/>
                 <PrivateRoute path='/menu' component={MenuListPage}/>
                 <PrivateRoute path='/meal-plan' component={MealPlanPage}/>
                 <PrivateRoute path='/add-menu-item' component={AddMenuItem} />
