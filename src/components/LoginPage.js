@@ -1,15 +1,11 @@
 import React from 'react'
 import TokenService from '../services/token-service'
+import AuthApiService from '../services/auth-api-service'
+
 
 class LoginPage extends React.Component {
 
-    /*
-    static defaultProps = {
-        onLoginSuccess: () => {}
-    }
-    */
-
-    //state = {error: null}
+    state = {error: null}
 
     handleLoginSuccess = () => {
         const { history } = this.props
@@ -29,13 +25,33 @@ class LoginPage extends React.Component {
         this.handleLoginSuccess()  
     }
 
-
+    handleSubmitJwtAuth = ev => {
+        ev.preventDefault()
+        this.setState({ error: null })
+        const { user_name, password } = ev.target
+    
+        AuthApiService.postLogin({
+            user_name: user_name.value,
+            password: password.value,
+        })
+            .then(res => {
+                user_name.value = ''
+                password.value = ''
+                TokenService.saveAuthToken(res.authToken)
+                this.handleLoginSuccess()  
+            })
+            .catch(res => {
+                this.setState({ error: res.error })
+            })
+    }
+    
+    
     render(){
 
         return(
             <>
                 <h1>Login</h1>
-                <form onSubmit={this.handleSubmitBasicAuth}>
+                <form onSubmit={this.handleSubmitJwtAuth}>
                     <label htmlFor='login_user_name'>
                         Username:
                     </label>
