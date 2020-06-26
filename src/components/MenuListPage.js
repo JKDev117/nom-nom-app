@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import './MenuListPage.css';
 import MenuContext from '../MenuContext';
 //import { element } from 'prop-types';
+import config from '../config';
+import TokenService from '../services/token-service';
 
 class MenuListPage extends React.Component {
 
@@ -22,9 +24,32 @@ class MenuListPage extends React.Component {
         }
         return count
     }
-    
+   
+
+
+  componentDidMount(){
+    const url = config.REACT_APP_API_BASE_URL + '/menu';
+    const options = {
+      method: 'GET',
+      headers: {
+        //"Authorization": `Bearer ${config.REACT_APP_API_KEY}`,
+        "Authorization": `Basic ${TokenService.getAuthToken()}`,
+        "Content-Type": "application/json",
+      }
+    }
+    fetch(url, options)
+      .then(res => {
+        if(!res.ok){
+          return res.json().then(e => Promise.reject(e))
+        }
+        return res.json()
+      })
+      .then(this.context.setMenuItems)
+      .catch(error => console.log(error))//this.setState({error}))
+  }
 
     render(){
+        console.log(this.context)
         //console.log(this.props.location.pathname)
         const { menu_items, addToMenuPlan, removeFromMenuPlan, menu_plan  } = this.context
         const breakfasts = menu_items.filter(item => item.category === 'Breakfast')

@@ -3,6 +3,10 @@
     margin-right: 10px;
 }
 
+nav {
+    overflow:hidden;
+}
+
 .logo {
     text-decoration: none
 }

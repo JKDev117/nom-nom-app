@@ -8,12 +8,12 @@ import EditMenuItem from './components/EditMenuItem';
 import NotFoundPage from './components/NotFoundPage';
 import LoginPage from './components/LoginPage';
 import Nav from './components/Nav';
-import config from './config';
 import MenuContext from './MenuContext'
 import TokenService from './services/token-service';
 //import { LIST, PLAN } from './store.js';
 import PrivateRoute from './components/Utils/PrivateRoute';
 import PublicOnlyRoute from './components/Utils/PublicOnlyRoute';
+import config from './config';
 
 class App extends React.Component {
 
@@ -25,6 +25,7 @@ class App extends React.Component {
   }
 
   setMenuItems = items => {
+    console.log(items)
     this.setState({
       menu_items: items,
       error: null
@@ -78,26 +79,6 @@ class App extends React.Component {
     }
   }
 
-  componentDidMount(){
-    const url = config.REACT_APP_API_BASE_URL + '/menu';
-    const options = {
-      method: 'GET',
-      headers: {
-        //"Authorization": `Bearer ${config.REACT_APP_API_KEY}`,
-        "Authorization": `Basic ${TokenService.getAuthToken()}`,
-        "Content-Type": "application/json",
-      }
-    }
-    fetch(url, options)
-      .then(res => {
-        if(!res.ok){
-          return res.json().then(e => Promise.reject(e))
-        }
-        return res.json()
-      })
-      .then(this.setMenuItems)
-      .catch(error => this.setState({error}))
-  }
 
   render(){
     const contextValue = {
@@ -108,6 +89,7 @@ class App extends React.Component {
       updateMenuItem: this.updateMenuItem,
       addToMenuPlan: this.addToMenuPlan,
       removeFromMenuPlan: this.removeFromMenuPlan,
+      setMenuItems: this.setMenuItems,
     }
 
     return (
