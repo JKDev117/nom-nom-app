@@ -1,6 +1,6 @@
 import React from 'react'
 //import TokenService from '../../services/token-service'
-//import AuthApiService from '../../services/auth-api-service'
+import AuthApiService from '../../services/auth-api-service'
 
 
 class RegistrationPage extends React.Component {
@@ -44,8 +44,33 @@ class RegistrationPage extends React.Component {
             .catch(res => {
                 this.setState({ error: res.error })
             })
+    }*/
+
+    handleSubmit = ev => {
+        ev.preventDefault()
+        this.setState({ error: null })
+        const { first_name, last_name, user_name, password } = ev.target
+    
+        this.setState({error: null})
+
+        AuthApiService.postUser({
+            first_name: first_name.value,
+            last_name: last_name.value,
+            user_name: user_name.value,
+            password: password.value,
+        })
+            .then(user => {
+                first_name.value = ''
+                last_name.value = ''
+                user_name.value = ''
+                password.value = ''
+                this.handleRegistrationSuccess()  
+            })
+            .catch(res => {
+                this.setState({ error: res.error })
+            })
     }
-    */
+    
     
     render(){
 
@@ -66,12 +91,12 @@ class RegistrationPage extends React.Component {
                     <label htmlFor='register_user_name'>
                         Username:
                     </label>
-                    <input type='text' name='register_user_name' id='register_user_name' required/><br/>
+                    <input type='text' name='user_name' id='register_user_name' required/><br/>
                     
                     <label htmlFor='register_password'>
                         Password:
                     </label>
-                    <input type='password' name='register_password' id='register_password' required/><br/>
+                    <input type='password' name='password' id='register_password' required/><br/>
                     
                     <button type="submit">Create account</button>
                 </form>
