@@ -1,7 +1,7 @@
 import React from 'react'
 //import TokenService from '../../services/token-service'
 import AuthApiService from '../../services/auth-api-service'
-
+import './RegistrationPage.css'
 
 class RegistrationPage extends React.Component {
 
@@ -9,7 +9,7 @@ class RegistrationPage extends React.Component {
 
     handleRegistrationSuccess = () => {
         const { history } = this.props
-        history.push('/')
+        history.push('/login')
     }
     
     /*
@@ -48,7 +48,6 @@ class RegistrationPage extends React.Component {
 
     handleSubmit = ev => {
         ev.preventDefault()
-        this.setState({ error: null })
         const { first_name, last_name, user_name, password } = ev.target
     
         this.setState({error: null})
@@ -73,11 +72,14 @@ class RegistrationPage extends React.Component {
     
     
     render(){
-
+        const { error } = this.state
         return(
             <>
                 <h1>Create a Nom Nom Account</h1>
-                <form onSubmit={()=>{}}>
+                <form onSubmit={this.handleSubmit}>
+                    <div role='alert'>
+                       { error && <p className='red'>{error}</p> }
+                    </div>    
                     <label htmlFor='first_name'>
                         First Name:
                     </label>
