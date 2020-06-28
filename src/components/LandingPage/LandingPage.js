@@ -7,6 +7,8 @@ class LandingPage extends React.Component {
         return(
             <div className="LandingPage">
                 <h1>My Nom Nom Menu & Meal Planner</h1>
+                <img src='/images/chef-kirby.png' alt='chef-kirby'/>
+
                 <p>This app lets you create your own menu & plan what you want to eat today.</p>
                 <section className="landing-page-links">
                     <Link to='/menu'>Go To My Menu</Link><br/>

@@ -2,7 +2,6 @@ import React from 'react'
 //import TokenService from '../../services/token-service'
 import AuthApiService from '../../services/auth-api-service'
 
-
 class LoginPage extends React.Component {
 
     state = {error: null}
@@ -49,11 +48,16 @@ class LoginPage extends React.Component {
     
     
     render(){
-
+        const { error } = this.state
         return(
             <>
                 <h1>Login</h1>
                 <form onSubmit={this.handleSubmitJwtAuth}>
+                    <img src='/images/chef-mario-and-yoshi.png' alt='chef-mario-and-yoshi'/>
+
+                    <div role="alert">
+                        {error && <p className='red'>{error}</p>}
+                    </div>    
                     <label htmlFor='login_user_name'>
                         Username:
                     </label>
