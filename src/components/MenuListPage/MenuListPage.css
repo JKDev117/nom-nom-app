@@ -24,3 +24,7 @@ img {
     width: 200px;
     object-fit: contain;
 }
+
+#added-status{
+    color:lightcoral
+}

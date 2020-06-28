@@ -1,0 +1,12 @@
+.login-link, .logout-link, .register-link  {
+    float: right;
+    margin-right: 10px;
+}
+
+nav {
+    overflow:hidden;
+}
+
+.logo {
+    text-decoration: none
+}

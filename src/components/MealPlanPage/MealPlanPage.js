@@ -1,48 +1,53 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './MealPlanPage.css';
+import MenuContext from '../../MenuContext';
 
 class MealPlanPage extends React.Component {
+    static contextType = MenuContext;
+
     render(){
+        const { menu_plan, removeFromMenuPlan } = this.context
+
+        //to calculate total
         let calories = 0;
         let carbs = 0;
         let protein = 0;
         let fat = 0;
-
-        this.props.items.forEach(item => {
+        menu_plan.forEach(item => {
             calories += item.calories;
             carbs += item.carbs;
             protein += item.protein;
             fat += item.fat;
         })
         
-        const breakfasts = this.props.items.filter(item => item.category === 'Breakfast')
+        const breakfasts = menu_plan.filter(item => item.category === 'Breakfast')
                                            .map((item, i) => 
                                                     <li key={i}>
                                                         <span>{item.name}</span> <br/>
-                                                        {item.url ? <img src={item.url} alt={`${item.name}`}/> : "" }
+                                                        {item.image_url ? <img src={item.image_url} alt={`${item.name}`}/> : "here" }
                                                         <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g  <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
-                                                        <button>Remove from Today's Meal Plan</button>
+                                                        <button onClick={()=>removeFromMenuPlan(item.id)}>Remove from Today's Meal Plan</button>
                                                     </li>)
         //console.log(breakfasts)
         
-        const lunches = this.props.items.filter(item => item.category === 'Lunch')
+        const lunches = menu_plan.filter(item => item.category === 'Lunch')
                                         .map((item, i) => 
                                                     <li key={i}>
                                                         <span>{item.name}</span> <br/>
-                                                        {item.url ? <img src={item.url} alt={`${item.name}`}/> : "" }
+                                                        {item.image_url ? <img src={item.image_url} alt={`${item.name}`}/> : "" }
                                                         <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g  <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
-                                                        <button>Remove from Today's Meal Plan</button>
+                                                        <button onClick={()=>removeFromMenuPlan(item.id)}>Remove from Today's Meal Plan</button>
                                                     </li>)
         //console.log(lunches)
         
-        const dinners = this.props.items.filter(item => item.category === 'Dinner')
+        const dinners = menu_plan.filter(item => item.category === 'Dinner')
                                         .map((item, i) => 
                                                     <li key={i}>
                                                         <span>{item.name}</span> <br/>
-                                                        {item.url ? <img src={item.url} alt={`${item.name}`}/> : "" }
+                                                        {item.image_url ? <img src={item.image_url} alt={`${item.name}`}/> : "" }
                                                         <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g  <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
-                                                        <button>Remove from Today's Meal Plan</button>
+                                                        <button onClick={()=>removeFromMenuPlan(item.id)}>Remove from Today's Meal Plan</button>
                                                     </li>)                                                  
         //console.log(dinners)
 
