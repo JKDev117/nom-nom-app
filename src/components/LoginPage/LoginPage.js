@@ -1,5 +1,5 @@
 import React from 'react'
-import TokenService from '../../services/token-service'
+//import TokenService from '../../services/token-service'
 import AuthApiService from '../../services/auth-api-service'
 
 
@@ -16,9 +16,11 @@ class LoginPage extends React.Component {
         ev.preventDefault()
         const { user_name, password } = ev.target
     
+        /*
         TokenService.saveAuthToken(
             TokenService.makeBasicAuthToken(user_name.value, password.value)
         )
+        */
         
         user_name.value = ''
         password.value = ''
@@ -37,7 +39,7 @@ class LoginPage extends React.Component {
             .then(res => {
                 user_name.value = ''
                 password.value = ''
-                TokenService.saveAuthToken(res.authToken)
+                //TokenService.saveAuthToken(res.authToken)
                 this.handleLoginSuccess()  
             })
             .catch(res => {
