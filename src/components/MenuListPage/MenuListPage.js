@@ -50,7 +50,6 @@ class MenuListPage extends React.Component {
 
     render(){
         console.log(this.context)
-        //console.log(this.props.location.pathname)
         const { menu_items, addToMenuPlan, removeFromMenuPlan, menu_plan  } = this.context
         const breakfasts = menu_items.filter(item => item.category === 'Breakfast')
                                            .map((item, i) => 
@@ -67,7 +66,6 @@ class MenuListPage extends React.Component {
                                                             <button>Edit Meal Item</button>
                                                         </Link>    
                                                     </li>)
-        //console.log(breakfasts)
         
         const lunches = menu_items.filter(item => item.category === 'Lunch')
                                         .map((item, i) => 
@@ -85,7 +83,6 @@ class MenuListPage extends React.Component {
                                                         </Link> 
 
                                                     </li>)
-        //console.log(lunches)
         
         const dinners = menu_items.filter(item => item.category === 'Dinner')
                                         .map((item, i) => 

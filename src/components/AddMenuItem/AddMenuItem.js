@@ -15,7 +15,6 @@ class AddMenuItem extends React.Component {
     handleSubmit = e => {
         e.preventDefault()
         const { name, image_url, category } = e.target
-        //console.log(typeof(image_url.value), image_url.value.length)
         const calories = parseInt(e.target.calories.value)
         const carbs = parseInt(e.target.carbs.value)
         const protein = parseInt(e.target.protein.value)

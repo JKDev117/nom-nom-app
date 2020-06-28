@@ -29,7 +29,6 @@ class App extends React.Component {
   }
 
   setMenuItems = items => {
-    console.log(items)
     this.setState({
       menu_items: items,
       error: null

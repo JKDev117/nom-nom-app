@@ -41,9 +41,6 @@ class EditMenuItem extends React.Component {
     }
 
     handleChange = event => {
-        console.log("event name:", event.target.name)
-        console.log("typeof:", typeof(event.target.value))
-        console.log("length:", event.target.value.length)
         if(event.target.value.length === 0){
             this.setState({
                 [event.target.name]: null
@@ -63,7 +60,6 @@ class EditMenuItem extends React.Component {
         event.preventDefault()
         /*
         const { name, image_url, category } = event.target
-        //console.log(typeof(image_url.value), image_url.value.length)
         const calories = parseInt(event.target.calories.value)
         const carbs = parseInt(event.target.carbs.value)
         const protein = parseInt(event.target.protein.value)
@@ -127,7 +123,6 @@ class EditMenuItem extends React.Component {
     }
 
     render(){
-        console.log("state at render", this.state)
         const { id, name, image_url, calories, carbs, protein, fat, category } = this.state
         return(
             <div className="EditMenuItem">
