@@ -49,7 +49,6 @@ class MenuListPage extends React.Component {
   }
 
     render(){
-        console.log(this.context)
         const { menu_items, addToMenuPlan, removeFromMenuPlan, menu_plan  } = this.context
         const breakfasts = menu_items.filter(item => item.category === 'Breakfast')
                                            .map((item, i) => 
@@ -100,7 +99,6 @@ class MenuListPage extends React.Component {
                                                         </Link> 
 
                                                     </li>)                                                   
-        //console.log(dinners)
 
         return(
             <div className="MenuListPage">
