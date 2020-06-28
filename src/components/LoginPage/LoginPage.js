@@ -53,7 +53,7 @@ class LoginPage extends React.Component {
             <>
                 <h1>Login</h1>
                 <form onSubmit={this.handleSubmitJwtAuth}>
-                    <img src='/images/chef-mario-and-yoshi.png' alt='chef-mario-and-yoshi'/>
+                    <img src='https://66.media.tumblr.com/50351820b1bcdfb9649dd5a0fcfe743c/e2b38183373ea62d-e7/s1280x1920/8dd463fbe477a7615245cf16c68327b115b8efca.png' alt='chef-mario-and-yoshi'/>
 
                     <div role="alert">
                         {error && <p className='red'>{error}</p>}
