@@ -10,3 +10,8 @@ ul {
 .mealplan-nutritional-info {
     font-size: 0.7em;
 }
+
+.user-note {
+    color: red;
+    text-align: center;
+}

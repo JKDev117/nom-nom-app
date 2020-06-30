@@ -51,6 +51,7 @@ class MealPlanPage extends React.Component {
         return(
             <div className="MenuListPage">
                 <h1>Today's Meal Plan</h1>
+                <p className="user-note"><u>Note</u>: The Meal Plan is currently on-device only and will not work across multiple devices. Multi-device support coming soon!</p>
                 <section className="menuCategory">Breakfast <br/>
                     <ul>
                         {breakfasts}
