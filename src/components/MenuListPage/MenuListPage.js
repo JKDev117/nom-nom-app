@@ -54,8 +54,17 @@ class MenuListPage extends React.Component {
                                            .map((item, i) => 
                                                     <li key={i}>
                                                         <details>
-                                                            <summary>{item.name} <span id='added-status'>{this.checkMenuPlan(item.id, menu_plan) > 0 ? `Added: ${this.checkMenuPlan(item.id, menu_plan)}` : ''}</span></summary>        
-                                                            {item.image_url ? <img src={item.image_url} alt={`${item.name}`}/> : "" }
+                                                            <summary>{item.name}
+                                                                <span id='added-status'>{this.checkMenuPlan(item.id, menu_plan) > 0 ? 
+                                                                    `Added: ${this.checkMenuPlan(item.id, menu_plan)}` 
+                                                                        : 
+                                                                    ''}
+                                                                </span>
+                                                            </summary>        
+                                                            {item.image_url ? 
+                                                            <img src={item.image_url} alt={`${item.name}`}/> 
+                                                                : 
+                                                            "" }
                                                             <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g   <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
                                                         </details>
 
@@ -70,9 +79,17 @@ class MenuListPage extends React.Component {
                                         .map((item, i) => 
                                                     <li key={i}>
                                                         <details>
-                                                            <summary>{item.name} <span id='added-status'>{this.checkMenuPlan(item.id, menu_plan) > 0 ? `Added: ${this.checkMenuPlan(item.id, menu_plan)}` : ''}</span></summary>
-                                                            {item.image_url ? <img src={item.image_url} alt={`${item.name}`}/> : "" }
-
+                                                            <summary>{item.name} 
+                                                                <span id='added-status'>{this.checkMenuPlan(item.id, menu_plan) > 0 ? 
+                                                                    `Added: ${this.checkMenuPlan(item.id, menu_plan)}` 
+                                                                        : 
+                                                                    ''}
+                                                                </span>
+                                                            </summary>
+                                                            {item.image_url ? 
+                                                            <img src={item.image_url} alt={`${item.name}`}/> 
+                                                                : 
+                                                            "" }
                                                             <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g   <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
                                                         </details>
                                                         <button onClick={() => addToMenuPlan(item)}>Add to Today's Meal Plan</button>
@@ -87,9 +104,17 @@ class MenuListPage extends React.Component {
                                         .map((item, i) => 
                                                     <li key={i}>
                                                         <details>
-                                                            <summary>{item.name} <span id='added-status'>{this.checkMenuPlan(item.id, menu_plan) > 0 ? `Added: ${this.checkMenuPlan(item.id, menu_plan)}` : ''}</span></summary>
-                                                            {item.image_url ? <img src={item.image_url} alt={`${item.name}`}/> : "" }
-
+                                                            <summary>{item.name} 
+                                                                <span id='added-status'>{this.checkMenuPlan(item.id, menu_plan) > 0 ? 
+                                                                    `Added: ${this.checkMenuPlan(item.id, menu_plan)}` 
+                                                                        :
+                                                                    ''}
+                                                                </span>
+                                                            </summary>
+                                                            {item.image_url ? 
+                                                            <img src={item.image_url} alt={`${item.name}`}/> 
+                                                                : 
+                                                            "" }
                                                             <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g   <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
                                                         </details>
                                                         <button onClick={() => addToMenuPlan(item)}>Add to Today's Meal Plan</button>

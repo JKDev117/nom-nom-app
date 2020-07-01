@@ -25,7 +25,10 @@ class MealPlanPage extends React.Component {
                                            .map((item, i) => 
                                                     <li key={i}>
                                                         <span>{item.name}</span> <br/>
-                                                        {item.image_url ? <img src={item.image_url} alt={`${item.name}`}/> : "here" }
+                                                        {item.image_url ? 
+                                                            <img src={item.image_url} alt={`${item.name}`}/> 
+                                                                : 
+                                                            "" }
                                                         <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g  <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
                                                         <button onClick={()=>removeFromMenuPlan(item.id)}>Remove from Today's Meal Plan</button>
                                                     </li>)
@@ -34,7 +37,10 @@ class MealPlanPage extends React.Component {
                                         .map((item, i) => 
                                                     <li key={i}>
                                                         <span>{item.name}</span> <br/>
-                                                        {item.image_url ? <img src={item.image_url} alt={`${item.name}`}/> : "" }
+                                                        {item.image_url ? 
+                                                            <img src={item.image_url} alt={`${item.name}`}/> 
+                                                                : 
+                                                            "" }
                                                         <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g  <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
                                                         <button onClick={()=>removeFromMenuPlan(item.id)}>Remove from Today's Meal Plan</button>
                                                     </li>)
@@ -43,7 +49,10 @@ class MealPlanPage extends React.Component {
                                         .map((item, i) => 
                                                     <li key={i}>
                                                         <span>{item.name}</span> <br/>
-                                                        {item.image_url ? <img src={item.image_url} alt={`${item.name}`}/> : "" }
+                                                        {item.image_url ? 
+                                                            <img src={item.image_url} alt={`${item.name}`}/> 
+                                                                : 
+                                                            "" }
                                                         <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g  <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
                                                         <button onClick={()=>removeFromMenuPlan(item.id)}>Remove from Today's Meal Plan</button>
                                                     </li>)                                                  
