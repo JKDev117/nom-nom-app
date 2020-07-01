@@ -55,10 +55,11 @@ class MenuListPage extends React.Component {
                                                     <li key={i}>
                                                         <details>
                                                             <summary>{item.name}
-                                                                <span id='added-status'>{this.checkMenuPlan(item.id, menu_plan) > 0 ? 
-                                                                    `Added: ${this.checkMenuPlan(item.id, menu_plan)}` 
-                                                                        : 
-                                                                    ''}
+                                                                <span id='added-status'>
+                                                                    {this.checkMenuPlan(item.id, menu_plan) > 0 ? 
+                                                                        `Added: ${this.checkMenuPlan(item.id, menu_plan)}` 
+                                                                            : 
+                                                                        ''}
                                                                 </span>
                                                             </summary>        
                                                             {item.image_url ? 
@@ -80,10 +81,11 @@ class MenuListPage extends React.Component {
                                                     <li key={i}>
                                                         <details>
                                                             <summary>{item.name} 
-                                                                <span id='added-status'>{this.checkMenuPlan(item.id, menu_plan) > 0 ? 
-                                                                    `Added: ${this.checkMenuPlan(item.id, menu_plan)}` 
-                                                                        : 
-                                                                    ''}
+                                                                <span id='added-status'>{
+                                                                    this.checkMenuPlan(item.id, menu_plan) > 0 ? 
+                                                                        `Added: ${this.checkMenuPlan(item.id, menu_plan)}` 
+                                                                            : 
+                                                                        ''}
                                                                 </span>
                                                             </summary>
                                                             {item.image_url ? 
@@ -105,10 +107,11 @@ class MenuListPage extends React.Component {
                                                     <li key={i}>
                                                         <details>
                                                             <summary>{item.name} 
-                                                                <span id='added-status'>{this.checkMenuPlan(item.id, menu_plan) > 0 ? 
-                                                                    `Added: ${this.checkMenuPlan(item.id, menu_plan)}` 
-                                                                        :
-                                                                    ''}
+                                                                <span id='added-status'>
+                                                                    {this.checkMenuPlan(item.id, menu_plan) > 0 ? 
+                                                                        `Added: ${this.checkMenuPlan(item.id, menu_plan)}` 
+                                                                            :
+                                                                        ''}
                                                                 </span>
                                                             </summary>
                                                             {item.image_url ? 
