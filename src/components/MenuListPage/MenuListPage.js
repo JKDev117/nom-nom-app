@@ -7,7 +7,6 @@ import config from '../../config';
 import TokenService from '../../services/token-service';
 
 class MenuListPage extends React.Component {
-
  
     static defaultProps = {
         menu_items: []
@@ -15,18 +14,7 @@ class MenuListPage extends React.Component {
 
     static contextType = MenuContext;
 
-    checkMenuPlan(id, menu_plan){
-        let count = 0
-        for(let i=0; i < menu_plan.length; i++){
-            if(menu_plan[i].id === id){
-                count += 1
-            }   
-        }
-        return count
-    }
-   
-
-
+    
   componentDidMount(){
     const url = config.REACT_APP_API_BASE_URL + '/menu';
     const options = {
@@ -49,17 +37,14 @@ class MenuListPage extends React.Component {
   }
 
     render(){
-        const { menu_items, addToMenuPlan, removeFromMenuPlan, menu_plan  } = this.context
+        const { menu_items, addToMenuPlan, removeFromMenuPlan, menu_plan, checkMenuPlan  } = this.context
         const breakfasts = menu_items.filter(item => item.category === 'Breakfast')
                                            .map((item, i) => 
                                                     <li key={i}>
                                                         <details>
                                                             <summary>{item.name}
                                                                 <span id='added-status'>
-                                                                    {this.checkMenuPlan(item.id, menu_plan) > 0 ? 
-                                                                        `Added: ${this.checkMenuPlan(item.id, menu_plan)}` 
-                                                                            : 
-                                                                        ''}
+                                                                    {checkMenuPlan(item.id, menu_plan)} 
                                                                 </span>
                                                             </summary>        
                                                             {item.image_url ? 
@@ -81,11 +66,8 @@ class MenuListPage extends React.Component {
                                                     <li key={i}>
                                                         <details>
                                                             <summary>{item.name} 
-                                                                <span id='added-status'>{
-                                                                    this.checkMenuPlan(item.id, menu_plan) > 0 ? 
-                                                                        `Added: ${this.checkMenuPlan(item.id, menu_plan)}` 
-                                                                            : 
-                                                                        ''}
+                                                                <span id='added-status'>
+                                                                    {checkMenuPlan(item.id, menu_plan)} 
                                                                 </span>
                                                             </summary>
                                                             {item.image_url ? 
@@ -108,10 +90,7 @@ class MenuListPage extends React.Component {
                                                         <details>
                                                             <summary>{item.name} 
                                                                 <span id='added-status'>
-                                                                    {this.checkMenuPlan(item.id, menu_plan) > 0 ? 
-                                                                        `Added: ${this.checkMenuPlan(item.id, menu_plan)}` 
-                                                                            :
-                                                                        ''}
+                                                                    {checkMenuPlan(item.id, menu_plan)} 
                                                                 </span>
                                                             </summary>
                                                             {item.image_url ? 

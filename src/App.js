@@ -63,11 +63,39 @@ class App extends React.Component {
   }
 
   addToMenuPlan = item => {
+    /*
     const { menu_plan } = this.state
     this.setState({
       menu_plan: [...menu_plan, item]
-    })    
+    })
+    */
+   
+   const url = config.REACT_APP_API_BASE_URL + '/plan';
+   const options = {
+     method: 'POST',
+     headers: {
+       //"Authorization": `Bearer ${config.REACT_APP_API_KEY}`,
+       "Authorization": `Bearer ${TokenService.getAuthToken()}`,
+       "Content-Type": "application/json",
+     },
+     body: JSON.stringify(item)
+   }
+   fetch(url, options)
+     .then(res => {
+       if(!res.ok){
+         return res.json().then(e => Promise.reject(e))
+       }
+       return res.json()
+      })
+     .then(resJson => 
+         this.setState({
+            menu_plan: [...this.state.menu_plan, item]
+            //menu_plan: [...this.state.menu_plan, resJson] // using resJson rather than item causes 'Added: ' to not work
+         })
+     )
+     .catch(error => console.log(error))//this.setState({error}))
   }
+
 
   removeFromMenuPlan = itemId => {
     const { menu_plan } = this.state
@@ -80,6 +108,19 @@ class App extends React.Component {
         return
       }
     }
+  }
+
+  checkMenuPlan(id, menu_plan){
+    let count = 0
+    for(let i=0; i < menu_plan.length; i++){
+        if(menu_plan[i].id === id){
+            count += 1
+        }   
+    }
+    if(count > 0){
+      return ` Added: ${count}`
+    }
+    return ''
   }
 
   componentDidMount() {
@@ -147,6 +188,7 @@ class App extends React.Component {
       addToMenuPlan: this.addToMenuPlan,
       removeFromMenuPlan: this.removeFromMenuPlan,
       setMenuItems: this.setMenuItems,
+      checkMenuPlan: this.checkMenuPlan,
     }
 
     return (
