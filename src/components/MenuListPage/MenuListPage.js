@@ -13,28 +13,28 @@ class MenuListPage extends React.Component {
     }
 
     static contextType = MenuContext;
-
     
-  componentDidMount(){
-    const url = config.REACT_APP_API_BASE_URL + '/menu';
-    const options = {
-      method: 'GET',
-      headers: {
-        //"Authorization": `Bearer ${config.REACT_APP_API_KEY}`,
-        "Authorization": `Bearer ${TokenService.getAuthToken()}`,
-        "Content-Type": "application/json",
-      }
-    }
-    fetch(url, options)
-      .then(res => {
-        if(!res.ok){
-          return res.json().then(e => Promise.reject(e))
+    componentDidMount(){
+        const url = config.REACT_APP_API_BASE_URL + '/menu';
+        const options = {
+          method: 'GET',
+          headers: {
+            //"Authorization": `Bearer ${config.REACT_APP_API_KEY}`,
+            "Authorization": `Bearer ${TokenService.getAuthToken()}`,
+            "Content-Type": "application/json",
+          }
         }
-        return res.json()
-      })
-      .then(this.context.setMenuItems)
-      .catch(error => console.log(error))//this.setState({error}))
-  }
+        fetch(url, options)
+          .then(res => {
+            if(!res.ok){
+              return res.json().then(e => Promise.reject(e))
+            }
+            return res.json()
+          })
+          .then(this.context.setMenuItems)
+          .catch(error => console.log(error))//this.setState({error}))
+    }
+
 
     render(){
         const { menu_items, addToMenuPlan, removeFromMenuPlan, menu_plan, checkMenuPlan  } = this.context
@@ -43,8 +43,9 @@ class MenuListPage extends React.Component {
                                                     <li key={i}>
                                                         <details>
                                                             <summary>{item.name}
+                                                                {/* Added Status Check */}
                                                                 <span id='added-status'>
-                                                                    {checkMenuPlan(item.id, menu_plan)} 
+                                                                    {checkMenuPlan(item.id)} 
                                                                 </span>
                                                             </summary>        
                                                             {item.image_url ? 

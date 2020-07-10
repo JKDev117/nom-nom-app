@@ -2,9 +2,34 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './MealPlanPage.css';
 import MenuContext from '../../MenuContext';
+import config from '../../config';
+import TokenService from '../../services/token-service';
+
 
 class MealPlanPage extends React.Component {
     static contextType = MenuContext;
+
+    componentDidMount(){
+        const url = config.REACT_APP_API_BASE_URL + '/plan';
+        const options = {
+          method: 'GET',
+          headers: {
+            //"Authorization": `Bearer ${config.REACT_APP_API_KEY}`,
+            "Authorization": `Bearer ${TokenService.getAuthToken()}`,
+            "Content-Type": "application/json",
+          }
+        }
+        fetch(url, options)
+          .then(res => {
+            if(!res.ok){
+              return res.json().then(e => Promise.reject(e))
+            }
+            return res.json()
+          })
+          .then(this.context.setPlanItems)
+          .catch(error => console.log(error))
+    }
+
 
     render(){
         const { menu_plan, removeFromMenuPlan } = this.context
@@ -60,7 +85,7 @@ class MealPlanPage extends React.Component {
         return(
             <div className="MenuListPage">
                 <h1>Today's Meal Plan</h1>
-                <p className="user-note"><u>Note</u>: The Meal Plan is currently on-device only and will not work across multiple devices. Multi-device support coming soon!</p>
+                {/*<p className="user-note"><u>Note</u>: The Meal Plan is currently on-device only and will not work across multiple devices. Multi-device support coming soon!</p>*/}
                 <section className="menuCategory">Breakfast <br/>
                     <ul>
                         {breakfasts}
