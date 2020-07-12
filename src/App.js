@@ -24,9 +24,10 @@ class App extends React.Component {
     state = {
       menu_items: [],
       menu_plan: [],
+      menu_plan_count: [],
       error: null,
       //item_counts: []
-      status: '',
+      //countAdded: '',
     }
 
     /* menu list methods -------------------------------------------------------- */
@@ -67,46 +68,77 @@ class App extends React.Component {
     /* plan list methods -------------------------------------------------------- */
 
     setPlanItems = items => {
+      /*
       this.setState({
         menu_plan: items,
       })
+      */
+      /*
+      this.setState({
+          menu_plan: items.reduce((acc, item) => {
+            if (!acc.includes(item)){ 
+              acc.push(item)
+            } else {
+              const id = acc.findIndex(item)
+              acc[id].occurrence = acc[id].occurrence + 1 || 2
+            }
+            return acc
+          }, [])
+      })
+      */
+     this.setState({
+        menu_plan: items,
+        menu_plan_count: items.reduce((acc, item) => {
+          const id = acc.findIndex(i => i.menu_item_id === item.menu_item_id)
+          if (id === -1){
+            acc.push(item)
+          } else {
+            Object.assign(acc[id], { occurrence: (acc[id].occurrence + 1 || 2) })
+          }
+          return acc
+        }, [])
+     })
     }
 
 
     addToMenuPlan = item => {
-      /*
-      const { menu_plan } = this.state
-      this.setState({
-        menu_plan: [...menu_plan, item]
-      })
-      */
-    const url = config.REACT_APP_API_BASE_URL + '/plan';
-    const options = {
-      method: 'POST',
-      headers: {
-        //"Authorization": `Bearer ${config.REACT_APP_API_KEY}`,
-        "Authorization": `Bearer ${TokenService.getAuthToken()}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(item)
-    }
-    fetch(url, options)
-      .then(res => {
-        if(!res.ok){
-          return res.json().then(e => Promise.reject(e))
-        }
-        //return res.json()
-        return;
+        /*
+        const { menu_plan } = this.state
+        this.setState({
+          menu_plan: [...menu_plan, item]
         })
-      /* 
-      .then(resJson => 
-          this.setState({
-              menu_plan: [...this.state.menu_plan, item]
-              //menu_plan: [...this.state.menu_plan, resJson] // using resJson rather than item causes 'Added: ' to not work
+        */
+        const url = config.REACT_APP_API_BASE_URL + '/plan';
+        const options = {
+          method: 'POST',
+          headers: {
+            //"Authorization": `Bearer ${config.REACT_APP_API_KEY}`,
+            "Authorization": `Bearer ${TokenService.getAuthToken()}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(item)
+        }
+        fetch(url, options)
+          .then(res => {
+            if(!res.ok){
+              return res.json().then(e => Promise.reject(e))
+            }
+            //return res.json()
+            return res.json()
+            })
+          .then(resJson => { 
+              const newMenuCount = [...this.state.menu_plan_count]
+              const id = newMenuCount.findIndex(p => p.menu_item_id === resJson.menu_item_id)
+              newMenuCount[id].occurrence++
+              this.setState({
+                  menu_plan: [...this.state.menu_plan, item],
+                  menu_plan_count: newMenuCount,    
+                  //menu_plan: [...this.state.menu_plan, item]
+                  //menu_plan: [...this.state.menu_plan, resJson] // using resJson rather than item causes 'Added: ' to not work
+              })
           })
-      )
-      */
-      .catch(error => console.log(error))//this.setState({error}))
+          .catch(error => console.log(error))//this.setState({error}))
+          console.log(this.state.menu_plan_count)
     }
 
     removeFromMenuPlan = itemId => {
@@ -138,6 +170,7 @@ class App extends React.Component {
     */
 
   checkMenuPlan = id => {
+    /*
     const { menu_plan } = this.state
     let count = 0
     for(let i=0; i < menu_plan.length; i++){
@@ -149,6 +182,17 @@ class App extends React.Component {
       return ` Added: ${count}`
     }
     return ''
+    */
+    const { menu_plan_count } = this.state
+
+
+    for(let i=0; i < menu_plan_count.length; i++){
+      if(menu_plan_count[i].menu_item_id === id){
+        return `Added: ${menu_plan_count[i].occurrence}`
+      }
+    }
+    return ''
+    
   }
 
   /* ---------------------------------------------------------------------------------- */

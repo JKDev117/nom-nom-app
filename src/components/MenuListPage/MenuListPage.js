@@ -33,6 +33,26 @@ class MenuListPage extends React.Component {
           })
           .then(this.context.setMenuItems)
           .catch(error => console.log(error))//this.setState({error}))
+
+          const url2 = config.REACT_APP_API_BASE_URL + '/plan';
+          const options2 = {
+            method: 'GET',
+            headers: {
+              //"Authorization": `Bearer ${config.REACT_APP_API_KEY}`,
+              "Authorization": `Bearer ${TokenService.getAuthToken()}`,
+              "Content-Type": "application/json",
+            }
+          }
+          fetch(url2, options2)
+            .then(res => {
+              if(!res.ok){
+                return res.json().then(e => Promise.reject(e))
+              }
+              return res.json()
+            })
+            .then(this.context.setPlanItems)
+            .catch(error => console.log(error))
+
     }
 
 

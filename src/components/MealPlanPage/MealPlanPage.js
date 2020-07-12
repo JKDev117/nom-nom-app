@@ -9,6 +9,7 @@ import TokenService from '../../services/token-service';
 class MealPlanPage extends React.Component {
     static contextType = MenuContext;
 
+    /*
     componentDidMount(){
         const url = config.REACT_APP_API_BASE_URL + '/plan';
         const options = {
@@ -29,7 +30,7 @@ class MealPlanPage extends React.Component {
           .then(this.context.setPlanItems)
           .catch(error => console.log(error))
     }
-
+    */
 
     render(){
         const { menu_plan, removeFromMenuPlan } = this.context
