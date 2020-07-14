@@ -140,7 +140,8 @@ class App extends React.Component {
           .catch(error => console.log(error))//this.setState({error}))
           console.log(this.state.menu_plan_count)
     }
-
+    
+    /*
     removeFromMenuPlan = itemId => {
       const { menu_plan } = this.state
       for(let i=0; i < menu_plan.length; i++){
@@ -152,7 +153,69 @@ class App extends React.Component {
           return
         }
       }
-    }
+    }*/
+
+    removeFromMenuPlan = item => {
+      console.log('item @App.js @removeFromMenuPlan', item)
+
+      const body = {
+        user_id: item.user_id,
+        menu_item_id: item.id || item.menu_item_id,
+        name: item.name,
+        category: item.category,
+        calories: item.calories,
+        protein: item.protein,
+        carbs: item.carbs,
+        fat: item.fat,
+        image_url: item.image_url
+      }
+
+      console.log('body @App.js @removeFromMenuPlan', body)
+
+      const url = config.REACT_APP_API_BASE_URL + '/plan';
+      const options = {
+        method: 'DELETE',
+        headers: {
+          //"Authorization": `Bearer ${config.REACT_APP_API_KEY}`,
+          "Authorization": `Bearer ${TokenService.getAuthToken()}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body)
+      }
+    
+      fetch(url, options)
+          .then(res => {
+            if(!res.ok){
+              return res.json().then(e => Promise.reject(e))
+            }
+            return;
+          })
+          .catch(error => console.log(error))
+
+          //.then(() => {
+            const newMenuCount = [...this.state.menu_plan_count]
+            const id = newMenuCount.findIndex(p => p.menu_item_id === item.id || item.menu_item_id)
+            if(newMenuCount[id] !== undefined && newMenuCount[id].occurrence > 0){
+              newMenuCount[id].occurrence--
+            }
+
+            const { menu_plan } = this.state
+            for(let i=0; menu_plan[i] !== undefined; i++){
+              if(JSON.stringify(menu_plan[i]) === JSON.stringify(item)){
+                menu_plan.splice(i,1)
+                i--
+              }
+            }
+
+            this.setState({
+              menu_plan: menu_plan,
+              menu_plan_count: newMenuCount
+            })
+
+            return;
+          //})//end .then
+          
+    }//end removeFromMenuPlan()
 
     /*
     checkMenuPlan(id, menu_plan){

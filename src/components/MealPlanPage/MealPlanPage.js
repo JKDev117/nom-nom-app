@@ -56,7 +56,7 @@ class MealPlanPage extends React.Component {
                                                                 : 
                                                             "" }
                                                         <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g  <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
-                                                        <button onClick={()=>removeFromMenuPlan(item.id)}>Remove from Today's Meal Plan</button>
+                                                        <button onClick={()=>removeFromMenuPlan(item)}>Remove from Today's Meal Plan</button>
                                                     </li>)
         
         const lunches = menu_plan.filter(item => item.category === 'Lunch')
@@ -68,7 +68,7 @@ class MealPlanPage extends React.Component {
                                                                 : 
                                                             "" }
                                                         <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g  <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
-                                                        <button onClick={()=>removeFromMenuPlan(item.id)}>Remove from Today's Meal Plan</button>
+                                                        <button onClick={()=>removeFromMenuPlan(item)}>Remove from Today's Meal Plan</button>
                                                     </li>)
         
         const dinners = menu_plan.filter(item => item.category === 'Dinner')
@@ -80,7 +80,7 @@ class MealPlanPage extends React.Component {
                                                                 : 
                                                             "" }
                                                         <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g  <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
-                                                        <button onClick={()=>removeFromMenuPlan(item.id)}>Remove from Today's Meal Plan</button>
+                                                        <button onClick={()=>removeFromMenuPlan(item)}>Remove from Today's Meal Plan</button>
                                                     </li>)                                                  
 
         return(
