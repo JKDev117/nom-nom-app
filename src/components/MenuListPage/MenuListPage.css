@@ -15,8 +15,16 @@ ul {
     list-style: none;
 }
 
+summary {
+    font-size: 0.8em;
+}
+
 summary:focus {
     outline: none;
+}
+
+details {
+    margin-bottom: 1.2em;
 }
 
 img {

@@ -14,6 +14,59 @@ class MenuListPage extends React.Component {
 
     static contextType = MenuContext;
     
+    state = {
+        addedToMenuPlan: [],
+    }
+
+    addToMenuPlan = (user_id, checked_menu_item_ids) => {
+        console.log(user_id)
+        console.log(checked_menu_item_ids)
+        for(let i=0; i<checked_menu_item_ids.length; i++){
+          const body = {
+            user_id: user_id,
+            id: checked_menu_item_ids[i]
+          }
+          const url = config.REACT_APP_API_BASE_URL + '/plan';
+          const options = {
+            method: 'POST',
+            headers: {
+              //"Authorization": `Bearer ${config.REACT_APP_API_KEY}`,
+              "Authorization": `Bearer ${TokenService.getAuthToken()}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body)
+          }
+          fetch(url, options)
+          .then(res => {
+            if(!res.ok){
+              return res.json().then(e => Promise.reject(e))
+            }
+            //return res.json()
+            return res.json()
+            })
+          .then(resJson => {
+            
+          })            
+          /* MS Code
+          .then(resJson => { 
+            const newMenuCount = [...this.state.menu_plan_count]
+            const id = newMenuCount.findIndex(p => p.menu_item_id === resJson.menu_item_id)
+            newMenuCount[id].occurrence++
+            this.setState({
+                menu_plan: [...this.state.menu_plan, item],
+                menu_plan_count: newMenuCount,    
+                //menu_plan: [...this.state.menu_plan, item]
+                //menu_plan: [...this.state.menu_plan, resJson] // using resJson rather than item causes 'Added: ' to not work
+            })
+          })*/
+
+          .catch(error => console.log(error))//this.setState({error}))
+          //console.log(this.state.menu_plan_count)
+        
+        }//end for loop
+    }//addToMenuPlan()
+
+
     componentDidMount(){
         //GET /menu
         const url = config.REACT_APP_API_BASE_URL + '/menu';
@@ -35,6 +88,7 @@ class MenuListPage extends React.Component {
           .then(this.context.setMenuItems)
           .catch(error => console.log(error))//this.setState({error}))
 
+          /*
           //GET /plan
           const url2 = config.REACT_APP_API_BASE_URL + '/plan';
           const options2 = {
@@ -54,110 +108,135 @@ class MenuListPage extends React.Component {
             })
             .then(this.context.setPlanItems)
             .catch(error => console.log(error))
-
+            */
     }
+
+    /*
+    const button = document.querySelector(`.button${element.menu_item_id}`);
+    button.disabled = true;
+    */
 
 
     render(){
-        console.log('menu_items', this.context.menu_items)
-        const { menu_items, addToMenuPlan, removeFromMenuPlan, menu_plan, checkMenuPlan  } = this.context
+        console.log('addedToMenuPlan @render', this.state.addedToMenuPlan)
+        //console.log('menu_items', this.context.menu_items)
+        const { user_id, menu_items, addToMenuPlan, removeFromMenuPlan, menu_plan, checkMenuPlan  } = this.context
 
-        const breakfasts = menu_items.filter(item => item.category === 'Breakfast')
-                                           .map((item, i) => 
-                                                    <li key={i}>
-                                                        <details>
-                                                            <summary>{item.name}
-                                                                {/* Added Status Check */}
-                                                                <span id='added-status'>
-                                                                    {checkMenuPlan(item.id)} 
-                                                                </span>
-                                                            </summary>        
-                                                            {item.image_url ? 
-                                                            <img src={item.image_url} alt={`${item.name}`}/> 
-                                                                : 
-                                                            "" }
-                                                            <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g   <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
-                                                        </details>
-
-                                                        <button onClick={() => addToMenuPlan(item)}>Add to Today's Meal Plan</button>
-                                                        <button onClick={() => removeFromMenuPlan(item)}>Remove from Today's Meal Plan</button>
-                                                        <Link to={`/edit-menu-item/${item.id}`}>
-                                                            <button>Edit Meal Item</button>
-                                                        </Link>    
-                                                    </li>)
+        const breakfasts 
+            = menu_items.filter(item => item.category === 'Breakfast')
+                        .map((item, i) =>
+                                <li key={i}>
+                                    <input className="checkBox" type="checkbox" id={`menu-item${item.id}`} name="menu-item" value={item.id}/>
+                                    <label htmlFor={`menu-item${item.id}`}>{item.name}</label>
+                                    <Link to={`/edit-menu-item/${item.id}`}>
+                                        <button>Edit Meal Item</button><br/>
+                                    </Link>
+                                    
+                                    <details>
+                                        <summary>
+                                            (nutritional info)
+                                        </summary>
+                                        { item.image_url ? 
+                                            <img src={item.image_url} alt={`${item.name}`}/> : "" }  
+                                        <p className="mealplan-nutritional-info">
+                                            (<u>Calories</u>: {item.calories} 
+                                            <u>Carbs</u>: {item.carbs}g   
+                                            <u>Protein</u>: {item.protein}g
+                                            <u>Fat</u>: {item.fat}g)
+                                        </p>
+                                    </details>
+                                </li>
+                        )
         
         const lunches = menu_items.filter(item => item.category === 'Lunch')
-                                        .map((item, i) => 
-                                                    <li key={i}>
-                                                        <details>
-                                                            <summary>{item.name} 
-                                                                <span id='added-status'>
-                                                                    {checkMenuPlan(item.id, menu_plan)} 
-                                                                </span>
-                                                            </summary>
-                                                            {item.image_url ? 
-                                                            <img src={item.image_url} alt={`${item.name}`}/> 
-                                                                : 
-                                                            "" }
-                                                            <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g   <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
-                                                        </details>
-                                                        <button onClick={() => addToMenuPlan(item)}>Add to Today's Meal Plan</button>
-                                                        <button onClick={()=>removeFromMenuPlan(item)}>Remove from Today's Meal Plan</button>
-                                                        <Link to={`/edit-menu-item/${item.id}`}>
-                                                            <button>Edit Meal Item</button>
-                                                        </Link> 
-                                                    </li>)
+                        .map((item, i) =>
+                                <li key={i}>
+                                    <input className="checkBox" type="checkbox" id={`menu-item${item.id}`} name="menu-item" value={item.id} />
+                                    <label htmlFor={`menu-item${item.id}`}>{item.name}</label>
+                                    <Link to={`/edit-menu-item/${item.id}`}>
+                                        <button>Edit Meal Item</button><br/>
+                                    </Link>
+                                    
+                                    <details>
+                                        <summary>
+                                            (nutritional info)
+                                        </summary>
+                                        { item.image_url ? 
+                                            <img src={item.image_url} alt={`${item.name}`}/> : "" }  
+                                        <p className="mealplan-nutritional-info">
+                                            (<u>Calories</u>: {item.calories} 
+                                            <u>Carbs</u>: {item.carbs}g   
+                                            <u>Protein</u>: {item.protein}g
+                                            <u>Fat</u>: {item.fat}g)
+                                        </p>
+                                    </details>
+                                </li>
+                        )
         
         const dinners = menu_items.filter(item => item.category === 'Dinner')
-                                        .map((item, i) => 
-                                                    <li key={i}>
-                                                        <details>
-                                                            <summary>{item.name} 
-                                                                <span id='added-status'>
-                                                                    {checkMenuPlan(item.id, menu_plan)} 
-                                                                </span>
-                                                            </summary>
-                                                            {item.image_url ? 
-                                                            <img src={item.image_url} alt={`${item.name}`}/> 
-                                                                : 
-                                                            "" }
-                                                            <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g   <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
-                                                        </details>
-                                                        <button onClick={() => addToMenuPlan(item)}>Add to Today's Meal Plan</button>
-                                                        <button onClick={()=>removeFromMenuPlan(item)}>Remove from Today's Meal Plan</button>
-                                                        <Link to={`/edit-menu-item/${item.id}`}>
-                                                            <button>Edit Meal Item</button>
-                                                        </Link> 
-
-                                                    </li>)                                                   
+                        .map((item, i) =>
+                                <li key={i}>
+                                    <input className="checkBox" type="checkbox" id={`menu-item${item.id}`} name="menu-item" value={item.id}/>
+                                    <label htmlFor={`menu-item${item.id}`}>{item.name}</label>
+                                    <Link to={`/edit-menu-item/${item.id}`}>
+                                        <button>Edit Meal Item</button><br/>
+                                    </Link>
+                                    
+                                    <details>
+                                        <summary>
+                                            (nutritional info)
+                                        </summary>
+                                        { item.image_url ? 
+                                            <img src={item.image_url} alt={`${item.name}`}/> : "" }  
+                                        <p className="mealplan-nutritional-info">
+                                            (<u>Calories</u>: {item.calories} 
+                                            <u>Carbs</u>: {item.carbs}g   
+                                            <u>Protein</u>: {item.protein}g
+                                            <u>Fat</u>: {item.fat}g)
+                                        </p>
+                                    </details>
+                                </li>
+                        )                                                 
 
         return(
             <div className="MenuListPage">
                 <h1>My Nom Nom Menu</h1>
-                <section className="menuCategory">Breakfast Menu <br/>
-                    <ul>
-                        {breakfasts}
-                    </ul>
-                    <Link to='/add-menu-item'>
-                        <button>+ Add New Menu Item</button>
-                    </Link>
-                </section>
-                <section className="menuCategory">Lunch Menu <br/>
-                    <ul>
-                        {lunches}
-                    </ul>
-                    <Link to='/add-menu-item'>
-                        <button>+ Add New Menu Item</button>
-                    </Link>
-                </section>
-                <section className="menuCategory">Dinner Menu <br/>
-                    <ul>
-                        {dinners}
-                    </ul>
-                    <Link to='/add-menu-item'>
-                        <button>+ Add New Menu Item</button>
-                    </Link>
-                </section>
+                <Link to='/add-menu-item'>
+                    <button>+ Add New Menu Item</button>
+                </Link>
+
+                <form onSubmit={e => {
+                        e.preventDefault()
+                        let checkedBoxes = document.querySelectorAll('input[name="menu-item"]:checked');
+                        console.log(checkedBoxes)
+                        const checked_menu_item_ids = []
+                        checkedBoxes.forEach(checkbox => {
+                            checked_menu_item_ids.push(checkbox.value)
+                        })
+                        console.log(checked_menu_item_ids)
+                        this.addToMenuPlan(user_id, checked_menu_item_ids)
+                    }}>
+                    <section className="menuCategory">Breakfast Menu <br/>
+                        <ul>
+                            {breakfasts}
+                        </ul>
+                        
+                    </section>
+                    <section className="menuCategory">Lunch Menu <br/>
+                        <ul>
+                            {lunches}
+                        </ul>
+                        
+                    </section>
+                    <section className="menuCategory">Dinner Menu <br/>
+                        <ul>
+                            {dinners}
+                        </ul>
+                        
+                    </section>
+                    <input type="submit" />
+
+                </form>
             </div>
         )
     }

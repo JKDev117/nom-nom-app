@@ -9,8 +9,30 @@ import TokenService from '../../services/token-service';
 class MealPlanPage extends React.Component {
     static contextType = MenuContext;
 
-    /*
+    state = {
+        menu_plan: []
+    }
+
+    setPlanItems = items => {
+        this.setState({
+           menu_plan: items,
+           
+           /* MS Code
+           menu_plan_count: items.reduce((acc, item) => {
+             const id = acc.findIndex(i => i.menu_item_id === item.menu_item_id)
+             if (id === -1){
+               acc.push(item)
+             } else {
+               Object.assign(acc[id], { occurrence: (acc[id].occurrence + 1 || 2) })
+             }
+             return acc
+           }, [])
+           */
+        })
+    }
+
     componentDidMount(){
+        //GET /plan
         const url = config.REACT_APP_API_BASE_URL + '/plan';
         const options = {
           method: 'GET',
@@ -27,13 +49,14 @@ class MealPlanPage extends React.Component {
             }
             return res.json()
           })
-          .then(this.context.setPlanItems)
+          .then(this.setPlanItems)
           .catch(error => console.log(error))
     }
-    */
+
 
     render(){
-        const { menu_plan, removeFromMenuPlan } = this.context
+        //const { menu_plan, removeFromMenuPlan } = this.context
+        const {menu_plan} = this.state
 
         //to calculate total
         let calories = 0;
@@ -56,7 +79,7 @@ class MealPlanPage extends React.Component {
                                                                 : 
                                                             "" }
                                                         <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g  <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
-                                                        <button onClick={()=>removeFromMenuPlan(item)}>Remove from Today's Meal Plan</button>
+                                                        <button onClick={()=>{/*removeFromMenuPlan(item)*/}}>Remove from Today's Meal Plan</button>
                                                     </li>)
         
         const lunches = menu_plan.filter(item => item.category === 'Lunch')
@@ -68,7 +91,7 @@ class MealPlanPage extends React.Component {
                                                                 : 
                                                             "" }
                                                         <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g  <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
-                                                        <button onClick={()=>removeFromMenuPlan(item)}>Remove from Today's Meal Plan</button>
+                                                        <button onClick={()=>{/*removeFromMenuPlan(item)*/}}>Remove from Today's Meal Plan</button>
                                                     </li>)
         
         const dinners = menu_plan.filter(item => item.category === 'Dinner')
@@ -80,7 +103,7 @@ class MealPlanPage extends React.Component {
                                                                 : 
                                                             "" }
                                                         <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g  <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
-                                                        <button onClick={()=>removeFromMenuPlan(item)}>Remove from Today's Meal Plan</button>
+                                                        <button onClick={()=>{/*removeFromMenuPlan(item)*/}}>Remove from Today's Meal Plan</button>
                                                     </li>)                                                  
 
         return(
