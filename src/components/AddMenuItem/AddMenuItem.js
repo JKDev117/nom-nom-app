@@ -1,7 +1,7 @@
 import React from 'react';
 import './AddMenuItem.css'
 import config from '../../config'
-import MenuContext from '../../MenuContext'
+import { MyContext } from '../../MyProvider';
 import TokenService from '../../services/token-service';
 
 class AddMenuItem extends React.Component {
@@ -10,7 +10,7 @@ class AddMenuItem extends React.Component {
         error: null
     }
 
-    static contextType = MenuContext;
+    static contextType = MyContext;
 
     handleSubmit = e => {
         e.preventDefault()

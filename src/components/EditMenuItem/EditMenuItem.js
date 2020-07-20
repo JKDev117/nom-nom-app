@@ -1,15 +1,16 @@
 import React from 'react';
 import './EditMenuItem.css'
 import config from '../../config'
-import MenuContext from '../../MenuContext'
+import { MyContext } from '../../MyProvider';
 import TokenService from '../../services/token-service';
 
 class EditMenuItem extends React.Component {
 
-    static contextType = MenuContext;
+    static contextType = MyContext;
 
     state = {
-
+        error_delete: null,
+        error_patch: null
     }
 
     loadMenuItem = items => {
@@ -37,7 +38,9 @@ class EditMenuItem extends React.Component {
             })
             .then(this.context.removeMenuItem(id))
             .then(this.props.history.push('/menu'))
-            .catch(error => console.error(error))
+            .catch(error => 
+                this.setState({ error_delete: error })
+            )
     }
 
     handleChange = event => {
@@ -58,7 +61,7 @@ class EditMenuItem extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault()
-        /*
+        
         const { name, image_url, category } = event.target
         const calories = parseInt(event.target.calories.value)
         const carbs = parseInt(event.target.carbs.value)
@@ -73,11 +76,12 @@ class EditMenuItem extends React.Component {
             fat: fat,
             category: category.value
         }
-        */
+        
         const fetchUrl = config.REACT_APP_API_BASE_URL + '/menu/' + this.props.match.params.item_id
         const options = { 
             method: 'PATCH',
-            body: JSON.stringify(this.state),
+            //body: JSON.stringify(this.state),
+            body: JSON.stringify(menu_item),
             headers:{ 
                 "content-type": "application/json",
                 //"Authorization": `Bearer ${config.REACT_APP_API_KEY}`,
@@ -91,12 +95,14 @@ class EditMenuItem extends React.Component {
                 }
                 return
             })
-            .then(this.context.updateMenuItem(this.state))
+            //.then(this.context.updateMenuItem(this.state))
+            .then(this.context.updateMenuItem(menu_item))
             .then(this.props.history.push('/menu'))
-            .catch(error => console.error(error))
+            .catch(error => 
+                this.setState({ error_patch: error })
+            )
     }
 
-    
     componentDidMount(){
         const item_id = this.props.match.params.item_id
         const fetchUrl = config.REACT_APP_API_BASE_URL + '/menu/' + item_id
@@ -154,7 +160,7 @@ class EditMenuItem extends React.Component {
                                 <option value="Dinner">Dinner</option>
                             </select><br/>
                         <button type="submit">Update</button>
-                        <button onClick={() => this.deleteMenuItem(id)}>Delete</button>
+                        <button onClick={() => this.context.deleteMenuItem(id)}>Delete</button>
                         <button onClick={() => this.props.history.push('/menu')}>Cancel</button>
                     </form>
                 </section>

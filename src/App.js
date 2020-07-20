@@ -9,7 +9,7 @@ import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 import LoginPage from './components/LoginPage/LoginPage';
 import RegistrationPage from './components/RegistrationPage/RegistrationPage';
 import Nav from './components/Nav/Nav';
-import MenuContext from './MenuContext'
+import MyProvider from './MyProvider';
 import TokenService from './services/token-service';
 import AuthApiService from './services/auth-api-service';
 import IdleService from './services/idle-service';
@@ -21,17 +21,18 @@ import config from './config';
 
 class App extends React.Component {
 
-    state = {
-      user_id: null,
-      menu_items: [],
-      menu_plan: [],
-      menu_plan_count: [],
-      error: null,
-      //item_counts: []
-      //countAdded: '',
-    }
+   // state = {
+   //   user_id: null,
+   //   menu_items: [],
+   //   menu_plan: [],
+   //   menu_plan_count: [],
+   //   error: null,
+   //   //item_counts: []
+   //   //countAdded: '',
+   // }
 
     /* MENU LIST METHODS -------------------------------------------------------- */
+    /*
     setMenuItems = items => {
       this.setState({
         user_id: items[0].user_id,
@@ -66,25 +67,27 @@ class App extends React.Component {
           menu_items: updatedMenuItems
         })
     }
+    */
 
     /* PLAN LIST METHODS -------------------------------------------------------- */
     
+    /*
     setPlanItems = items => {
      
      this.setState({
         menu_plan: items,
         
-        /* MS Code
-        menu_plan_count: items.reduce((acc, item) => {
-          const id = acc.findIndex(i => i.menu_item_id === item.menu_item_id)
-          if (id === -1){
-            acc.push(item)
-          } else {
-            Object.assign(acc[id], { occurrence: (acc[id].occurrence + 1 || 2) })
-          }
-          return acc
-        }, [])
-        */
+        // MS Code
+        // menu_plan_count: items.reduce((acc, item) => {
+        //   const id = acc.findIndex(i => i.menu_item_id === item.menu_item_id)
+        //   if (id === -1){
+        //     acc.push(item)
+        //   } else {
+        //     Object.assign(acc[id], { occurrence: (acc[id].occurrence + 1 || 2) })
+        //   }
+        //   return acc
+        // }, [])
+        
      })
     }
 
@@ -116,38 +119,38 @@ class App extends React.Component {
             return res.json()
             })
             
-          /* MS Code
-          .then(resJson => { 
-            const newMenuCount = [...this.state.menu_plan_count]
-            const id = newMenuCount.findIndex(p => p.menu_item_id === resJson.menu_item_id)
-            newMenuCount[id].occurrence++
-            this.setState({
-                menu_plan: [...this.state.menu_plan, item],
-                menu_plan_count: newMenuCount,    
-                //menu_plan: [...this.state.menu_plan, item]
-                //menu_plan: [...this.state.menu_plan, resJson] // using resJson rather than item causes 'Added: ' to not work
-            })
-          })*/
+          //  MS Code
+          // .then(resJson => { 
+          //   const newMenuCount = [...this.state.menu_plan_count]
+          //   const id = newMenuCount.findIndex(p => p.menu_item_id === resJson.menu_item_id)
+          //   newMenuCount[id].occurrence++
+          //   this.setState({
+          //       menu_plan: [...this.state.menu_plan, item],
+          //       menu_plan_count: newMenuCount,    
+          //       //menu_plan: [...this.state.menu_plan, item]
+          //       //menu_plan: [...this.state.menu_plan, resJson] // using resJson rather than item causes 'Added: ' to not work
+          //   })
+          // })
 
           .catch(error => console.log(error))//this.setState({error}))
           //console.log(this.state.menu_plan_count)
         
         }
-    }//addToMenuPlan()
+    }//end addToMenuPlan()
     
-    /*
-    removeFromMenuPlan = itemId => {
-      const { menu_plan } = this.state
-      for(let i=0; i < menu_plan.length; i++){
-        if(menu_plan[i].id === itemId){
-          menu_plan.splice(i,1)
-          this.setState({
-            menu_plan: menu_plan
-          })
-          return
-        }
-      }
-    }*/
+    
+    // removeFromMenuPlan = itemId => {
+    //   const { menu_plan } = this.state
+    //   for(let i=0; i < menu_plan.length; i++){
+    //     if(menu_plan[i].id === itemId){
+    //       menu_plan.splice(i,1)
+    //       this.setState({
+    //         menu_plan: menu_plan
+    //       })
+    //       return
+    //     }
+    //   }
+    // }
 
     removeFromMenuPlan = item => {
       console.log('item @App.js @removeFromMenuPlan', item)
@@ -211,46 +214,48 @@ class App extends React.Component {
           
     }//end removeFromMenuPlan()
 
-    /*
-    checkMenuPlan(id, menu_plan){
-      let count = 0
-      for(let i=0; i < menu_plan.length; i++){
-          if(menu_plan[i].id === id){
-              count += 1
-          }   
-      }
-      if(count > 0){
-        return ` Added: ${count}`
+    
+    // checkMenuPlan(id, menu_plan){
+    //   let count = 0
+    //   for(let i=0; i < menu_plan.length; i++){
+    //       if(menu_plan[i].id === id){
+    //           count += 1
+    //       }   
+    //   }
+    //   if(count > 0){
+    //     return ` Added: ${count}`
+    //   }
+    //   return ''
+    // }
+    
+
+    checkMenuPlan = id => {
+      
+      // const { menu_plan } = this.state
+      // let count = 0
+      // for(let i=0; i < menu_plan.length; i++){
+      //     if(menu_plan[i].menu_item_id === id){
+      //         count += 1
+      //     }   
+      // }
+      // if(count > 0){
+      //   return ` Added: ${count}`
+      // }
+      // return ''
+      
+      const { menu_plan_count } = this.state
+  
+  
+      for(let i=0; i < menu_plan_count.length; i++){
+        if(menu_plan_count[i].menu_item_id === id){
+          return `Added: ${menu_plan_count[i].occurrence}`
+        }
       }
       return ''
+      
     }
-    */
 
-  checkMenuPlan = id => {
-    /*
-    const { menu_plan } = this.state
-    let count = 0
-    for(let i=0; i < menu_plan.length; i++){
-        if(menu_plan[i].menu_item_id === id){
-            count += 1
-        }   
-    }
-    if(count > 0){
-      return ` Added: ${count}`
-    }
-    return ''
-    */
-    const { menu_plan_count } = this.state
-
-
-    for(let i=0; i < menu_plan_count.length; i++){
-      if(menu_plan_count[i].menu_item_id === id){
-        return `Added: ${menu_plan_count[i].occurrence}`
-      }
-    }
-    return ''
-    
-  }
+  */
 
   /* ---------------------------------------------------------------------------------- */
 
@@ -311,24 +316,24 @@ class App extends React.Component {
 
   render(){
     //context
-    const contextValue = {
-      menu_items: this.state.menu_items,
-      menu_plan: this.state.menu_plan,
-      addMenuItem: this.addMenuItem,
-      removeMenuItem: this.removeMenuItem,
-      updateMenuItem: this.updateMenuItem,
-      addToMenuPlan: this.addToMenuPlan,
-      removeFromMenuPlan: this.removeFromMenuPlan,
-      setMenuItems: this.setMenuItems,
-      checkMenuPlan: this.checkMenuPlan,
-      setPlanItems: this.setPlanItems,
-      user_id: this.state.user_id,
-    }
+    //const contextValue = {
+    //  menu_items: this.state.menu_items,
+    //  menu_plan: this.state.menu_plan,
+    //  addMenuItem: this.addMenuItem,
+    //  removeMenuItem: this.removeMenuItem,
+    //  updateMenuItem: this.updateMenuItem,
+    //  addToMenuPlan: this.addToMenuPlan,
+    //  removeFromMenuPlan: this.removeFromMenuPlan,
+    //  setMenuItems: this.setMenuItems,
+    //  checkMenuPlan: this.checkMenuPlan,
+    //  setPlanItems: this.setPlanItems,
+    //  user_id: this.state.user_id,
+    //}
 
     return (
        <main className='App'>
          <Nav />
-         <MenuContext.Provider value={contextValue}>
+         <MyProvider>
             <Switch>
                 <Route exact path='/' component={LandingPage} /> 
                 <PublicOnlyRoute path='/login' component={LoginPage}/>
@@ -339,7 +344,7 @@ class App extends React.Component {
                 <PrivateRoute path='/edit-menu-item/:item_id' component={EditMenuItem} />
                 <Route component={NotFoundPage} />
             </Switch>
-        </MenuContext.Provider>    
+        </MyProvider>    
        </main>
     );
   }

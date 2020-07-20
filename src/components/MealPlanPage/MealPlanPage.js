@@ -1,35 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './MealPlanPage.css';
-import MenuContext from '../../MenuContext';
+import { MyContext } from '../../MyProvider';
 import config from '../../config';
 import TokenService from '../../services/token-service';
 
 
 class MealPlanPage extends React.Component {
-    static contextType = MenuContext;
-
-    state = {
-        menu_plan: []
-    }
-
-    setPlanItems = items => {
-        this.setState({
-           menu_plan: items,
-           
-           /* MS Code
-           menu_plan_count: items.reduce((acc, item) => {
-             const id = acc.findIndex(i => i.menu_item_id === item.menu_item_id)
-             if (id === -1){
-               acc.push(item)
-             } else {
-               Object.assign(acc[id], { occurrence: (acc[id].occurrence + 1 || 2) })
-             }
-             return acc
-           }, [])
-           */
-        })
-    }
+    static contextType = MyContext;
 
     componentDidMount(){
         //GET /plan
@@ -49,28 +27,28 @@ class MealPlanPage extends React.Component {
             }
             return res.json()
           })
-          .then(this.setPlanItems)
+          .then(this.context.setMealPlan)
           .catch(error => console.log(error))
     }
 
 
     render(){
         //const { menu_plan, removeFromMenuPlan } = this.context
-        const {menu_plan} = this.state
+        const { meal_plan } = this.context
 
         //to calculate total
         let calories = 0;
         let carbs = 0;
         let protein = 0;
         let fat = 0;
-        menu_plan.forEach(item => {
+        meal_plan.forEach(item => {
             calories += item.calories;
             carbs += item.carbs;
             protein += item.protein;
             fat += item.fat;
         })
         
-        const breakfasts = menu_plan.filter(item => item.category === 'Breakfast')
+        const breakfasts = meal_plan.filter(item => item.category === 'Breakfast')
                                            .map((item, i) => 
                                                     <li key={i}>
                                                         <span>{item.name}</span> <br/>
@@ -82,7 +60,7 @@ class MealPlanPage extends React.Component {
                                                         <button onClick={()=>{/*removeFromMenuPlan(item)*/}}>Remove from Today's Meal Plan</button>
                                                     </li>)
         
-        const lunches = menu_plan.filter(item => item.category === 'Lunch')
+        const lunches = meal_plan.filter(item => item.category === 'Lunch')
                                         .map((item, i) => 
                                                     <li key={i}>
                                                         <span>{item.name}</span> <br/>
@@ -94,7 +72,7 @@ class MealPlanPage extends React.Component {
                                                         <button onClick={()=>{/*removeFromMenuPlan(item)*/}}>Remove from Today's Meal Plan</button>
                                                     </li>)
         
-        const dinners = menu_plan.filter(item => item.category === 'Dinner')
+        const dinners = meal_plan.filter(item => item.category === 'Dinner')
                                         .map((item, i) => 
                                                     <li key={i}>
                                                         <span>{item.name}</span> <br/>
@@ -106,7 +84,7 @@ class MealPlanPage extends React.Component {
                                                         <button onClick={()=>{/*removeFromMenuPlan(item)*/}}>Remove from Today's Meal Plan</button>
                                                     </li>)                                                  
 
-        return(
+        return (
             <div className="MenuListPage">
                 <h1>Today's Meal Plan</h1>
                 {/*<p className="user-note"><u>Note</u>: The Meal Plan is currently on-device only and will not work across multiple devices. Multi-device support coming soon!</p>*/}
