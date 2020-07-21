@@ -33,8 +33,8 @@ class MealPlanPage extends React.Component {
 
 
     render(){
-        //const { menu_plan, removeFromMenuPlan } = this.context
-        const { meal_plan } = this.context
+        //const { menu_plan, removeFromMealPlan } = this.context
+        const { meal_plan, removeFromMealPlan } = this.context
 
         //to calculate total
         let calories = 0;
@@ -57,7 +57,7 @@ class MealPlanPage extends React.Component {
                                                                 : 
                                                             "" }
                                                         <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g  <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
-                                                        <button onClick={()=>{/*removeFromMenuPlan(item)*/}}>Remove from Today's Meal Plan</button>
+                                                        <button onClick={()=>removeFromMealPlan(item)}>Remove from Today's Meal Plan</button>
                                                     </li>)
         
         const lunches = meal_plan.filter(item => item.category === 'Lunch')
@@ -69,7 +69,7 @@ class MealPlanPage extends React.Component {
                                                                 : 
                                                             "" }
                                                         <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g  <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
-                                                        <button onClick={()=>{/*removeFromMenuPlan(item)*/}}>Remove from Today's Meal Plan</button>
+                                                        <button onClick={()=>removeFromMealPlan(item)}>Remove from Today's Meal Plan</button>
                                                     </li>)
         
         const dinners = meal_plan.filter(item => item.category === 'Dinner')
@@ -81,7 +81,7 @@ class MealPlanPage extends React.Component {
                                                                 : 
                                                             "" }
                                                         <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g  <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
-                                                        <button onClick={()=>{/*removeFromMenuPlan(item)*/}}>Remove from Today's Meal Plan</button>
+                                                        <button onClick={()=>removeFromMealPlan(item)}>Remove from Today's Meal Plan</button>
                                                     </li>)                                                  
 
         return (

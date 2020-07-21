@@ -2,16 +2,6 @@ import React from 'react';
 import config from './config';
 import TokenService from './services/token-service';
 
-/*
-const MenuContext = React.createContext({
-    menu_items: [],
-    menu_plan: [],
-    addItem: () => {},
-    removeItem: () => {},
-    updateItem: () => {}
-})
-*/
-
 const MyContext = React.createContext()
 
 export default class MyProvider extends React.Component {
@@ -63,7 +53,7 @@ export default class MyProvider extends React.Component {
            meal_plan: items,
            
            /* MS Code
-           menu_plan_count: items.reduce((acc, item) => {
+           meal_plan_count: items.reduce((acc, item) => {
              const id = acc.findIndex(i => i.menu_item_id === item.menu_item_id)
              if (id === -1){
                acc.push(item)
@@ -118,20 +108,66 @@ export default class MyProvider extends React.Component {
                 })            
                 /* MS Code
                 .then(resJson => { 
-                    const newMenuCount = [...this.state.menu_plan_count]
+                    const newMenuCount = [...this.state.meal_plan_count]
                     const id = newMenuCount.findIndex(p => p.menu_item_id === resJson.menu_item_id)
                     newMenuCount[id].occurrence++
                     this.setState({
-                        menu_plan: [...this.state.menu_plan, item],
-                        menu_plan_count: newMenuCount,    
-                        //menu_plan: [...this.state.menu_plan, item]
-                        //menu_plan: [...this.state.menu_plan, resJson] // using resJson rather than item causes 'Added: ' to not work
+                        meal_plan: [...this.state.meal_plan, item],
+                        meal_plan_count: newMenuCount,    
+                        //meal_plan: [...this.state.meal_plan, item]
+                        //meal_plan: [...this.state.meal_plan, resJson] // using resJson rather than item causes 'Added: ' to not work
                     })
                 })*/
                 .catch(error => console.log(error))//this.setState({error}))
-                //console.log(this.state.menu_plan_count)
+                //console.log(this.state.meal_plan_count)
         }//end for loop
     }//end addToMealPlan()
+
+    removeFromMealPlan = item => {
+        //console.log('item @MyProvider.js @removeFromMealPlan', item)
+        //console.log('this.state.meal_plan @MyProvider.js @removeFromMealPlan', this.state.meal_plan)
+        
+        const url = config.REACT_APP_API_BASE_URL + '/plan';
+        const options = {
+          method: 'DELETE',
+          headers: {
+            //"Authorization": `Bearer ${config.REACT_APP_API_KEY}`,
+            "Authorization": `Bearer ${TokenService.getAuthToken()}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({id: item.id})
+        }
+      
+        fetch(url, options)
+            .then(res => {
+              if(!res.ok){
+                return res.json().then(e => Promise.reject(e))
+              }
+              return;
+            })
+            .catch(error => console.log(error))
+            .then(() => {
+              
+              //const newMenuCount = [...this.state.meal_plan_count]
+              //const id = newMenuCount.findIndex(p => p.menu_item_id === item.id || item.menu_item_id)
+              //if(newMenuCount[id] !== undefined && newMenuCount[id].occurrence > 0){
+              //  newMenuCount[id].occurrence--
+              //}
+            
+              const { meal_plan } = this.state
+              for(let i=0; meal_plan[i] !== undefined; i++){
+                if(JSON.stringify(meal_plan[i]) === JSON.stringify(item)){
+                  meal_plan.splice(i,1)
+                  i--
+                }
+              }
+  
+              this.setState({
+                meal_plan: meal_plan              
+              })
+              return;
+            })
+    }//end removeFromMenuPlan()
 
 
     render(){
@@ -150,6 +186,7 @@ export default class MyProvider extends React.Component {
                 setMealPlan: this.setMealPlan,
                 checkMealPlanItemCounts: this.checkMealPlanItemCounts,
                 addToMealPlan: this.addToMealPlan,
+                removeFromMealPlan: this.removeFromMealPlan,
             }}>
                 {this.props.children}
             </MyContext.Provider>
