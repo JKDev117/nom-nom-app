@@ -9,7 +9,7 @@ export default class MyProvider extends React.Component {
         user_id: null,
         menu_items: [],
         meal_plan: [],
-        meal_plan_item_count: []
+        //meal_plan_item_count: []
     }
 
     /* MENU ITEMS METHODS ------------------------------------------------------------------------------------------------------------------------ */
@@ -51,21 +51,10 @@ export default class MyProvider extends React.Component {
     setMealPlan = items => {
         this.setState({
            meal_plan: items,
-           
-           /* MS Code
-           meal_plan_count: items.reduce((acc, item) => {
-             const id = acc.findIndex(i => i.menu_item_id === item.menu_item_id)
-             if (id === -1){
-               acc.push(item)
-             } else {
-               Object.assign(acc[id], { occurrence: (acc[id].occurrence + 1 || 2) })
-             }
-             return acc
-           }, [])
-           */
         })
     }
 
+    /*
     checkMealPlanItemCounts = id => {
         const { meal_plan_item_count } = this.state
         for(let element of meal_plan_item_count){
@@ -75,6 +64,7 @@ export default class MyProvider extends React.Component {
         }
         return 'Added: '
     }
+    */
 
     addToMealPlan = (user_id, ids_of_checked_menu_items) => {
         //console.log(user_id)
@@ -101,23 +91,12 @@ export default class MyProvider extends React.Component {
                     }
                     //return res.json()
                     return res.json()
-                    })
+                })
+                /*
                 .then(resJson => {
                     this.setState({meal_plan_item_count: resJson})
                     //console.log(this.state.meal_plan_item_count)
-                })            
-                /* MS Code
-                .then(resJson => { 
-                    const newMenuCount = [...this.state.meal_plan_count]
-                    const id = newMenuCount.findIndex(p => p.menu_item_id === resJson.menu_item_id)
-                    newMenuCount[id].occurrence++
-                    this.setState({
-                        meal_plan: [...this.state.meal_plan, item],
-                        meal_plan_count: newMenuCount,    
-                        //meal_plan: [...this.state.meal_plan, item]
-                        //meal_plan: [...this.state.meal_plan, resJson] // using resJson rather than item causes 'Added: ' to not work
-                    })
-                })*/
+                })*/            
                 .catch(error => console.log(error))//this.setState({error}))
                 //console.log(this.state.meal_plan_count)
         }//end for loop
@@ -176,7 +155,7 @@ export default class MyProvider extends React.Component {
                 user_id: this.state.user_id,
                 menu_items: this.state.menu_items,
                 meal_plan: this.state.meal_plan,
-                meal_plan_item_count: this.state.meal_plan_item_count,
+                //meal_plan_item_count: this.state.meal_plan_item_count,
 
                 setMenuItems: this.setMenuItems,
                 addMenuItem: this.addToMealPlan,
@@ -184,7 +163,7 @@ export default class MyProvider extends React.Component {
                 updateMenuItem: this.updateMenuItem,
 
                 setMealPlan: this.setMealPlan,
-                checkMealPlanItemCounts: this.checkMealPlanItemCounts,
+                //checkMealPlanItemCounts: this.checkMealPlanItemCounts,
                 addToMealPlan: this.addToMealPlan,
                 removeFromMealPlan: this.removeFromMealPlan,
             }}>

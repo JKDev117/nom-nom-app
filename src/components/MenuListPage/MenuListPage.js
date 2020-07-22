@@ -40,7 +40,7 @@ class MenuListPage extends React.Component {
     render(){
         //console.log('addedToMenuPlan @render', this.state.addedToMenuPlan)
         //console.log('menu_items', this.context.menu_items)
-        const { user_id, menu_items, checkMealPlanItemCounts } = this.context
+        const { user_id, menu_items } = this.context
 
         const breakfasts 
             = menu_items.filter(item => item.category === 'Breakfast')
@@ -52,7 +52,6 @@ class MenuListPage extends React.Component {
                                         <button>Edit Meal Item</button><br/>
                                     </Link>
                                     {/* ----- Added: x ------- */}
-                                    {checkMealPlanItemCounts(item.id)}
                                     <details>
                                         <summary>
                                             (nutritional info)
@@ -78,7 +77,6 @@ class MenuListPage extends React.Component {
                                         <button>Edit Meal Item</button><br/>
                                     </Link>
                                     {/* ----- Added: x ------- */}
-                                    {checkMealPlanItemCounts(item.id)}
                                     <details>
                                         <summary>
                                             (nutritional info)
@@ -104,7 +102,6 @@ class MenuListPage extends React.Component {
                                         <button>Edit Meal Item</button><br/>
                                     </Link>
                                     {/* ----- Added: x ------- */}
-                                    {checkMealPlanItemCounts(item.id)}
                                     <details>
                                         <summary>
                                             (nutritional info)
