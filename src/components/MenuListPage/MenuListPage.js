@@ -40,6 +40,7 @@ class MenuListPage extends React.Component {
     */
 
     render(){
+        console.log("MenuListPage.js")
         //console.log('addedToMenuPlan @render', this.state.addedToMenuPlan)
         //console.log('menu_items', this.context.menu_items)
 
@@ -48,7 +49,7 @@ class MenuListPage extends React.Component {
         
         const menu_items_updated = menu_items.map(
             item => {
-                console.log('item', item)
+                //console.log('item', item)
                 if(checkMealPlanForItem(item)===true){
                     Object.assign(item, {in_meal_plan: true})
                 } else {
@@ -58,7 +59,11 @@ class MenuListPage extends React.Component {
             }
         )
 
-        console.log('menu_items_updated', menu_items_updated)
+        const temp =[]
+        menu_items_updated.forEach(element => 
+            temp.push(element.in_meal_plan)    
+        )
+        console.log('menu_items_updated in_meal_plan values', temp)
 
         const breakfasts 
             = menu_items.filter(item => item.category === 'Breakfast')
@@ -157,6 +162,7 @@ class MenuListPage extends React.Component {
                         })
                         //console.log(ids_of_checked_menu_items)
                         this.context.addToMealPlan(user_id, ids_of_checked_menu_items)
+                        this.props.history.push('/meal-plan')
                     }}>
                     <section className="menuCategory">Breakfast Menu <br/>
                         <ul>

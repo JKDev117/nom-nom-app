@@ -33,8 +33,10 @@ class MealPlanPage extends React.Component {
           .catch(error => console.log(error))
     }
     */
+    
 
     render(){
+        console.log("MealPlanPage.js")
         //const { menu_plan, removeFromMealPlan } = this.context
         const { meal_plan, removeFromMealPlan } = this.context
 
@@ -87,7 +89,7 @@ class MealPlanPage extends React.Component {
                                                     </li>)                                                  
 
         return (
-            <div className="MenuListPage">
+            <div className="MealPlanPage">
                 <h1>Today's Meal Plan</h1>
                 {/*<p className="user-note"><u>Note</u>: The Meal Plan is currently on-device only and will not work across multiple devices. Multi-device support coming soon!</p>*/}
                 <section className="menuCategory">Breakfast <br/>
