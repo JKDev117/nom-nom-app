@@ -98,11 +98,12 @@ export default class MyProvider extends React.Component {
                     //return res.json()
                     return res.json()
                 })
-                /*
                 .then(resJson => {
-                    this.setState({meal_plan_item_count: resJson})
+                    console.log('resJson', resJson)
+                    this.setState({meal_plan: [...this.state.meal_plan, resJson]})
+                    //this.setState({meal_plan_item_count: resJson})
                     //console.log(this.state.meal_plan_item_count)
-                })*/            
+                })
                 .catch(error => console.log(error))//this.setState({error}))
                 //console.log(this.state.meal_plan_count)
         }//end for loop
@@ -199,7 +200,7 @@ export default class MyProvider extends React.Component {
     }
     */
 
-    
+    /*
     componentDidMount(){
       //GET /menu
       const url = config.REACT_APP_API_BASE_URL + '/menu';
@@ -242,6 +243,7 @@ export default class MyProvider extends React.Component {
       })
       .catch(error => console.log(error))
     }
+    */
     
 
     render(){

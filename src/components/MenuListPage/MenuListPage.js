@@ -10,7 +10,20 @@ class MenuListPage extends React.Component {
  
     static contextType = MyContext;
     
-    /*
+    handleSubmit = e => {
+        console.log('e', e)
+        e.preventDefault()
+        let checkedBoxes = document.querySelectorAll('input[name="menu-item"]:checked');
+        //console.log(checkedBoxes)
+        const ids_of_checked_menu_items = []
+        checkedBoxes.forEach(checkbox => {
+            ids_of_checked_menu_items.push(checkbox.value)
+        })
+        //console.log(ids_of_checked_menu_items)
+        this.context.addToMealPlan(this.context.user_id, ids_of_checked_menu_items)
+        setTimeout(() => this.props.history.push('/meal-plan'), 500)            
+    }
+    
     componentDidMount(){
         //GET /menu
         const url = config.REACT_APP_API_BASE_URL + '/menu';
@@ -32,7 +45,7 @@ class MenuListPage extends React.Component {
           .then(this.context.setMenuItems)
           .catch(error => console.log(error))//this.setState({error}))
     }
-    */
+    
 
     /*
     const button = document.querySelector(`.button${element.menu_item_id}`);
@@ -44,7 +57,7 @@ class MenuListPage extends React.Component {
         //console.log('addedToMenuPlan @render', this.state.addedToMenuPlan)
         //console.log('menu_items', this.context.menu_items)
 
-        const { user_id, menu_items, checkMealPlanForItem } = this.context
+        const { menu_items, checkMealPlanForItem } = this.context
         
         
         const menu_items_updated = menu_items.map(
@@ -152,18 +165,7 @@ class MenuListPage extends React.Component {
                     <button>+ Add New Menu Item</button>
                 </Link>
 
-                <form onSubmit={e => {
-                        e.preventDefault()
-                        let checkedBoxes = document.querySelectorAll('input[name="menu-item"]:checked');
-                        //console.log(checkedBoxes)
-                        const ids_of_checked_menu_items = []
-                        checkedBoxes.forEach(checkbox => {
-                            ids_of_checked_menu_items.push(checkbox.value)
-                        })
-                        //console.log(ids_of_checked_menu_items)
-                        this.context.addToMealPlan(user_id, ids_of_checked_menu_items)
-                        this.props.history.push('/meal-plan')
-                    }}>
+                <form onSubmit={this.handleSubmit}>
                     <section className="menuCategory">Breakfast Menu <br/>
                         <ul>
                             {breakfasts}
