@@ -12,6 +12,50 @@ export default class MyProvider extends React.Component {
         //meal_plan_item_count: []
     }
 
+    componentDidMount(){
+        //GET /menu
+        const url = config.REACT_APP_API_BASE_URL + '/menu';
+        const options = {
+          method: 'GET',
+          headers: {
+            //"Authorization": `Bearer ${config.REACT_APP_API_KEY}`,
+            "Authorization": `Bearer ${TokenService.getAuthToken()}`,
+            "Content-Type": "application/json",
+          }
+        }
+    
+        //GET /plan
+        const url2 = config.REACT_APP_API_BASE_URL + '/plan';
+        const options2 = {
+          method: 'GET',
+          headers: {
+            //"Authorization": `Bearer ${config.REACT_APP_API_KEY}`,
+            "Authorization": `Bearer ${TokenService.getAuthToken()}`,
+            "Content-Type": "application/json",
+          }
+        }
+        
+        Promise.all([
+          fetch(url, options),
+          fetch(url2, options2)
+        ])
+        .then(([menuRes, planRes]) => {
+          if(!menuRes.ok){
+            return menuRes.json().then(e => Promise.reject(e))
+          }    
+          if(!planRes.ok){
+            return planRes.json().then(e => Promise.reject(e))
+          }
+          return Promise.all([menuRes.json(), planRes.json()])
+        })
+        .then(([menu, plan]) => {
+          this.setMenuItems(menu)
+          this.setMealPlan(plan)
+        })
+        .catch(error => console.log(error))
+    }
+
+
     /* MENU ITEMS METHODS ------------------------------------------------------------------------------------------------------------------------ */
     setMenuItems = items => {
         this.setState({
@@ -48,6 +92,12 @@ export default class MyProvider extends React.Component {
     }
 
     /* MEAL PLAN METHODS ------------------------------------------------------------------------------------------------------------------------ */
+    checkMealPlanForItem = item => {
+      const { meal_plan } = this.state
+      console.log('meal_plan', meal_plan)
+      return meal_plan.some(element => element.menu_item_id === item.id)
+    }
+    
     setMealPlan = items => {
         this.setState({
            meal_plan: items,
@@ -156,6 +206,7 @@ export default class MyProvider extends React.Component {
                 menu_items: this.state.menu_items,
                 meal_plan: this.state.meal_plan,
                 //meal_plan_item_count: this.state.meal_plan_item_count,
+                checkMealPlanForItem: this.checkMealPlanForItem,
 
                 setMenuItems: this.setMenuItems,
                 addMenuItem: this.addToMealPlan,

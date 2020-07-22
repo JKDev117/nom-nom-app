@@ -10,6 +10,7 @@ class MenuListPage extends React.Component {
  
     static contextType = MyContext;
     
+    /*
     componentDidMount(){
         //GET /menu
         const url = config.REACT_APP_API_BASE_URL + '/menu';
@@ -31,6 +32,7 @@ class MenuListPage extends React.Component {
           .then(this.context.setMenuItems)
           .catch(error => console.log(error))//this.setState({error}))
     }
+    */
 
     /*
     const button = document.querySelector(`.button${element.menu_item_id}`);
@@ -40,18 +42,38 @@ class MenuListPage extends React.Component {
     render(){
         //console.log('addedToMenuPlan @render', this.state.addedToMenuPlan)
         //console.log('menu_items', this.context.menu_items)
-        const { user_id, menu_items } = this.context
+
+        const { user_id, menu_items, checkMealPlanForItem } = this.context
+        
+        
+        const menu_items_updated = menu_items.map(
+            item => {
+                console.log('item', item)
+                if(checkMealPlanForItem(item)===true){
+                    Object.assign(item, {in_meal_plan: true})
+                } else {
+                    Object.assign(item, {in_meal_plan: false})
+                }
+                return item
+            }
+        )
+
+        console.log('menu_items_updated', menu_items_updated)
 
         const breakfasts 
             = menu_items.filter(item => item.category === 'Breakfast')
                         .map((item, i) =>
                                 <li key={i}>
+                                    
                                     <input className="checkBox" type="checkbox" id={`menu-item${item.id}`} name="menu-item" value={item.id}/>
                                     <label htmlFor={`menu-item${item.id}`}>{item.name}</label>
+
                                     <Link to={`/edit-menu-item/${item.id}`}>
                                         <button>Edit Meal Item</button><br/>
                                     </Link>
+
                                     {/* ----- Added: x ------- */}
+                                    
                                     <details>
                                         <summary>
                                             (nutritional info)
