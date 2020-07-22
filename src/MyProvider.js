@@ -99,13 +99,14 @@ export default class MyProvider extends React.Component {
                     return res.json()
                 })
                 .then(resJson => {
-                    console.log('resJson', resJson)
+                    console.log('resJson @MyProvider.js @addToMealPlan', resJson)
                     this.setState({meal_plan: [...this.state.meal_plan, resJson]})
+                    console.log('meal_plan @MyProvider.js @addToMealPlan', this.state.meal_plan)
                     //this.setState({meal_plan_item_count: resJson})
                     //console.log(this.state.meal_plan_item_count)
                 })
                 .catch(error => console.log(error))//this.setState({error}))
-                //console.log(this.state.meal_plan_count)
+                //console.log(this.state.meal_plan_count)      
         }//end for loop
     }//end addToMealPlan()
 
@@ -247,9 +248,10 @@ export default class MyProvider extends React.Component {
     
 
     render(){
+        console.log(this.props)
         console.log("MyProvider.js")
-        console.log('menu_items', this.state.menu_items)
-        console.log('meal_plan', this.state.meal_plan)
+        //console.log('menu_items', this.state.menu_items)
+        //console.log('meal_plan', this.state.meal_plan)
         return(
             <MyContext.Provider value={{
                 user_id: this.state.user_id,

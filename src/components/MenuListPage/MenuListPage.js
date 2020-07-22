@@ -11,7 +11,7 @@ class MenuListPage extends React.Component {
     static contextType = MyContext;
     
     handleSubmit = e => {
-        console.log('e', e)
+        //console.log('e', e)
         e.preventDefault()
         let checkedBoxes = document.querySelectorAll('input[name="menu-item"]:checked');
         //console.log(checkedBoxes)
