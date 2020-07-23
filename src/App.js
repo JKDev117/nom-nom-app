@@ -77,7 +77,7 @@ class App extends React.Component {
 
 
   render(){
-    console.log('App.js')
+    console.log('@App.js render')
     return (
        <main className='App'>
          <Nav />

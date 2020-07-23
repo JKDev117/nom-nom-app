@@ -14,6 +14,7 @@ export default class MyProvider extends React.Component {
 
     /* MENU ITEMS METHODS ------------------------------------------------------------------------------------------------------------------------ */
     setMenuItems = items => {
+        console.log('@MyProvider.js setMenuItems')
         this.setState({
           user_id: items[0].user_id,
           menu_items: items
@@ -55,6 +56,7 @@ export default class MyProvider extends React.Component {
     }
     
     setMealPlan = items => {
+        console.log('@MyProvider.js setMealPlan')
         this.setState({
            meal_plan: items,
         })
@@ -110,10 +112,10 @@ export default class MyProvider extends React.Component {
         }//end for loop
     }//end addToMealPlan()
 
-    removeFromMealPlan = item => {
-        //console.log('item @MyProvider.js @removeFromMealPlan', item)
+    removeFromMealPlan = id => {
+        console.log('@MyProvider.js @removeFromMealPlan id', id)
         //console.log('this.state.meal_plan @MyProvider.js @removeFromMealPlan', this.state.meal_plan)
-        
+
         const url = config.REACT_APP_API_BASE_URL + '/plan';
         const options = {
           method: 'DELETE',
@@ -122,38 +124,44 @@ export default class MyProvider extends React.Component {
             "Authorization": `Bearer ${TokenService.getAuthToken()}`,
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({id: item.id})
+          body: JSON.stringify({id: id})
         }
       
         fetch(url, options)
             .then(res => {
+              console.log('res.status @MyProvider.js @removeFromMealPlan', res.status)
               if(!res.ok){
                 return res.json().then(e => Promise.reject(e))
               }
               return;
             })
-            .catch(error => console.log(error))
             .then(() => {
-              
               //const newMenuCount = [...this.state.meal_plan_count]
               //const id = newMenuCount.findIndex(p => p.menu_item_id === item.id || item.menu_item_id)
               //if(newMenuCount[id] !== undefined && newMenuCount[id].occurrence > 0){
               //  newMenuCount[id].occurrence--
               //}
-            
+
               const { meal_plan } = this.state
+
+              
+
               for(let i=0; meal_plan[i] !== undefined; i++){
-                if(JSON.stringify(meal_plan[i]) === JSON.stringify(item)){
+                if(meal_plan[i].id === id){
+                //if(JSON.stringify(meal_plan[i]) === JSON.stringify(item)){
                   meal_plan.splice(i,1)
                   i--
                 }
               }
+              console.log(meal_plan)
   
               this.setState({
                 meal_plan: meal_plan              
               })
-              return;
+              //return;
             })
+            .catch(error => console.log(error))
+
     }//end removeFromMenuPlan()
 
     /*
@@ -249,7 +257,7 @@ export default class MyProvider extends React.Component {
 
     render(){
         //console.log(this.props)
-        console.log("MyProvider.js")
+        console.log("@MyProvider.js render")
         //console.log('menu_items', this.state.menu_items)
         //console.log('meal_plan', this.state.meal_plan)
         return(

@@ -33,6 +33,10 @@ img {
     object-fit: contain;
 }
 
-#added-status{
+.added-status {
     color:lightcoral
+}
+
+.gray {
+    color:gray;
 }

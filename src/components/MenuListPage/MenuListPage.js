@@ -10,6 +10,18 @@ class MenuListPage extends React.Component {
  
     static contextType = MyContext;
     
+    handleRemoveFromMealPlan = item => {
+        const { meal_plan, removeFromMealPlan } = this.context;
+        let plan_id;
+        for(let element of meal_plan){
+            if(element.menu_item_id === item.id){
+                plan_id = element.id
+                break;
+            }
+        }
+        removeFromMealPlan(plan_id)
+    }
+
     handleSubmit = e => {
         //console.log('e', e)
         e.preventDefault()
@@ -23,13 +35,14 @@ class MenuListPage extends React.Component {
         this.context.addToMealPlan(this.context.user_id, ids_of_checked_menu_items)
         setTimeout(() => this.props.history.push('/meal-plan'), 600)            
     }
-    
+        
     componentDidMount(){
         const { checkMealPlanForItem } = this.context;
+        console.log('@MenuListPage.js [componentDidMount]')
 
         //GET /plan
-        const url = config.REACT_APP_API_BASE_URL + '/plan';
-        const options = {
+        const plan_url = config.REACT_APP_API_BASE_URL + '/plan';
+        const plan_options = {
             method: 'GET',
             headers: {
                 //"Authorization": `Bearer ${config.REACT_APP_API_KEY}`,
@@ -37,29 +50,39 @@ class MenuListPage extends React.Component {
                 "Content-Type": "application/json",
             }
         }
-        fetch(url, options)
-        .then(res => {
-            if(!res.ok){
-            return res.json().then(e => Promise.reject(e))
-            }
-            //console.log('res.json()', res.json())
-            return res.json()
-        })
-        .then(this.context.setMealPlan)
-        .catch(error => console.log(error))
 
         //GET /menu
-        const url2 = config.REACT_APP_API_BASE_URL + '/menu';
-        const options2 = {
-          method: 'GET',
-          headers: {
-            //"Authorization": `Bearer ${config.REACT_APP_API_KEY}`,
-            "Authorization": `Bearer ${TokenService.getAuthToken()}`,
-            "Content-Type": "application/json",
-          }
+        const menu_url = config.REACT_APP_API_BASE_URL + '/menu';
+        const menu_options = {
+            method: 'GET',
+            headers: {
+                //"Authorization": `Bearer ${config.REACT_APP_API_KEY}`,
+                "Authorization": `Bearer ${TokenService.getAuthToken()}`,
+                "Content-Type": "application/json",
+            }
         }
-        fetch(url2, options2)
+
+        //fetch plan_url
+        fetch(plan_url, plan_options)
+            .then(res => {
+                console.log('fetch plan')
+                if(!res.ok){
+                    return res.json().then(e => Promise.reject(e))
+                }
+                //console.log('res.json()', res.json())
+                return res.json()
+            })
+            .then(resJson => {
+                console.log('this.context.setMealPlan')
+                return this.context.setMealPlan(resJson)
+            })
+            .catch(error => console.log(error))
+
+       
+        //fetch menu_url
+        fetch(menu_url, menu_options)
           .then(res => {
+            console.log('fetch menu')
             if(!res.ok){
               return res.json().then(e => Promise.reject(e))
             }
@@ -69,6 +92,7 @@ class MenuListPage extends React.Component {
             const menu_items_modified = resJson.map(
                 item => {
                     //console.log('item', item)
+                    console.log('this.context.meal_plan @"fetch menu"', this.context.meal_plan)
                     if(checkMealPlanForItem(item)===true){
                         Object.assign(item, {in_meal_plan: true})
                     } else {
@@ -77,11 +101,12 @@ class MenuListPage extends React.Component {
                     return item
                 }
             )
-            this.context.setMenuItems(menu_items_modified)
-          })            
+            console.log('this.context.setMenuItems')
+            return this.context.setMenuItems(menu_items_modified)
+          })           
           .catch(error => console.log(error))//this.setState({error}))
     }
-    
+
 
     /*
     const button = document.querySelector(`.button${element.menu_item_id}`);
@@ -89,7 +114,7 @@ class MenuListPage extends React.Component {
     */
 
     render(){
-        console.log("MenuListPage.js")
+        console.log("@MenuListPage.js render")
         //console.log('addedToMenuPlan @render', this.state.addedToMenuPlan)
         //console.log('menu_items', this.context.menu_items)
 
@@ -101,38 +126,77 @@ class MenuListPage extends React.Component {
         menu_items.forEach(element => 
             temp.push(element.in_meal_plan)    
         )
-        console.log('menu_items_updated in_meal_plan values', temp)
-            
+        console.log('values of in_meal_plan? for menu_items', temp)
+        
+       
+        /*
+        const categories = [
+            {category: 'Breakfast', list: []},
+            {category: 'Lunch', list: []},
+            {category: 'Dinner', list: []}
+        ]
+
+        categories.forEach(
+            category => 
+        )
+        */
 
         const breakfasts 
             = menu_items.filter(item => item.category === 'Breakfast')
                         .map((item, i) =>
                                 <li key={i}>
                                     
-                                    <input className="checkBox" type="checkbox" id={`menu-item${item.id}`} name="menu-item" value={item.id}/>
-                                    <label htmlFor={`menu-item${item.id}`}>{item.name}</label>
+                                    {item.in_meal_plan ? 
+                                        <>
+                                            <label className="gray" htmlFor={`menu-item${item.id}`}>{item.name}</label>
 
-                                    <Link to={`/edit-menu-item/${item.id}`}>
-                                        <button>Edit Meal Item</button><br/>
-                                    </Link>
+                                            <Link to={`/edit-menu-item/${item.id}`}>
+                                                <button>Edit</button><br/>
+                                            </Link>
+                                            
+                                            <span className="added-status">[In Today's Meal Plan] </span>
+                                            <button type="button" onClick={()=>this.handleRemoveFromMealPlan(item)}>Remove from today's meal plan</button>                                   
+                                            
+                                            <details className="gray">
+                                                <summary>
+                                                    (nutritional info)
+                                                </summary>
+                                                { item.image_url ? 
+                                                    <img style={{opacity: '0.5' }} src={item.image_url} alt={`${item.name}`}/> : "" }  
+                                                <p className="mealplan-nutritional-info">
+                                                    (<u>Calories</u>: {item.calories} 
+                                                    <u>Carbs</u>: {item.carbs}g   
+                                                    <u>Protein</u>: {item.protein}g
+                                                    <u>Fat</u>: {item.fat}g)
+                                                </p>
+                                            </details>
+                                        </>
 
-                                    {/* ----- Added: x ------- */}
-                                    
-                                    <details>
-                                        <summary>
-                                            (nutritional info)
-                                        </summary>
-                                        { item.image_url ? 
-                                            <img src={item.image_url} alt={`${item.name}`}/> : "" }  
-                                        <p className="mealplan-nutritional-info">
-                                            (<u>Calories</u>: {item.calories} 
-                                            <u>Carbs</u>: {item.carbs}g   
-                                            <u>Protein</u>: {item.protein}g
-                                            <u>Fat</u>: {item.fat}g)
-                                        </p>
-                                    </details>
+                                    :
+                                        <>
+                                            <input className="checkBox" type="checkbox" id={`menu-item${item.id}`} name="menu-item" value={item.id} />
+                                            <label htmlFor={`menu-item${item.id}`}>{item.name}</label>
+                                            <Link to={`/edit-menu-item/${item.id}`}>
+                                                <button>Edit</button><br/>
+                                            </Link>
+                                            <details>
+                                                <summary>
+                                                    (nutritional info)
+                                                </summary>
+                                                { item.image_url ? 
+                                                    <img src={item.image_url} alt={`${item.name}`}/> : "" }  
+                                                <p className="mealplan-nutritional-info">
+                                                    (<u>Calories</u>: {item.calories} 
+                                                    <u>Carbs</u>: {item.carbs}g   
+                                                    <u>Protein</u>: {item.protein}g
+                                                    <u>Fat</u>: {item.fat}g)
+                                                </p>
+                                            </details>
+                                        </>
+                                    }
+                        
                                 </li>
-                        )
+                        )//end .map
         
         const lunches = menu_items.filter(item => item.category === 'Lunch')
                         .map((item, i) =>
@@ -140,7 +204,7 @@ class MenuListPage extends React.Component {
                                     <input className="checkBox" type="checkbox" id={`menu-item${item.id}`} name="menu-item" value={item.id} />
                                     <label htmlFor={`menu-item${item.id}`}>{item.name}</label>
                                     <Link to={`/edit-menu-item/${item.id}`}>
-                                        <button>Edit Meal Item</button><br/>
+                                        <button>Edit</button><br/>
                                     </Link>
                                     {/* ----- Added: x ------- */}
                                     <details>
@@ -165,7 +229,7 @@ class MenuListPage extends React.Component {
                                     <input className="checkBox" type="checkbox" id={`menu-item${item.id}`} name="menu-item" value={item.id}/>
                                     <label htmlFor={`menu-item${item.id}`}>{item.name}</label>
                                     <Link to={`/edit-menu-item/${item.id}`}>
-                                        <button>Edit Meal Item</button><br/>
+                                        <button>Edit</button><br/>
                                     </Link>
                                     {/* ----- Added: x ------- */}
                                     <details>

@@ -10,6 +10,7 @@ class MealPlanPage extends React.Component {
     static contextType = MyContext;
     
     componentDidMount(){
+        console.log('@MealPlanPage.js [componentDidMount]')
         //GET /plan
         const url = config.REACT_APP_API_BASE_URL + '/plan';
         const options = {
@@ -33,7 +34,7 @@ class MealPlanPage extends React.Component {
     }
 
     render(){
-        console.log("MealPlanPage.js")
+        console.log("@MealPlanPage.js render")
         //const { menu_plan, removeFromMealPlan } = this.context
         const { meal_plan, removeFromMealPlan } = this.context
 
@@ -58,7 +59,7 @@ class MealPlanPage extends React.Component {
                                                                 : 
                                                             "" }
                                                         <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g  <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
-                                                        <button onClick={()=>removeFromMealPlan(item)}>Remove from Today's Meal Plan</button>
+                                                        <button onClick={()=>removeFromMealPlan(item.id)}>Remove from Today's Meal Plan</button>
                                                     </li>)
         
         const lunches = meal_plan.filter(item => item.category === 'Lunch')
@@ -70,7 +71,7 @@ class MealPlanPage extends React.Component {
                                                                 : 
                                                             "" }
                                                         <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g  <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
-                                                        <button onClick={()=>removeFromMealPlan(item)}>Remove from Today's Meal Plan</button>
+                                                        <button onClick={()=>removeFromMealPlan(item.id)}>Remove from Today's Meal Plan</button>
                                                     </li>)
         
         const dinners = meal_plan.filter(item => item.category === 'Dinner')
@@ -82,7 +83,7 @@ class MealPlanPage extends React.Component {
                                                                 : 
                                                             "" }
                                                         <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g  <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
-                                                        <button onClick={()=>removeFromMealPlan(item)}>Remove from Today's Meal Plan</button>
+                                                        <button onClick={()=>removeFromMealPlan(item.id)}>Remove from Today's Meal Plan</button>
                                                     </li>)                                                  
 
         return (
