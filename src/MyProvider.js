@@ -248,7 +248,7 @@ export default class MyProvider extends React.Component {
     
 
     render(){
-        console.log(this.props)
+        //console.log(this.props)
         console.log("MyProvider.js")
         //console.log('menu_items', this.state.menu_items)
         //console.log('meal_plan', this.state.meal_plan)

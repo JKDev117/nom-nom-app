@@ -9,7 +9,6 @@ import TokenService from '../../services/token-service';
 class MealPlanPage extends React.Component {
     static contextType = MyContext;
     
-    
     componentDidMount(){
         //GET /plan
         const url = config.REACT_APP_API_BASE_URL + '/plan';
@@ -32,8 +31,6 @@ class MealPlanPage extends React.Component {
           .then(this.context.setMealPlan)
           .catch(error => console.log(error))
     }
-    
-    
 
     render(){
         console.log("MealPlanPage.js")
