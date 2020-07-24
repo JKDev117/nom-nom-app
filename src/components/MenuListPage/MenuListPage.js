@@ -120,16 +120,16 @@ class MenuListPage extends React.Component {
 
         const { menu_items } = this.context
         
-
-
+        /*
+        //to see values of in_meal_plan (boolean) for menu_items for debugging purposes
         const temp =[]
         menu_items.forEach(element => 
             temp.push(element.in_meal_plan)    
         )
-        console.log('values of in_meal_plan? for menu_items', temp)
-        
+        console.log('values of in_meal_plan (boolean) for menu_items', temp)
+        */
        
-        /*
+
         const categories = [
             {category: 'Breakfast', list: []},
             {category: 'Lunch', list: []},
@@ -137,12 +137,7 @@ class MenuListPage extends React.Component {
         ]
 
         categories.forEach(
-            category => 
-        )
-        */
-
-        const breakfasts 
-            = menu_items.filter(item => item.category === 'Breakfast')
+            category => category.list = menu_items.filter(item => item.category === category.category)
                         .map((item, i) =>
                                 <li key={i}>
                                     
@@ -197,56 +192,8 @@ class MenuListPage extends React.Component {
                         
                                 </li>
                         )//end .map
-        
-        const lunches = menu_items.filter(item => item.category === 'Lunch')
-                        .map((item, i) =>
-                                <li key={i}>
-                                    <input className="checkBox" type="checkbox" id={`menu-item${item.id}`} name="menu-item" value={item.id} />
-                                    <label htmlFor={`menu-item${item.id}`}>{item.name}</label>
-                                    <Link to={`/edit-menu-item/${item.id}`}>
-                                        <button>Edit</button><br/>
-                                    </Link>
-                                    {/* ----- Added: x ------- */}
-                                    <details>
-                                        <summary>
-                                            (nutritional info)
-                                        </summary>
-                                        { item.image_url ? 
-                                            <img src={item.image_url} alt={`${item.name}`}/> : "" }  
-                                        <p className="mealplan-nutritional-info">
-                                            (<u>Calories</u>: {item.calories} 
-                                            <u>Carbs</u>: {item.carbs}g   
-                                            <u>Protein</u>: {item.protein}g
-                                            <u>Fat</u>: {item.fat}g)
-                                        </p>
-                                    </details>
-                                </li>
-                        )
-        
-        const dinners = menu_items.filter(item => item.category === 'Dinner')
-                        .map((item, i) =>
-                                <li key={i}>
-                                    <input className="checkBox" type="checkbox" id={`menu-item${item.id}`} name="menu-item" value={item.id}/>
-                                    <label htmlFor={`menu-item${item.id}`}>{item.name}</label>
-                                    <Link to={`/edit-menu-item/${item.id}`}>
-                                        <button>Edit</button><br/>
-                                    </Link>
-                                    {/* ----- Added: x ------- */}
-                                    <details>
-                                        <summary>
-                                            (nutritional info)
-                                        </summary>
-                                        { item.image_url ? 
-                                            <img src={item.image_url} alt={`${item.name}`}/> : "" }  
-                                        <p className="mealplan-nutritional-info">
-                                            (<u>Calories</u>: {item.calories} 
-                                            <u>Carbs</u>: {item.carbs}g   
-                                            <u>Protein</u>: {item.protein}g
-                                            <u>Fat</u>: {item.fat}g)
-                                        </p>
-                                    </details>
-                                </li>
-                        )                                                 
+        )
+                                                    
 
         return(
             <div className="MenuListPage">
@@ -258,19 +205,19 @@ class MenuListPage extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                     <section className="menuCategory">Breakfast Menu <br/>
                         <ul>
-                            {breakfasts}
+                            {categories[0].list}
                         </ul>
                         
                     </section>
                     <section className="menuCategory">Lunch Menu <br/>
                         <ul>
-                            {lunches}
+                            {categories[1].list}
                         </ul>
                         
                     </section>
                     <section className="menuCategory">Dinner Menu <br/>
                         <ul>
-                            {dinners}
+                            {categories[2].list}
                         </ul>
                         
                     </section>

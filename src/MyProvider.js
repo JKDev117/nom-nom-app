@@ -113,7 +113,7 @@ export default class MyProvider extends React.Component {
     }//end addToMealPlan()
 
     removeFromMealPlan = id => {
-        console.log('@MyProvider.js @removeFromMealPlan id', id)
+        console.log('@MyProvider.js @removeFromMealPlan plan item id', id)
         //console.log('this.state.meal_plan @MyProvider.js @removeFromMealPlan', this.state.meal_plan)
 
         const url = config.REACT_APP_API_BASE_URL + '/plan';
@@ -129,7 +129,7 @@ export default class MyProvider extends React.Component {
       
         fetch(url, options)
             .then(res => {
-              console.log('res.status @MyProvider.js @removeFromMealPlan', res.status)
+              console.log('res.status', res.status)
               if(!res.ok){
                 return res.json().then(e => Promise.reject(e))
               }
@@ -141,11 +141,7 @@ export default class MyProvider extends React.Component {
               //if(newMenuCount[id] !== undefined && newMenuCount[id].occurrence > 0){
               //  newMenuCount[id].occurrence--
               //}
-
               const { meal_plan } = this.state
-
-              
-
               for(let i=0; meal_plan[i] !== undefined; i++){
                 if(meal_plan[i].id === id){
                 //if(JSON.stringify(meal_plan[i]) === JSON.stringify(item)){
@@ -153,12 +149,27 @@ export default class MyProvider extends React.Component {
                   i--
                 }
               }
-              console.log(meal_plan)
-  
+
+
+              const { menu_items } = this.state
+              const menu_items_updated = menu_items.map(
+                item => {
+                    if(this.checkMealPlanForItem(item)===true){
+                        Object.assign(item, {in_meal_plan: true})
+                    } else {
+                        Object.assign(item, {in_meal_plan: false})
+                    }
+                    return item
+                }
+              )
+
+
               this.setState({
-                meal_plan: meal_plan              
+                meal_plan: meal_plan,
+                menu_items: menu_items_updated               
               })
-              //return;
+              console.log('@MyProvider.js @removeFromMealPlan meal_plan after setting state', meal_plan)
+              return;
             })
             .catch(error => console.log(error))
 
