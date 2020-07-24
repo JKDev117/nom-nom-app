@@ -76,35 +76,36 @@ class MenuListPage extends React.Component {
                 console.log('this.context.setMealPlan')
                 return this.context.setMealPlan(resJson)
             })
-            .catch(error => console.log(error))
-
-       
-        //fetch menu_url
-        fetch(menu_url, menu_options)
-          .then(res => {
-            console.log('fetch menu')
-            if(!res.ok){
-              return res.json().then(e => Promise.reject(e))
-            }
-            return res.json()
-          })
-          .then(resJson => {
-            const menu_items_modified = resJson.map(
-                item => {
-                    //console.log('item', item)
-                    console.log('this.context.meal_plan @"fetch menu"', this.context.meal_plan)
-                    if(checkMealPlanForItem(item)===true){
-                        Object.assign(item, {in_meal_plan: true})
-                    } else {
-                        Object.assign(item, {in_meal_plan: false})
+            //.catch(error => console.log(error))
+            .then(
+                //fetch menu_url
+                fetch(menu_url, menu_options)
+                .then(res => {
+                    console.log('fetch menu')
+                    if(!res.ok){
+                    return res.json().then(e => Promise.reject(e))
                     }
-                    return item
-                }
+                    return res.json()
+                })
+                .then(resJson => {
+                    const menu_items_modified = resJson.map(
+                        item => {
+                            //console.log('item', item)
+                            console.log('this.context.meal_plan @"fetch menu"', this.context.meal_plan)
+                            if(checkMealPlanForItem(item)===true){
+                                Object.assign(item, {in_meal_plan: true})
+                            } else {
+                                Object.assign(item, {in_meal_plan: false})
+                            }
+                            return item
+                        }
+                    )
+                    console.log('this.context.setMenuItems')
+                    return this.context.setMenuItems(menu_items_modified)
+                })           
+                .catch(error => console.log(error))//this.setState({error}))
             )
-            console.log('this.context.setMenuItems')
-            return this.context.setMenuItems(menu_items_modified)
-          })           
-          .catch(error => console.log(error))//this.setState({error}))
+            .catch(error =>  console.log(error))
     }
 
 
