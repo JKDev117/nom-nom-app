@@ -267,7 +267,6 @@ export default class MyProvider extends React.Component {
     
 
     render(){
-        //console.log(this.props)
         console.log("@MyProvider.js render")
         //console.log('menu_items', this.state.menu_items)
         //console.log('meal_plan', this.state.meal_plan)
@@ -280,7 +279,7 @@ export default class MyProvider extends React.Component {
                 checkMealPlanForItem: this.checkMealPlanForItem,
 
                 setMenuItems: this.setMenuItems,
-                addMenuItem: this.addToMealPlan,
+                addMenuItem: this.addMenuItem,
                 removeMenuItem: this.removeMenuItem,
                 updateMenuItem: this.updateMenuItem,
 

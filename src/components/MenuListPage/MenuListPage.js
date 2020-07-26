@@ -9,7 +9,6 @@ import TokenService from '../../services/token-service';
 
 class MenuListPage extends React.Component {
     
-
     static contextType = MyContext;
     
     handleRemoveFromMealPlan = item => {
