@@ -6,8 +6,10 @@ import { MyContext } from '../../MyProvider';
 import config from '../../config';
 import TokenService from '../../services/token-service';
 
+
 class MenuListPage extends React.Component {
- 
+    
+
     static contextType = MyContext;
     
     handleRemoveFromMealPlan = item => {
@@ -22,9 +24,7 @@ class MenuListPage extends React.Component {
         removeFromMealPlan(plan_id)
     }
 
-    handleSubmit = e => {
-        //console.log('e', e)
-        e.preventDefault()
+    handleSubmit () {
         let checkedBoxes = document.querySelectorAll('input[name="menu-item"]:checked');
         //console.log(checkedBoxes)
         const ids_of_checked_menu_items = []
@@ -109,10 +109,7 @@ class MenuListPage extends React.Component {
     }
 
 
-    /*
-    const button = document.querySelector(`.button${element.menu_item_id}`);
-    button.disabled = true;
-    */
+
 
     render(){
         console.log("@MenuListPage.js render")
@@ -120,7 +117,8 @@ class MenuListPage extends React.Component {
         //console.log('menu_items', this.context.menu_items)
 
         const { menu_items } = this.context
-        
+
+
         /*
         //to see values of in_meal_plan (boolean) for menu_items for debugging purposes
         const temp =[]
@@ -170,7 +168,7 @@ class MenuListPage extends React.Component {
 
                                     :
                                         <>
-                                            <input className="checkBox" type="checkbox" id={`menu-item${item.id}`} name="menu-item" value={item.id} />
+                                            <input className="checkBox" type="checkbox" id={`menu-item${item.id}`} name="menu-item" value={item.id} required />
                                             <label htmlFor={`menu-item${item.id}`}>{item.name}</label>
                                             <Link to={`/edit-menu-item/${item.id}`}>
                                                 <button>Edit</button><br/>
@@ -190,11 +188,11 @@ class MenuListPage extends React.Component {
                                             </details>
                                         </>
                                     }
-                        
                                 </li>
                         )//end .map
         )
-                                                    
+
+
 
         return(
             <div className="MenuListPage">
@@ -203,7 +201,6 @@ class MenuListPage extends React.Component {
                     <button>+ Add New Menu Item</button>
                 </Link>
 
-                <form onSubmit={this.handleSubmit}>
                     <section className="menuCategory">Breakfast Menu <br/>
                         <ul>
                             {categories[0].list}
@@ -222,10 +219,20 @@ class MenuListPage extends React.Component {
                         </ul>
                         
                     </section>
-                    <input type="submit" />
+                    <input type="button" id="addToMealPlanButton" value="submit" onClick={() => {
+                        const checkedBoxes = document.querySelectorAll('input[type=checkbox]:checked')
 
-                </form>
+                        if(!checkedBoxes.length){
+                            document.querySelector('#alert').innerHTML = "You must select atleast one new menu item option to submit."
+                            return;
+                        }
+
+                        this.handleSubmit()
+                    }}/>                    
+                    <span id="alert"></span>
+
             </div>
+            
         )
     }
 }
