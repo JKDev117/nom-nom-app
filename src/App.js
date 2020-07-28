@@ -49,6 +49,7 @@ class App extends React.Component {
     }
   }
 
+  
   componentWillUnmount() {
     /*
       when the app unmounts,
