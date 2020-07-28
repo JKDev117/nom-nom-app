@@ -9,7 +9,7 @@ import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 import LoginPage from './components/LoginPage/LoginPage';
 import RegistrationPage from './components/RegistrationPage/RegistrationPage';
 import Nav from './components/Nav/Nav';
-import MenuContext from './MenuContext'
+import MyProvider from './MyProvider';
 import TokenService from './services/token-service';
 import AuthApiService from './services/auth-api-service';
 import IdleService from './services/idle-service';
@@ -20,67 +20,6 @@ import config from './config';
 
 
 class App extends React.Component {
-
-  state = {
-    menu_items: [],
-    menu_plan: [],
-    error: null,
-    item_counts: []
-  }
-
-  setMenuItems = items => {
-    this.setState({
-      menu_items: items,
-      error: null
-    })
-  }
-
-  addMenuItem = item => {
-    this.setState({
-      menu_items: [...this.state.menu_items, item]
-    })
-  }
-
-  removeMenuItem = itemId => {
-    const updatedMenuItems = this.state.menu_items.filter(itm => 
-      itm.id !== itemId
-    )
-    this.setState({
-      menu_items: updatedMenuItems
-    })
-  }
-
-  updateMenuItem = item => {
-    const updatedMenuItems = this.state.menu_items.map(itm => 
-      (itm.id === item.id) ?
-        item 
-          :
-        itm
-      )
-      this.setState({
-        menu_items: updatedMenuItems
-      })
-  }
-
-  addToMenuPlan = item => {
-    const { menu_plan } = this.state
-    this.setState({
-      menu_plan: [...menu_plan, item]
-    })    
-  }
-
-  removeFromMenuPlan = itemId => {
-    const { menu_plan } = this.state
-    for(let i=0; i < menu_plan.length; i++){
-      if(menu_plan[i].id === itemId){
-        menu_plan.splice(i,1)
-        this.setState({
-          menu_plan: menu_plan
-        })
-        return
-      }
-    }
-  }
 
   componentDidMount() {
     /*
@@ -138,21 +77,11 @@ class App extends React.Component {
 
 
   render(){
-    const contextValue = {
-      menu_items: this.state.menu_items,
-      menu_plan: this.state.menu_plan,
-      addMenuItem: this.addMenuItem,
-      removeMenuItem: this.removeMenuItem,
-      updateMenuItem: this.updateMenuItem,
-      addToMenuPlan: this.addToMenuPlan,
-      removeFromMenuPlan: this.removeFromMenuPlan,
-      setMenuItems: this.setMenuItems,
-    }
-
+    console.log('@App.js render')
     return (
        <main className='App'>
          <Nav />
-         <MenuContext.Provider value={contextValue}>
+         <MyProvider>
             <Switch>
                 <Route exact path='/' component={LandingPage} /> 
                 <PublicOnlyRoute path='/login' component={LoginPage}/>
@@ -163,7 +92,7 @@ class App extends React.Component {
                 <PrivateRoute path='/edit-menu-item/:item_id' component={EditMenuItem} />
                 <Route component={NotFoundPage} />
             </Switch>
-        </MenuContext.Provider>    
+        </MyProvider>    
        </main>
     );
   }

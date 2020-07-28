@@ -1,27 +1,56 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './MealPlanPage.css';
-import MenuContext from '../../MenuContext';
+import { MyContext } from '../../MyProvider';
+import config from '../../config';
+import TokenService from '../../services/token-service';
+
 
 class MealPlanPage extends React.Component {
-    static contextType = MenuContext;
+    static contextType = MyContext;
+    
+    componentDidMount(){
+        console.log('@MealPlanPage.js [componentDidMount]')
+        //GET /plan
+        const url = config.REACT_APP_API_BASE_URL + '/plan';
+        const options = {
+          method: 'GET',
+          headers: {
+            //"Authorization": `Bearer ${config.REACT_APP_API_KEY}`,
+            "Authorization": `Bearer ${TokenService.getAuthToken()}`,
+            "Content-Type": "application/json",
+          }
+        }
+        fetch(url, options)
+          .then(res => {
+            if(!res.ok){
+              return res.json().then(e => Promise.reject(e))
+            }
+            //console.log('res.json()', res.json())
+            return res.json()
+          })
+          .then(this.context.setMealPlan)
+          .catch(error => console.log(error))
+    }
 
     render(){
-        const { menu_plan, removeFromMenuPlan } = this.context
+        console.log("@MealPlanPage.js render")
+        //const { menu_plan, removeFromMealPlan } = this.context
+        const { meal_plan, removeFromMealPlan } = this.context
 
         //to calculate total
         let calories = 0;
         let carbs = 0;
         let protein = 0;
         let fat = 0;
-        menu_plan.forEach(item => {
+        meal_plan.forEach(item => {
             calories += item.calories;
             carbs += item.carbs;
             protein += item.protein;
             fat += item.fat;
         })
         
-        const breakfasts = menu_plan.filter(item => item.category === 'Breakfast')
+        const breakfasts = meal_plan.filter(item => item.category === 'Breakfast')
                                            .map((item, i) => 
                                                     <li key={i}>
                                                         <span>{item.name}</span> <br/>
@@ -30,10 +59,10 @@ class MealPlanPage extends React.Component {
                                                                 : 
                                                             "" }
                                                         <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g  <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
-                                                        <button onClick={()=>removeFromMenuPlan(item.id)}>Remove from Today's Meal Plan</button>
+                                                        <button onClick={()=>removeFromMealPlan(item.id)}>Remove from Today's Meal Plan</button>
                                                     </li>)
         
-        const lunches = menu_plan.filter(item => item.category === 'Lunch')
+        const lunches = meal_plan.filter(item => item.category === 'Lunch')
                                         .map((item, i) => 
                                                     <li key={i}>
                                                         <span>{item.name}</span> <br/>
@@ -42,10 +71,10 @@ class MealPlanPage extends React.Component {
                                                                 : 
                                                             "" }
                                                         <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g  <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
-                                                        <button onClick={()=>removeFromMenuPlan(item.id)}>Remove from Today's Meal Plan</button>
+                                                        <button onClick={()=>removeFromMealPlan(item.id)}>Remove from Today's Meal Plan</button>
                                                     </li>)
         
-        const dinners = menu_plan.filter(item => item.category === 'Dinner')
+        const dinners = meal_plan.filter(item => item.category === 'Dinner')
                                         .map((item, i) => 
                                                     <li key={i}>
                                                         <span>{item.name}</span> <br/>
@@ -54,13 +83,13 @@ class MealPlanPage extends React.Component {
                                                                 : 
                                                             "" }
                                                         <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g  <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
-                                                        <button onClick={()=>removeFromMenuPlan(item.id)}>Remove from Today's Meal Plan</button>
+                                                        <button onClick={()=>removeFromMealPlan(item.id)}>Remove from Today's Meal Plan</button>
                                                     </li>)                                                  
 
-        return(
-            <div className="MenuListPage">
+        return (
+            <div className="MealPlanPage">
                 <h1>Today's Meal Plan</h1>
-                <p className="user-note"><u>Note</u>: The Meal Plan is currently on-device only and will not work across multiple devices. Multi-device support coming soon!</p>
+                {/*<p className="user-note"><u>Note</u>: The Meal Plan is currently on-device only and will not work across multiple devices. Multi-device support coming soon!</p>*/}
                 <section className="menuCategory">Breakfast <br/>
                     <ul>
                         {breakfasts}

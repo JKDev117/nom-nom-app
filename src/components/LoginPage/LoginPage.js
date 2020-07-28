@@ -48,6 +48,7 @@ class LoginPage extends React.Component {
     
     
     render(){
+        console.log("render@LoginPage.js")
         const { error } = this.state
         return(
             <>

@@ -1,24 +1,28 @@
 import React from 'react';
-import './AddMenuItem.css'
-import config from '../../config'
-import MenuContext from '../../MenuContext'
+import './AddMenuItem.css';
+import config from '../../config';
+import { MyContext } from '../../MyProvider';
 import TokenService from '../../services/token-service';
 
 class AddMenuItem extends React.Component {
+    
+    static contextType = MyContext;
 
-    state = {
-        error: null
+    async pushPath() {
+        let promise = new Promise((resolve, reject) => {
+            setTimeout(() => resolve(), 1000)
+        });
+        await promise
+        this.props.history.push('/menu')
     }
-
-    static contextType = MenuContext;
-
+          
     handleSubmit = e => {
         e.preventDefault()
         const { name, image_url, category } = e.target
-        const calories = parseInt(e.target.calories.value)
-        const carbs = parseInt(e.target.carbs.value)
-        const protein = parseInt(e.target.protein.value)
-        const fat = parseInt(e.target.fat.value)
+        const calories = parseInt(e.target.calories.value) || null
+        const carbs = parseInt(e.target.carbs.value) || null
+        const protein = parseInt(e.target.protein.value) || null
+        const fat = parseInt(e.target.fat.value) || null
         const menu_item = {
             name: name.value,
             image_url: image_url.value,
@@ -28,8 +32,10 @@ class AddMenuItem extends React.Component {
             fat: fat,
             category: category.value
         }
-        const fetchUrl = config.REACT_APP_API_BASE_URL + '/menu'
 
+        console.log('menu_item @handleSubmit @AddMenuItem.js', menu_item)
+
+        const fetchUrl = config.REACT_APP_API_BASE_URL + '/menu'
         const options = {
             method: 'POST',
             body: JSON.stringify(menu_item),
@@ -39,25 +45,21 @@ class AddMenuItem extends React.Component {
                 "Authorization": `Bearer ${TokenService.getAuthToken()}`,
             }
         }
-
         fetch(fetchUrl, options)
             .then(res => {
                 if(!res.ok) {
-                    return  res.json().then(error => Promise.reject(error))
+                    return res.json().then(error => Promise.reject(error))
                 }
                 return res.json()
             })
-            .then(data => {
-                this.context.addMenuItem(data)
-                this.props.history.push('/menu')
-            })
-            .catch(error => {
-                this.setState({ error })
-            })
+            .then(this.context.addMenuItem)
+            .then(this.pushPath())
+            .catch(error => console.log(error))
     }
 
-
     render(){
+        console.log('props', this.props)
+
         return(
             <div className="AddMenuItem">
                 <h1>Add New Menu Item</h1>
@@ -90,11 +92,11 @@ class AddMenuItem extends React.Component {
                         <button type='submit'>Add to Menu</button>
                         <button onClick={() => this.props.history.push('/menu')}>Cancel</button>
                     </form>
-                    
                 </section>
             </div>
         )
     }
 }
 
-export default AddMenuItem
+
+export default AddMenuItem;

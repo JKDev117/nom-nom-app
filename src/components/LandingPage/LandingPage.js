@@ -4,6 +4,8 @@ import './LandingPage.css'
 
 class LandingPage extends React.Component {
     render(){
+        console.log('@LandingPage.js render')
+
         return(
             <div className="LandingPage">
                 <h1>My Nom Nom Menu & Meal Planner</h1>
