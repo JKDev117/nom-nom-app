@@ -78,7 +78,7 @@ class MenuListPage extends React.Component {
             //.catch(error => console.log(error))
             .then(
                 //fetch menu_url
-                fetch(menu_url, menu_options)
+                () => fetch(menu_url, menu_options)
                 .then(res => {
                     console.log('fetch menu')
                     if(!res.ok){
@@ -102,7 +102,7 @@ class MenuListPage extends React.Component {
                     console.log('this.context.setMenuItems')
                     return this.context.setMenuItems(menu_items_modified)
                 })           
-                .catch(error => console.log(error))//this.setState({error}))
+                //.catch(error => console.log(error))//this.setState({error}))
             )
             .catch(error =>  console.log(error))
     }
