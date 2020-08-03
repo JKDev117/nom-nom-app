@@ -31,10 +31,53 @@ class MenuListPage extends React.Component {
             ids_of_checked_menu_items.push(checkbox.value)
         })
         //console.log(ids_of_checked_menu_items)
-        this.context.addToMealPlan(this.context.user_id, ids_of_checked_menu_items)
-        setTimeout(() => this.props.history.push('/meal-plan'), 600)            
+        this.context.addToMealPlan(this.context.user_id, ids_of_checked_menu_items, () => this.props.history.push('/meal-plan'))
+        //setTimeout(() => this.props.history.push('/meal-plan'), 600)            
     }
         
+    nutritionalInfo (e){
+        //console.log(e)
+        e.target.classList.toggle('active')
+            // Toggle between hiding and showing the active panel
+            let panel = e.target.nextElementSibling;
+              if(panel.style.display === 'block'){
+                panel.style.display = 'none';
+              } else {
+                panel.style.display = 'block';
+              }
+    }
+
+    expandAll(className){
+        let acc = document.getElementsByClassName(className)
+        console.log('acc', acc)
+        for(let i=0; i<acc.length; i++){
+            if(acc[i].classList.contains('active')===false){
+                acc[i].classList.add('active')
+            }
+            let panel = acc[i].nextElementSibling
+            if(panel.style.display !== 'block'){
+                panel.style.display = 'block';
+            }  
+        }
+    }
+
+
+    collapseAll(className){
+        let acc = document.getElementsByClassName(className)
+
+        for(let i=0; i<acc.length; i++){
+            if(acc[i].classList.contains('active')===true){
+            acc[i].classList.remove('active')
+            }
+            let panel = acc[i].nextElementSibling
+
+            if(panel.style.display === 'block'){
+                panel.style.display = 'none';
+            }  
+        }
+    }
+
+
     componentDidMount(){
         const { checkMealPlanForItem } = this.context;
         console.log('@MenuListPage.js [componentDidMount]')
@@ -105,6 +148,8 @@ class MenuListPage extends React.Component {
                 //.catch(error => console.log(error))//this.setState({error}))
             )
             .catch(error =>  console.log(error))
+
+            
     }
 
 
@@ -117,7 +162,7 @@ class MenuListPage extends React.Component {
 
         const { menu_items } = this.context
 
-
+        
         /*
         //to see values of in_meal_plan (boolean) for menu_items for debugging purposes
         const temp =[]
@@ -150,7 +195,10 @@ class MenuListPage extends React.Component {
                                             <span className="added-status">[In Today's Meal Plan] </span>
                                             <button type="button" onClick={()=>this.handleRemoveFromMealPlan(item)}>Remove from today's meal plan</button>                                   
                                             
-                                            <details className="gray">
+                                            
+
+
+                                            {/* <details className="gray">
                                                 <summary>
                                                     (nutritional info)
                                                 </summary>
@@ -162,16 +210,29 @@ class MenuListPage extends React.Component {
                                                     <u>Protein</u>: {item.protein}g
                                                     <u>Fat</u>: {item.fat}g)
                                                 </p>
-                                            </details>
+                                            </details> */}
                                         </>
 
                                     :
                                         <>
                                             <input className="checkBox" type="checkbox" id={`menu-item${item.id}`} name="menu-item" value={item.id} required />
                                             <label htmlFor={`menu-item${item.id}`}>{item.name}</label>
-                                            <Link to={`/edit-menu-item/${item.id}`}>
-                                                <button>Edit</button><br/>
+                                            <Link style={{display: "inline"}} to={`/edit-menu-item/${item.id}`}>
+                                                <button >Edit</button><br/>
                                             </Link>
+
+                                            <button className={`accordion ${item.category}`} type="button" onClick={e => this.nutritionalInfo(e)}>(nutritional info)</button>
+                                            <div className="panel">
+                                                { item.image_url ? 
+                                                        <img src={item.image_url} alt={`${item.name}`}/> : "" }  
+                                                    <p className="mealplan-nutritional-info">
+                                                        (<u>Calories</u>: {item.calories} 
+                                                        <u>Carbs</u>: {item.carbs}g   
+                                                        <u>Protein</u>: {item.protein}g
+                                                        <u>Fat</u>: {item.fat}g)
+                                                    </p>
+                                            </div>
+                                            {/*
                                             <details>
                                                 <summary>
                                                     (nutritional info)
@@ -185,6 +246,7 @@ class MenuListPage extends React.Component {
                                                     <u>Fat</u>: {item.fat}g)
                                                 </p>
                                             </details>
+                                            */}
                                         </>
                                     }
                                 </li>
@@ -200,20 +262,27 @@ class MenuListPage extends React.Component {
                     <button>+ Add New Menu Item</button>
                 </Link>
 
+
                     <section className="menuCategory">Breakfast Menu <br/>
                         <ul>
+                            <button id="expand-all" onClick={()=>this.expandAll('Breakfast')}>Expand All</button>
+                            <button id="collapse-all" onClick={()=>this.collapseAll('Breakfast')}>Collapse All</button>
                             {categories[0].list}
                         </ul>
                         
                     </section>
                     <section className="menuCategory">Lunch Menu <br/>
                         <ul>
+                            <button id="expand-all" onClick={()=>this.expandAll('Lunch')}>Expand All</button>
+                            <button id="collapse-all" onClick={()=>this.collapseAll('Lunch')}>Collapse All</button>
                             {categories[1].list}
                         </ul>
                         
                     </section>
                     <section className="menuCategory">Dinner Menu <br/>
                         <ul>
+                            <button id="expand-all" onClick={()=>this.expandAll('Dinner')}>Expand All</button>
+                            <button id="collapse-all" onClick={()=>this.collapseAll('Dinner')}>Collapse All</button>
                             {categories[2].list}
                         </ul>
                         

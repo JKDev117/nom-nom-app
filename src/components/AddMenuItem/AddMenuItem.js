@@ -52,8 +52,8 @@ class AddMenuItem extends React.Component {
                 }
                 return res.json()
             })
-            .then(this.context.addMenuItem)
-            .then(this.pushPath())
+            .then(this.context.addMenuItem, this.props.history.push('/menu'))
+            //.then(this.pushPath())
             .catch(error => console.log(error))
     }
 

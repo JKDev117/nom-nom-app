@@ -21,22 +21,22 @@ export default class MyProvider extends React.Component {
         })
     }
 
-    addMenuItem = item => {
+    addMenuItem = (item, callback) => {
         this.setState({
           menu_items: [...this.state.menu_items, item]
-        })
+        }, callback)
     }
 
-    removeMenuItem = itemId => {
+    removeMenuItem = (itemId, callback) => {
         const updatedMenuItems = this.state.menu_items.filter(itm => 
           itm.id !== itemId
         )
         this.setState({
           menu_items: updatedMenuItems
-        })
+        }, callback)
     }
 
-    updateMenuItem = item => {
+    updateMenuItem = (item, callback) => {
         const updatedMenuItems = this.state.menu_items.map(itm => 
           (itm.id === item.id) ?
             item 
@@ -45,7 +45,7 @@ export default class MyProvider extends React.Component {
           )
           this.setState({
             menu_items: updatedMenuItems
-          })
+          }, callback)
     }
 
     /* MEAL PLAN METHODS ------------------------------------------------------------------------------------------------------------------------ */
@@ -74,7 +74,7 @@ export default class MyProvider extends React.Component {
     }
     */
 
-    addToMealPlan = (user_id, ids_of_checked_menu_items) => {
+    addToMealPlan = (user_id, ids_of_checked_menu_items, callback) => {
         //console.log(user_id)
         //console.log(ids_of_checked_menu_items)
         for(let i=0; i < ids_of_checked_menu_items.length; i++){
@@ -102,7 +102,7 @@ export default class MyProvider extends React.Component {
                 })
                 .then(resJson => {
                     console.log('resJson @MyProvider.js @addToMealPlan', resJson)
-                    this.setState({meal_plan: [...this.state.meal_plan, resJson]})
+                    this.setState({meal_plan: [...this.state.meal_plan, resJson]}, callback)
                     console.log('meal_plan @MyProvider.js @addToMealPlan', this.state.meal_plan)
                     //this.setState({meal_plan_item_count: resJson})
                     //console.log(this.state.meal_plan_item_count)

@@ -43,8 +43,8 @@ class EditMenuItem extends React.Component {
                 }
                 return;
             })
-            .then(this.context.removeMenuItem(id))
-            .then(this.pushPath())
+            .then(this.context.removeMenuItem(id, () => this.props.history.push('/menu')))
+            //.then(this.pushPath())
             .catch(error => console.log(error))
     }
 
@@ -101,8 +101,8 @@ class EditMenuItem extends React.Component {
                 return
             })
             //.then(this.context.updateMenuItem(this.state))
-            .then(this.context.updateMenuItem(menu_item))
-            .then(this.pushPath())
+            .then(this.context.updateMenuItem(menu_item, () => this.props.history.push('/menu')))
+            //.then(this.pushPath())
             .catch(error => console.log(error))
     }
 
