@@ -1,11 +1,47 @@
 .LandingPage {
     border: 1px solid black;
+    border-radius: 2em;
+    width: 80%;
+    margin: auto;
     text-align: center;
     padding: 10px;
+    background-color: white;
 }
+
 
 .landing-page-links {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
 }
+
+
+.landing-page-link {
+    margin: 0 2em;
+    font-family: 'Lemonada', cursive;
+    font-size: 1.1em;
+}
+
+.landing-page-link > img {
+    width: 140px;
+}
+
+.app-name {
+    font-family: 'Bungee Shade', cursive;
+    color: rgb(148, 100, 129);
+}
+
+
+.about-app {
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: 1.6em;
+}
+
+
+@media screen and (min-width: 1055px){
+    .LandingPage {
+        width: 821px;
+    }
+}
+
+
