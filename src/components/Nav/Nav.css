@@ -9,5 +9,7 @@ nav {
 }
 
 .logo {
-    text-decoration: none
+    text-decoration: none;
+    text-align: center;
+    font-size: 1.4em;
 }

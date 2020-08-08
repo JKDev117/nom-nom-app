@@ -90,7 +90,7 @@ export default function Nav() {
       return (
         <nav>
           <h1>
-            <Link to='/' className='logo'>
+            <Link to='/' className='logo app-name'>
               My Nom Nom Menu & Meal Planner
             </Link>  
           </h1>

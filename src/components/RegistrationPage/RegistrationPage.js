@@ -74,8 +74,8 @@ class RegistrationPage extends React.Component {
     render(){
         const { error } = this.state
         return(
-            <>
-                <h1>Create a Nom Nom Account</h1>
+            <div className="RegistrationPage">
+                <h1 className="create-account-title">Create a Nom Nom Account</h1>
                 <form onSubmit={this.handleSubmit}>
                     <div role='alert'>
                        { error && <p className='red'>{error}</p> }
@@ -98,11 +98,11 @@ class RegistrationPage extends React.Component {
                     <label htmlFor='register_password'>
                         Password:
                     </label>
-                    <input type='password' name='password' id='register_password' required/><br/>
+                    <input type='text' name='password' id='register_password' required/><br/>
                     
                     <button type="submit">Create account</button>
                 </form>
-            </>
+            </div>
         )
 
     }
