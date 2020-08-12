@@ -65,7 +65,7 @@ class AddMenuItem extends React.Component {
                 <h1 className="add-menu-item-title">Add New Menu Item</h1>
                 <section>
                     <form onSubmit={this.handleSubmit}>
-                        <img src="http://vignette1.wikia.nocookie.net/doom/images/4/4c/Chef-hat-png-13.png/revision/latest?cb=20170308012617" alt="food-plate"/><br/>
+                        <img src="http://vignette1.wikia.nocookie.net/doom/images/4/4c/Chef-hat-png-13.png/revision/latest?cb=20170308012617" alt="chef-hat"/><br/>
                         <label htmlFor="name"> Name: </label>
                         <input type="text" id="name" name="name" required/><br/>
 
@@ -73,16 +73,16 @@ class AddMenuItem extends React.Component {
                         <input type="text" id="image_url" name="image_url"/><br/>
 
                         <label htmlFor="calories"> Calories: </label>
-                        <input type="text" id="calories" name="calories"/><br/>
+                        <input type="number" id="calories" name="calories"/><br/>
 
                         <label htmlFor="carbs"> Carbs(g): </label>
-                        <input type="text" id="carbs" name="carbs"/><br/>
+                        <input type="number" id="carbs" name="carbs"/><br/>
 
                         <label htmlFor="protein"> Protein(g): </label>
-                        <input type="text" id="protein" name="protein"/><br/>
+                        <input type="number" id="protein" name="protein"/><br/>
 
                         <label htmlFor="fat"> Fat(g): </label>
-                        <input type="text" id="fat" name="fat"/><br/>
+                        <input type="number" id="fat" name="fat"/><br/>
 
                         <label htmlFor="category">Category: </label>
                             <select id="category" name="category" required>

@@ -8,9 +8,7 @@ class EditMenuItem extends React.Component {
 
     static contextType = MyContext;
 
-    state = {
-        
-    }
+    state = { }
 
     async pushPath() {
         let promise = new Promise((resolve, reject) => {
@@ -135,14 +133,15 @@ class EditMenuItem extends React.Component {
         const { id, name, image_url, calories, carbs, protein, fat, category } = this.state
         return(
             <div className="EditMenuItem">
-                <h1>Edit Menu Item</h1>
+                <h1 className="edit-menu-item-title">Edit Menu Item</h1>
                 <section>
                     <form onSubmit={this.handleSubmit}>
+                        <img src="http://vignette1.wikia.nocookie.net/doom/images/4/4c/Chef-hat-png-13.png/revision/latest?cb=20170308012617" alt="chef-hat"/><br/>
                         <label htmlFor="name"> Name: </label>
                         <input type="text" id="name" name="name" value={name || ''} onChange={this.handleChange} required/><br/>
 
                         <label htmlFor="image-url"> Image URL: </label>
-                        <input type="url" id="image_url" name="image_url" value={image_url || ''} onChange={this.handleChange}/><br/>
+                        <input type="text" id="image_url" name="image_url" value={image_url || ''} onChange={this.handleChange}/><br/>
                         
                         <label htmlFor="calories"> Calories: </label>
                         <input type="number" id="calories" name="calories" value={calories || ''} onChange={this.handleChange}/><br/>
@@ -162,9 +161,9 @@ class EditMenuItem extends React.Component {
                                 <option value="Lunch">Lunch</option>
                                 <option value="Dinner">Dinner</option>
                             </select><br/>
-                        <button type="submit">Update</button>
-                        <button type='button' onClick={() => this.deleteMenuItem(id)}>Delete</button>
-                        <button onClick={() => this.props.history.push('/menu')}>Cancel</button>
+                        <button className="update-button" type="submit">Update</button>
+                        <button className="delete-menu-item-button" type='button' onClick={() => this.deleteMenuItem(id)}>Delete</button>
+                        <button className="cancel-button" onClick={() => this.props.history.push('/menu')}>Cancel</button>
                     </form>
                 </section>
             </div>

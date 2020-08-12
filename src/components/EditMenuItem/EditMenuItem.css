@@ -1,3 +1,27 @@
 .EditMenuItem {
-    border: 1px solid black
+    border: 1px solid black;
+    border-radius: 2em;
+    width: 80%;
+    max-width: 821px;
+    margin: auto;
+    text-align: center;
+    padding: 10px;
+    background-color: white;
+}
+
+.edit-menu-item-title {
+    font-family: 'Pangolin', cursive;
+}
+
+[type="number"] {
+    font-size: 1.3em;
+    border-radius: 2em;
+    margin-left: 2px;
+    margin-bottom: 5px;
+    text-align: center;
+    font-family: 'Baloo Tamma 2', cursive;
+}
+
+.update-button, .delete-menu-item-button {
+    margin: 0.5em;
 }
