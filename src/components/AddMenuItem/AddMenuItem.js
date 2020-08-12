@@ -62,14 +62,15 @@ class AddMenuItem extends React.Component {
 
         return(
             <div className="AddMenuItem">
-                <h1>Add New Menu Item</h1>
+                <h1 className="add-menu-item-title">Add New Menu Item</h1>
                 <section>
                     <form onSubmit={this.handleSubmit}>
+                        <img src="http://vignette1.wikia.nocookie.net/doom/images/4/4c/Chef-hat-png-13.png/revision/latest?cb=20170308012617" alt="food-plate"/><br/>
                         <label htmlFor="name"> Name: </label>
                         <input type="text" id="name" name="name" required/><br/>
 
                         <label htmlFor="image_url"> Image URL: </label>
-                        <input type="url" id="image_url" name="image_url"/><br/>
+                        <input type="text" id="image_url" name="image_url"/><br/>
 
                         <label htmlFor="calories"> Calories: </label>
                         <input type="text" id="calories" name="calories"/><br/>
@@ -84,13 +85,14 @@ class AddMenuItem extends React.Component {
                         <input type="text" id="fat" name="fat"/><br/>
 
                         <label htmlFor="category">Category: </label>
-                            <select id="category" name="category" defaultValue="Lunch" required>
+                            <select id="category" name="category" required>
+                                <option hidden disabled selected value> -- select an option -- </option>
                                 <option value="Breakfast">Breakfast</option>
                                 <option value="Lunch">Lunch</option>
                                 <option value="Dinner">Dinner</option>
                             </select><br/>
-                        <button type='submit'>Add to Menu</button>
-                        <button onClick={() => this.props.history.push('/menu')}>Cancel</button>
+                        <button className="add-to-menu-button" type='submit'>Add to Menu</button>
+                        <button className="cancel-buttton" onClick={() => this.props.history.push('/menu')}>Cancel</button>
                     </form>
                 </section>
             </div>
