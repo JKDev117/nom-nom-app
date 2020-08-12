@@ -1,6 +1,7 @@
 import React from 'react'
 //import TokenService from '../../services/token-service'
 import AuthApiService from '../../services/auth-api-service'
+import './LoginPage.css';
 
 class LoginPage extends React.Component {
 
@@ -51,8 +52,8 @@ class LoginPage extends React.Component {
         console.log("render@LoginPage.js")
         const { error } = this.state
         return(
-            <>
-                <h1>Login</h1>
+            <div className="LoginPage">
+                <h1 className="login-title">Login</h1>
                 <form onSubmit={this.handleSubmitJwtAuth}>
                     <img src='https://66.media.tumblr.com/50351820b1bcdfb9649dd5a0fcfe743c/e2b38183373ea62d-e7/s1280x1920/8dd463fbe477a7615245cf16c68327b115b8efca.png' alt='chef-mario-and-yoshi'/>
 
@@ -67,10 +68,10 @@ class LoginPage extends React.Component {
                     <label htmlFor='login_password'>
                         Password:
                     </label>
-                    <input type='password' name='password' id='login_password' required/><br/>
+                    <input type='text' name='password' id='login_password' required/><br/>
                     <button type="submit">Submit</button>
                 </form>
-            </>
+            </div>
         )
 
     }

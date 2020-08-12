@@ -1,0 +1,15 @@
+.LoginPage {
+    border: 1px solid black;
+    border-radius: 2em;
+    width: 80%;
+    max-width: 821px;
+    margin: auto;
+    text-align: center;
+    padding: 10px;
+    background-color: white;
+}
+
+
+.login-title {
+    font-family: 'Pangolin', cursive;
+}
