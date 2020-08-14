@@ -14,7 +14,7 @@
     font-family: 'Pangolin', cursive;
 }
 
-select {
+select#category {
     font-size: 1.3em;
     margin-left: 2px;
     margin-bottom: 5px;

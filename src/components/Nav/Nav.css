@@ -4,6 +4,19 @@
     font-family: 'Lemonada', cursive;
 }
 
+.home-link, .my-menu-link {
+    font-family: 'Lemonada', cursive;
+    position: absolute;
+}
+
+.home-link {
+    margin-left: 5px;
+}
+
+.my-menu-link {
+    margin-left: 4.5em;
+}
+
 nav {
     overflow:hidden;
 }

@@ -53,64 +53,93 @@ class MealPlanPage extends React.Component {
         const breakfasts = meal_plan.filter(item => item.category === 'Breakfast')
                                            .map((item, i) => 
                                                     <li key={i}>
-                                                        <span>{item.name}</span> <br/>
+                                                        <span className="mealplan-item-name">{item.name}</span> <br/>
                                                         {item.image_url ? 
                                                             <img src={item.image_url} alt={`${item.name}`}/> 
                                                                 : 
                                                             "" }
-                                                        <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g  <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
+                                                        <p className="mealplan-nutritional-info">          
+                                                            <u>Calories</u>: {item.calories} <br/>
+                                                            <u>Carbs</u>: {item.carbs}g  <br/>
+                                                            <u>Protein</u>: {item.protein}g <br/>
+                                                            <u>Fat</u>: {item.fat}g<br/>
+                                                        </p>
                                                         <button onClick={()=>removeFromMealPlan(item.id)}>Remove from Today's Meal Plan</button>
                                                     </li>)
         
         const lunches = meal_plan.filter(item => item.category === 'Lunch')
                                         .map((item, i) => 
                                                     <li key={i}>
-                                                        <span>{item.name}</span> <br/>
+                                                        <span className="mealplan-item-name">{item.name}</span> <br/>
                                                         {item.image_url ? 
                                                             <img src={item.image_url} alt={`${item.name}`}/> 
                                                                 : 
-                                                            "" }
-                                                        <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g  <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
+                                                            "" 
+                                                        }
+                                                        <p className="mealplan-nutritional-info">
+                                                            
+                                                                <u>Calories</u>: {item.calories} <br/>
+                                                                <u>Carbs</u>: {item.carbs}g  <br/>
+                                                                <u>Protein</u>: {item.protein}g <br/>
+                                                                <u>Fat</u>: {item.fat}g<br/>
+                                                            
+                                                        </p>
                                                         <button onClick={()=>removeFromMealPlan(item.id)}>Remove from Today's Meal Plan</button>
                                                     </li>)
         
         const dinners = meal_plan.filter(item => item.category === 'Dinner')
                                         .map((item, i) => 
                                                     <li key={i}>
-                                                        <span>{item.name}</span> <br/>
+                                                        <span className="mealplan-item-name">{item.name}</span> <br/>
                                                         {item.image_url ? 
                                                             <img src={item.image_url} alt={`${item.name}`}/> 
                                                                 : 
                                                             "" }
-                                                        <p className="mealplan-nutritional-info">(<u>Calories</u>: {item.calories} <u>Carbs</u>: {item.carbs}g  <u>Protein</u>: {item.protein}g <u>Fat</u>: {item.fat}g)</p>
+                                                        <p className="mealplan-nutritional-info">        
+                                                                <u>Calories</u>: {item.calories} <br/>
+                                                                <u>Carbs</u>: {item.carbs}g  <br/>
+                                                                <u>Protein</u>: {item.protein}g <br/>
+                                                                <u>Fat</u>: {item.fat}g<br/>
+                                                        </p>
                                                         <button onClick={()=>removeFromMealPlan(item.id)}>Remove from Today's Meal Plan</button>
                                                     </li>)                                                  
 
         return (
             <div className="MealPlanPage">
-                <h1>Today's Meal Plan</h1>
+                <h1 className="meal-plan-title">Today's Meal Plan</h1>
                 {/*<p className="user-note"><u>Note</u>: The Meal Plan is currently on-device only and will not work across multiple devices. Multi-device support coming soon!</p>*/}
-                <section className="menuCategory">Breakfast <br/>
+                <section className="meal-plan-summary">
+                    <p>
+                        <u>Calories</u>: {calories}<br/> 
+                        <u>Carbs</u>: {carbs} g<br/> 
+                        <u>Protein</u>: {protein} g<br/> 
+                        <u>Fat</u>: {fat} g<br/>
+                    </p>
+                </section>
+                
+                <section className="menuCategory breakfastPlanSection">
+                    <h2 className="breakfastLabel">Breakfast</h2>
                     <ul>
                         {breakfasts}
                     </ul>
                 </section>
-                <section className="menuCategory">Lunch <br/>
+                <section className="menuCategory lunchPlanSection">
+                    <h2 className="lunchLabel">Lunch</h2>
                     <ul>
                         {lunches}
                     </ul>    
                 </section>
-                <section className="menuCategory">Dinner <br/>
+                <section className="menuCategory dinnerPlanSection">
+                    <h2 className="dinnerLabel">Dinner</h2>
                     <ul>
                         {dinners}
                     </ul>
                 </section>
-                <section>Total
-                    <p><u>Calories</u>: {calories} <u>Carbs</u>: {carbs} g <u>Protein</u>: {protein} g <u>Fat</u>: {fat} g</p>
-                </section>
+
             </div>
         )
     }
 }
+
 
 export default MealPlanPage
