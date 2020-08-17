@@ -53,9 +53,9 @@ export default function Nav() {
     case '/menu':
       return (
         <nav>
-            <Link to="/">Home</Link>
+            <Link className="home-link" to="/">Home</Link>
             {" "}
-            <Link to={'/meal-plan'}>My Meal Plan</Link>
+            <Link className="meal-plan-link" to={'/meal-plan'}>My Meal Plan</Link>
             {" "}
             {renderLogOutLink()}
         </nav>        

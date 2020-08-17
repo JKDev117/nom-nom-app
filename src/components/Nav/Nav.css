@@ -4,7 +4,7 @@
     font-family: 'Lemonada', cursive;
 }
 
-.home-link, .my-menu-link {
+.home-link, .my-menu-link, .meal-plan-link {
     font-family: 'Lemonada', cursive;
     position: absolute;
 }
@@ -13,7 +13,7 @@
     margin-left: 5px;
 }
 
-.my-menu-link {
+.my-menu-link, .meal-plan-link {
     margin-left: 4.5em;
 }
 

@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import './MenuListPage.css';
 import { MyContext } from '../../MyProvider';
 //import { element } from 'prop-types';
-import config from '../../config';
+import config from '../../config';  
 import TokenService from '../../services/token-service';
+import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 
 
 class MenuListPage extends React.Component {
@@ -162,7 +164,6 @@ class MenuListPage extends React.Component {
 
         const { menu_items } = this.context
 
-        
         /*
         //to see values of in_meal_plan (boolean) for menu_items for debugging purposes
         const temp =[]
@@ -182,22 +183,32 @@ class MenuListPage extends React.Component {
         categories.forEach(
             category => category.list = menu_items.filter(item => item.category === category.category)
                         .map((item, i) =>
-                                <li key={i}>
+                                <li className="meal-box" key={i}>
                                     
                                     {item.in_meal_plan ? 
-                                        <>
+                                        <>  
+                                            <span className="added-status">ADDED</span><br/>
                                             <label className="gray" htmlFor={`menu-item${item.id}`}>{item.name}</label>
-
-                                            <Link to={`/edit-menu-item/${item.id}`}>
-                                                <button>Edit</button><br/>
+                                            <Link className="edit-button-link" to={`/edit-menu-item/${item.id}`}>
+                                                <button>Edit</button><br />
                                             </Link>
-                                            
-                                            <span className="added-status">[In Today's Meal Plan] </span>
-                                            <button type="button" onClick={()=>this.handleRemoveFromMealPlan(item)}>Remove from today's meal plan</button>                                   
-                                            
-                                            
+                                            { item.image_url ? <img src={item.image_url} alt={`${item.name}`}/> : "" }
+    
+                                            <div className="menu-item-info"> 
 
-
+                                                {/*<button className={`accordion ${item.category}`} type="button" onClick={e => this.nutritionalInfo(e)}> (see nutritional info)</button>*/}
+                                                <div className="panel">
+                                                    
+                                                        <p className="mealplan-nutritional-info">
+                                                            <u>Calories</u>: {item.calories} 
+                                                            <u>Carbs</u>: {item.carbs}g  
+                                                            <u>Protein</u>: {item.protein}g
+                                                            <u>Fat</u>: {item.fat}g
+                                                        </p>
+                                                </div><br />
+                                            </div>
+                                            <button type="button" onClick={()=>this.handleRemoveFromMealPlan(item)}>Remove from today's meal plan</button>                             
+                                            
                                             {/* <details className="gray">
                                                 <summary>
                                                     (nutritional info)
@@ -217,7 +228,7 @@ class MenuListPage extends React.Component {
                                         <>
                                             <input className="checkBox" type="checkbox" id={`menu-item${item.id}`} name="menu-item" value={item.id} required />
                                             <label htmlFor={`menu-item${item.id}`}>{item.name}</label>
-                                            <Link style={{display: "inline"}} to={`/edit-menu-item/${item.id}`}>
+                                            <Link className="edit-button-link" to={`/edit-menu-item/${item.id}`}>
                                                 <button >Edit</button><br/>
                                             </Link>
 
@@ -257,37 +268,11 @@ class MenuListPage extends React.Component {
 
         return(
             <div className="MenuListPage">
-                <h1>My Nom Nom Menu</h1>
-                <Link to='/add-menu-item'>
-                    <button>+ Add New Menu Item</button>
-                </Link>
+                <img src="https://image.flaticon.com/icons/png/512/289/289658.png" alt="food-menu"/>
 
-
-                    <section className="menuCategory">Breakfast Menu <br/>
-                        <ul>
-                            <button id="expand-all" onClick={()=>this.expandAll('Breakfast')}>Expand All</button>
-                            <button id="collapse-all" onClick={()=>this.collapseAll('Breakfast')}>Collapse All</button>
-                            {categories[0].list}
-                        </ul>
-                        
-                    </section>
-                    <section className="menuCategory">Lunch Menu <br/>
-                        <ul>
-                            <button id="expand-all" onClick={()=>this.expandAll('Lunch')}>Expand All</button>
-                            <button id="collapse-all" onClick={()=>this.collapseAll('Lunch')}>Collapse All</button>
-                            {categories[1].list}
-                        </ul>
-                        
-                    </section>
-                    <section className="menuCategory">Dinner Menu <br/>
-                        <ul>
-                            <button id="expand-all" onClick={()=>this.expandAll('Dinner')}>Expand All</button>
-                            <button id="collapse-all" onClick={()=>this.collapseAll('Dinner')}>Collapse All</button>
-                            {categories[2].list}
-                        </ul>
-                        
-                    </section>
-                    <input type="button" id="addToMealPlanButton" value="submit" onClick={() => {
+                <h1 className="menu-list-title">My Menu List</h1>
+                     
+                {/*<input type="button" id="addToMealPlanButton" onClick={() => {
                         const checkedBoxes = document.querySelectorAll('input[type=checkbox]:checked')
 
                         if(!checkedBoxes.length){
@@ -296,11 +281,78 @@ class MenuListPage extends React.Component {
                         }
 
                         this.handleSubmit()
-                    }}/>                    
-                    <span id="alert"></span>
+                }} value="Add Selected Items To Today's Meal Plan"/> */}
+                <button id="addToMealPlanButton" onClick={() => {
+                        const checkedBoxes = document.querySelectorAll('input[type=checkbox]:checked')
+
+                        if(!checkedBoxes.length){
+                            document.querySelector('#alert').innerHTML = "You must select atleast one new menu item option to submit."
+                            return;
+                        }
+
+                        this.handleSubmit()
+                }}>Add Selected Items To Today's Meal Plan</button>                    
+                <br/>
+                <span id="alert"></span>
+
+                <Tabs defaultIndex={0} onSelect={index => console.log(index)}>
+                    <TabList>
+                        <Tab>Breakfast Menu</Tab>
+                        <Tab>Lunch Menu</Tab>
+                        <Tab>Dinner Menu</Tab>
+                    </TabList>
+
+                    <TabPanel>
+                        <div id="breakfast-menu">
+                            <h2 className="breakfastLabel breakfastLabelColor">Breakfast Menu</h2>
+                            <div className="category-buttons">
+                                    <Link to='/add-menu-item'>
+                                        <button className='add-new-menu-item-button'>+ Add New Menu Item</button>
+                                    </Link>
+                                        <div className='expand-collapse-buttons'>
+                                            <button className="expand-all" onClick={()=>this.expandAll('Breakfast')}>Expand All</button>
+                                            <button className="collapse-all" onClick={()=>this.collapseAll('Breakfast')}>Collapse All</button>
+                                        </div>
+                            </div>
+                            <section className="menuCategory">
+                                <ul className="parent-ul">
+                                    {categories[0].list}
+                                </ul>
+                            </section>
+                        </div>
+                    </TabPanel>
+
+                    <TabPanel>
+                        <div id="lunch-menu">
+                            <h2 className="lunchLabel lunchLabelColor">Lunch Menu</h2>
+                            <section className="menuCategory">
+                                <ul>
+                                    <button className="expand-all" onClick={()=>this.expandAll('Lunch')}>Expand All</button>
+                                    <button className="collapse-all" onClick={()=>this.collapseAll('Lunch')}>Collapse All</button>
+                                    {categories[1].list}
+                                </ul>
+                                
+                            </section>
+                        </div>
+                    </TabPanel>
+
+                    <TabPanel>
+                        <div id="dinner-menu">
+                            <h2 className="dinnerLabel dinnerLabelColor">Dinner Menu</h2>
+                            <section className="menuCategory">
+                                <ul>
+                                    <button className="expand-all" onClick={()=>this.expandAll('Dinner')}>Expand All</button>
+                                    <button className="collapse-all" onClick={()=>this.collapseAll('Dinner')}>Collapse All</button>
+                                    {categories[2].list}
+                                </ul>
+                                
+                            </section>
+                        </div>
+                    </TabPanel>
+
+                </Tabs>
 
             </div>
-            
         )
     }
 }

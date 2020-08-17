@@ -106,8 +106,11 @@ class MealPlanPage extends React.Component {
 
         return (
             <div className="MealPlanPage">
+                <img src="https://sunnybrook.ca/uploads/1/programs/schulich-heart-centre/cutlery.png" alt="food-icon"/>
+
                 <h1 className="meal-plan-title">Today's Meal Plan</h1>
                 {/*<p className="user-note"><u>Note</u>: The Meal Plan is currently on-device only and will not work across multiple devices. Multi-device support coming soon!</p>*/}
+
                 <section className="meal-plan-summary">
                     <p>
                         <u>Calories</u>: {calories}<br/> 

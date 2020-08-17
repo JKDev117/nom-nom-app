@@ -23,7 +23,7 @@ select#category {
     font-family: 'Baloo Tamma 2', cursive;
 }
 
-option {
+select, option {
     font-family: 'Baloo Tamma 2', cursive;
 }
 

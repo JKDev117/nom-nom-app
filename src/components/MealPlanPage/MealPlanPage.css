@@ -9,6 +9,12 @@
     background-color: white;
 }
 
+.MealPlanPage>img {    
+    max-width: 120px;
+    padding: 0;
+    margin: 0;
+}
+
 .meal-plan-summary {
     font-family: 'Baloo Tamma 2', cursive;
     font-size: 1.1em;
@@ -22,26 +28,27 @@
     border-width: 5px;
 }
 
+.menuCategory:hover {
+    background-color: rgb(203, 201, 189);
+    /* background-color: rgb(235, 233, 220); */
+
+}
 
 .breakfastPlanSection:hover {
     border-color: rgba(102, 160, 232, 0.5);
-    background-color: rgb(235, 233, 220);
+    color: rgb(47, 97, 114);
 }
-
-
 
 .lunchPlanSection:hover {
     border-color: rgba(219, 163, 58, 0.5);
-    background-color: rgb(235, 233, 220);
+    color: darkgoldenrod;
+
 }
-
-
 
 .dinnerPlanSection:hover {
     border-color: rgba(121, 13, 199, 0.5);
-    background-color: rgb(235, 233, 220);
+    color: purple;
 }
-
 
 .meal-plan-title {
     font-family: 'Pangolin', cursive;
