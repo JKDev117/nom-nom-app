@@ -20,6 +20,31 @@
     font-size: 1.1em;
 }
 
+.meal-plan-title {
+    font-family: 'Pangolin', cursive;
+}
+
+.breakfastLabel {
+    font-family: 'Pacifico', cursive;
+    font-size: 3em;
+    padding: 0;
+    margin: 0;
+}
+
+.lunchLabel {
+    font-family: 'Sriracha', cursive;
+    font-size: 3em;
+    padding: 0;
+    margin: 0;
+}
+
+.dinnerLabel {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 3em;
+    padding: 0;
+    margin: 0;
+}
+
 .menuCategory {
     border-radius: 2em;
     margin-bottom: 1em;
@@ -50,24 +75,7 @@
     color: purple;
 }
 
-.meal-plan-title {
-    font-family: 'Pangolin', cursive;
-}
 
-.breakfastLabel {
-    font-family: 'Pacifico', cursive;
-    font-size: 3em;
-}
-
-.lunchLabel {
-    font-family: 'Sriracha', cursive;
-    font-size: 3em;
-}
-
-.dinnerLabel {
-    font-family: 'Pinyon Script', cursive;
-    font-size: 3em;
-}
 
 ul {
     list-style: none;

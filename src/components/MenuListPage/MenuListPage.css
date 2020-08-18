@@ -20,17 +20,13 @@
     font-family: 'Pangolin', cursive;
 }
 
-#addToMealPlanButton{
-    width: 200px;
-    height: 100px;
+.add-new-menu-item-button {
     margin-bottom: 1em;
-    border-radius: 10%;
 }
 
 .menuCategory {
     border: 1px solid black;
     padding: 10px;
-    
 }
 
 .breakfastLabelColor {
@@ -56,18 +52,6 @@
     vertical-align: middle;
 }
 
-.category-buttons{
-    margin-bottom: 2em;
-}
-
-.category-buttons button{
-    font-size: 0.8em;
-}
-
-#expand-all {
-    margin-bottom: 10px;
-    margin-right: 10px;
-}
 
 ul {
     list-style: none;
@@ -87,6 +71,7 @@ details {
 }
 
 img {
+    margin-top: 0.4em;
     height: 200px;
     width: 200px;
     object-fit: contain;
@@ -95,16 +80,20 @@ img {
 .added-status {
     color:lightcoral;
     font-size: 2em;
+    font-family: 'Handlee', cursive;
 }
 
 .gray {
-    color:gray;
+    opacity: 0.4;
+    filter: alpha(opacity=40); /* msie */
 }
 
 .edit-button-link {
     display: inline;
     margin-left: 0.8em;
 }
+
+
 
 /* Style the buttons that are used to open and close the accordion panel */
 .accordion { /* button */

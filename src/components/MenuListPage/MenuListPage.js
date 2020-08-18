@@ -196,18 +196,18 @@ class MenuListPage extends React.Component {
                                             <Link className="edit-button-link" to={`/edit-menu-item/${item.id}`}>
                                                 <button>Edit</button><br />
                                             </Link>
-                                            { item.image_url ? <img src={item.image_url} alt={`${item.name}`}/> : "" }
+                                            { item.image_url ? <img className="menu-item-image gray" src={item.image_url} alt={`${item.name}`}/> : "" }
     
                                             <div className="menu-item-info"> 
 
                                                 {/*<button className={`accordion ${item.category}`} type="button" onClick={e => this.nutritionalInfo(e)}> (see nutritional info)</button>*/}
-                                                <div className="panel">
+                                                <div className="panel gray">
                                                     
                                                         <p className="mealplan-nutritional-info">
-                                                            <u>Calories</u>: {item.calories} 
-                                                            <u>Carbs</u>: {item.carbs}g  
-                                                            <u>Protein</u>: {item.protein}g
-                                                            <u>Fat</u>: {item.fat}g
+                                                            <u>Calories</u>: {item.calories} &nbsp;
+                                                            <u>Carbs</u>: {item.carbs}g &nbsp; 
+                                                            <u>Protein</u>: {item.protein}g &nbsp;
+                                                            <u>Fat</u>: {item.fat}g &nbsp;
                                                         </p>
                                                 </div><br />
                                             </div>
@@ -227,24 +227,23 @@ class MenuListPage extends React.Component {
                                                 </p>
                                             </details> */}
                                         </>
-
                                     :
                                         <>
                                             {/*<input className="checkBox" type="checkbox" id={`menu-item${item.id}`} name="menu-item" value={item.id} required /> */}
                                             <label htmlFor={`menu-item${item.id}`}>{item.name}</label>
                                             <Link className="edit-button-link" to={`/edit-menu-item/${item.id}`}>
-                                                <button >Edit</button><br/>
+                                                <button className="edit-button">Edit</button><br/>
                                             </Link>
 
                                             {/*<button className={`accordion ${item.category}`} type="button" onClick={e => this.nutritionalInfo(e)}>(nutritional info)</button>*/}
                                             <div className="panel">
                                                 { item.image_url ? 
-                                                        <img src={item.image_url} alt={`${item.name}`}/> : "" }  
+                                                        <img className="menu-item-image" src={item.image_url} alt={`${item.name}`}/> : "" }  
                                                     <p className="mealplan-nutritional-info">
-                                                        (<u>Calories</u>: {item.calories} 
-                                                        <u>Carbs</u>: {item.carbs}g   
-                                                        <u>Protein</u>: {item.protein}g
-                                                        <u>Fat</u>: {item.fat}g)
+                                                        <u>Calories</u>: {item.calories} &nbsp; 
+                                                        <u>Carbs</u>: {item.carbs}g &nbsp;   
+                                                        <u>Protein</u>: {item.protein}g &nbsp;
+                                                        <u>Fat</u>: {item.fat}g &nbsp;
                                                     </p>
                                             </div>
                                             <button type="button" onClick={() => this.context.addToMealPlan(item.user_id, item.id)}>Add to today's meal plan</button>                             
@@ -313,17 +312,11 @@ class MenuListPage extends React.Component {
                     <TabPanel>
                         <div id="breakfast-menu">
                             <h2 className="breakfastLabel breakfastLabelColor">Breakfast Menu</h2>
-                            <div className="category-buttons">
-                                    <Link to='/add-menu-item'>
-                                        <button className='add-new-menu-item-button'>+ Add New Menu Item</button>
-                                    </Link>
-                                        <div className='expand-collapse-buttons'>
-                                            <button className="expand-all" onClick={()=>this.expandAll('Breakfast')}>Expand All</button>
-                                            <button className="collapse-all" onClick={()=>this.collapseAll('Breakfast')}>Collapse All</button>
-                                        </div>
-                            </div>
+                            <Link to='/add-menu-item'>
+                                <button className='add-new-menu-item-button'>+ Add New Menu Item</button>
+                            </Link>
                             <section className="menuCategory">
-                                <ul className="parent-ul">
+                                <ul>
                                     {categories[0].list}
                                 </ul>
                             </section>
@@ -333,13 +326,13 @@ class MenuListPage extends React.Component {
                     <TabPanel>
                         <div id="lunch-menu">
                             <h2 className="lunchLabel lunchLabelColor">Lunch Menu</h2>
+                            <Link to='/add-menu-item'>
+                                <button className='add-new-menu-item-button'>+ Add New Menu Item</button>
+                            </Link>
                             <section className="menuCategory">
                                 <ul>
-                                    <button className="expand-all" onClick={()=>this.expandAll('Lunch')}>Expand All</button>
-                                    <button className="collapse-all" onClick={()=>this.collapseAll('Lunch')}>Collapse All</button>
                                     {categories[1].list}
                                 </ul>
-                                
                             </section>
                         </div>
                     </TabPanel>
@@ -347,19 +340,18 @@ class MenuListPage extends React.Component {
                     <TabPanel>
                         <div id="dinner-menu">
                             <h2 className="dinnerLabel dinnerLabelColor">Dinner Menu</h2>
+                            <Link to='/add-menu-item'>
+                                <button className='add-new-menu-item-button'>+ Add New Menu Item</button>
+                            </Link>
                             <section className="menuCategory">
                                 <ul>
-                                    <button className="expand-all" onClick={()=>this.expandAll('Dinner')}>Expand All</button>
-                                    <button className="collapse-all" onClick={()=>this.collapseAll('Dinner')}>Collapse All</button>
                                     {categories[2].list}
-                                </ul>
-                                
+                                </ul>                 
                             </section>
                         </div>
                     </TabPanel>
 
                 </Tabs>
-
             </div>
         )
     }
