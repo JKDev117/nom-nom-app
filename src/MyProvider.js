@@ -74,6 +74,58 @@ export default class MyProvider extends React.Component {
     }
     */
 
+    addToMealPlan = (user_id, item_id) => {
+        console.log(user_id)
+        console.log(item_id)
+        const body = {
+          id: item_id,
+          user_id: user_id
+        }
+        const url = config.REACT_APP_API_BASE_URL + '/plan';
+        const options = {
+          method: 'POST',
+          headers: {
+          //"Authorization": `Bearer ${config.REACT_APP_API_KEY}`,
+          "Authorization": `Bearer ${TokenService.getAuthToken()}`,
+          "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body)
+        }
+        fetch(url, options)
+                .then(res => {
+                    if(!res.ok){
+                        return res.json().then(e => Promise.reject(e))
+                    }
+                    //return res.json()
+                    return res.json()
+                })
+                .then(resJson => {
+                    console.log('resJson @MyProvider.js @addToMealPlan', resJson)
+
+                    this.setState({meal_plan: [...this.state.meal_plan, resJson]})
+                    console.log('meal_plan @MyProvider.js @addToMealPlan', this.state.meal_plan)
+
+                    const { menu_items } = this.state
+                    const menu_items_updated = menu_items.map(
+                      item => {
+                        if(this.checkMealPlanForItem(item)===true){
+                          Object.assign(item, {in_meal_plan: true})
+                        } else {
+                          Object.assign(item, {in_meal_plan: false})
+                        }
+                        return item
+                      }
+                    )
+
+                    this.setState({menu_items: menu_items_updated})
+                    //this.setState({meal_plan_item_count: resJson})
+                    //console.log(this.state.meal_plan_item_count)
+                })
+                .catch(error => console.log(error))//this.setState({error}))
+                //console.log(this.state.meal_plan_count)
+    }
+
+    /*
     addToMealPlan = (user_id, ids_of_checked_menu_items, callback) => {
         //console.log(user_id)
         //console.log(ids_of_checked_menu_items)
@@ -111,6 +163,7 @@ export default class MyProvider extends React.Component {
                 //console.log(this.state.meal_plan_count)      
         }//end for loop
     }//end addToMealPlan()
+    */
 
     removeFromMealPlan = id => {
         console.log('@MyProvider.js @removeFromMealPlan plan item id', id)

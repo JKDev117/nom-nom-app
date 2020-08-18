@@ -25,6 +25,7 @@ class MenuListPage extends React.Component {
         removeFromMealPlan(plan_id)
     }
 
+    /*
     handleSubmit () {
         let checkedBoxes = document.querySelectorAll('input[name="menu-item"]:checked');
         //console.log(checkedBoxes)
@@ -36,6 +37,9 @@ class MenuListPage extends React.Component {
         this.context.addToMealPlan(this.context.user_id, ids_of_checked_menu_items, () => this.props.history.push('/meal-plan'))
         //setTimeout(() => this.props.history.push('/meal-plan'), 600)            
     }
+    */
+
+ 
         
     nutritionalInfo (e){
         //console.log(e)
@@ -226,13 +230,13 @@ class MenuListPage extends React.Component {
 
                                     :
                                         <>
-                                            <input className="checkBox" type="checkbox" id={`menu-item${item.id}`} name="menu-item" value={item.id} required />
+                                            {/*<input className="checkBox" type="checkbox" id={`menu-item${item.id}`} name="menu-item" value={item.id} required /> */}
                                             <label htmlFor={`menu-item${item.id}`}>{item.name}</label>
                                             <Link className="edit-button-link" to={`/edit-menu-item/${item.id}`}>
                                                 <button >Edit</button><br/>
                                             </Link>
 
-                                            <button className={`accordion ${item.category}`} type="button" onClick={e => this.nutritionalInfo(e)}>(nutritional info)</button>
+                                            {/*<button className={`accordion ${item.category}`} type="button" onClick={e => this.nutritionalInfo(e)}>(nutritional info)</button>*/}
                                             <div className="panel">
                                                 { item.image_url ? 
                                                         <img src={item.image_url} alt={`${item.name}`}/> : "" }  
@@ -243,6 +247,8 @@ class MenuListPage extends React.Component {
                                                         <u>Fat</u>: {item.fat}g)
                                                     </p>
                                             </div>
+                                            <button type="button" onClick={() => this.context.addToMealPlan(item.user_id, item.id)}>Add to today's meal plan</button>                             
+
                                             {/*
                                             <details>
                                                 <summary>
@@ -282,6 +288,7 @@ class MenuListPage extends React.Component {
 
                         this.handleSubmit()
                 }} value="Add Selected Items To Today's Meal Plan"/> */}
+                {/*
                 <button id="addToMealPlanButton" onClick={() => {
                         const checkedBoxes = document.querySelectorAll('input[type=checkbox]:checked')
 
@@ -291,7 +298,8 @@ class MenuListPage extends React.Component {
                         }
 
                         this.handleSubmit()
-                }}>Add Selected Items To Today's Meal Plan</button>                    
+                }}>Add Selected Items To Today's Meal Plan</button>
+                */}                    
                 <br/>
                 <span id="alert"></span>
 
