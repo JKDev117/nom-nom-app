@@ -21,25 +21,34 @@
 }
 
 .add-new-menu-item-button {
-    margin-bottom: 1em;
+    margin-bottom: 2em;
+    width: 100px;
+    height: 50px;
+    margin-top: 1em;
+    font-size: 0.8em;
 }
 
 .menuCategory {
-    border: 1px solid black;
+    border: 1px ridge black;
     padding: 10px;
+    border-radius: 2em;
+    margin-bottom: 1em;
+    border-width: 5px;
 }
 
-.breakfastLabelColor {
-    color: rgb(47, 97, 114);
+.breakfast-menuCategory{
+    background-color: rgba(47, 97, 114, 0.5); 
 }
 
-.lunchLabelColor {
-    color: darkgoldenrod;
+.lunch-menuCategory{
+    background-color: rgb(213, 159, 60, 0.5);
 }
 
-.dinnerLabelColor {
-    color: purple;
+.dinner-menuCategory{
+    background-color: rgb(49, 3, 82, 0.5);
 }
+
+
 
 
 .meal-box {
@@ -50,8 +59,12 @@
     width: 300px;
     height: 600px;
     vertical-align: middle;
+    background-color: white;
 }
 
+.meal-box:hover {
+    background-color: rgb(255, 255, 255, 0.8);
+}
 
 ul {
     list-style: none;
@@ -70,7 +83,7 @@ details {
     margin-bottom: 1.2em;
 }
 
-img {
+.menu-item-image {
     margin-top: 0.4em;
     height: 200px;
     width: 200px;
@@ -93,7 +106,18 @@ img {
     margin-left: 0.8em;
 }
 
+.edit-button{
+    font-size: 1em;
+}
 
+.mealplan-nutritional-info {
+    font-size: 1em;
+    font-family: 'Baloo Tamma 2', cursive;
+}
+
+.addToMP-button {
+    font-size: 1em;
+}
 
 /* Style the buttons that are used to open and close the accordion panel */
 .accordion { /* button */

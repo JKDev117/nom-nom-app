@@ -9,6 +9,11 @@
     background-color: white;
 }
 
+.chef-kirby {
+    max-width: 180px;
+    padding: 0;
+    margin: 0;
+}
 
 .landing-page-links {
     display: flex;
@@ -23,7 +28,7 @@
     font-size: 1.1em;
 }
 
-.landing-page-link > img {
+.food-icon, .food-menu {
     width: 140px;
 }
 

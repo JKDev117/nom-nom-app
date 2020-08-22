@@ -9,6 +9,11 @@
     background-color: white;
 }
 
+.chef-mario-and-yoshi {
+    max-width: 180px;
+    padding: 0;
+    margin: 0;
+}
 
 .login-title {
     font-family: 'Pangolin', cursive;

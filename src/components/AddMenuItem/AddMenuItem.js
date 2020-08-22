@@ -65,7 +65,7 @@ class AddMenuItem extends React.Component {
                 <h1 className="add-menu-item-title">Add New Menu Item</h1>
                 <section>
                     <form onSubmit={this.handleSubmit}>
-                        <img src="http://vignette1.wikia.nocookie.net/doom/images/4/4c/Chef-hat-png-13.png/revision/latest?cb=20170308012617" alt="chef-hat"/><br/>
+                        <img className="chef-hat" src="http://vignette1.wikia.nocookie.net/doom/images/4/4c/Chef-hat-png-13.png/revision/latest?cb=20170308012617" alt="chef-hat"/><br/>
                         <label htmlFor="name"> Name: </label>
                         <input type="text" id="name" name="name" required/><br/>
 

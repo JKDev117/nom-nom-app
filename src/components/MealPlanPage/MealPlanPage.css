@@ -9,7 +9,7 @@
     background-color: white;
 }
 
-.MealPlanPage>img {    
+.food-icon {    
     max-width: 120px;
     padding: 0;
     margin: 0;
@@ -18,34 +18,45 @@
 .meal-plan-summary {
     font-family: 'Baloo Tamma 2', cursive;
     font-size: 1.1em;
+    font-weight: bold;
 }
 
 .meal-plan-title {
     font-family: 'Pangolin', cursive;
 }
 
+
 .breakfastLabel {
     font-family: 'Pacifico', cursive;
     font-size: 3em;
     padding: 0;
     margin: 0;
+    color: rgb(47, 97, 114);
 }
 
 .lunchLabel {
     font-family: 'Sriracha', cursive;
-    font-size: 3em;
+    font-size: 3.5em;
     padding: 0;
     margin: 0;
+    color: darkgoldenrod;
+
 }
 
 .dinnerLabel {
     font-family: 'Pinyon Script', cursive;
-    font-size: 3em;
+    font-size: 4em;
     padding: 0;
     margin: 0;
+    color: purple;
+
 }
 
-.menuCategory {
+
+
+
+.planCategory {
+    padding-top: 2em;
     border-radius: 2em;
     margin-bottom: 1em;
     background-color: rgb(255, 255, 255);
@@ -53,42 +64,61 @@
     border-width: 5px;
 }
 
-.menuCategory:hover {
-    background-color: rgb(203, 201, 189);
-    /* background-color: rgb(235, 233, 220); */
 
+.breakfastPlanSection {
+    border-color: rgba(47, 97, 114, 0.5);
 }
 
 .breakfastPlanSection:hover {
-    border-color: rgba(102, 160, 232, 0.5);
-    color: rgb(47, 97, 114);
+    background-color: rgba(47, 97, 114, 0.1);
 }
 
-.lunchPlanSection:hover {
-    border-color: rgba(219, 163, 58, 0.5);
-    color: darkgoldenrod;
+.lunchPlanSection {
+    border-color: rgba(213, 159, 60, 0.5);
+}
 
+
+.lunchPlanSection:hover {
+    background-color: rgba(213, 159, 60, 0.1);
+}
+
+.dinnerPlanSection {
+    border-color: rgba(49, 3, 82, 0.5);
 }
 
 .dinnerPlanSection:hover {
-    border-color: rgba(121, 13, 199, 0.5);
-    color: purple;
-}
-
-
-
-ul {
-    list-style: none;
+    background-color: rgba(49, 3, 82, 0.1);
 }
 
 .mealplan-item-name{
     font-family: 'Nanum Pen Script';
     font-size: 1.8em;
+    color: white;
+    padding: 0.2em;
+    border-radius: 5px;
+    width: 80%;
+    margin: 0 auto;
+    background-color: black;
 }
 
-.mealplan-nutritional-info {
-    font-size: 0.9em;
-    font-family: 'Baloo Tamma 2', cursive;
+.breakfast-item-name {
+
+}
+
+.lunch-item-name {
+
+}
+
+.dinner-item-name {
+
+}
+
+ul {
+    list-style: none;
+}
+
+.meal-plan-box{
+    margin-bottom: 2em;
 }
 
 .user-note {
@@ -96,3 +126,15 @@ ul {
     text-align: center;
 }
 
+.removeFromMP-button {
+    font-family: 'Baloo Tamma 2', cursive;
+    font-size: 1.2em;
+    border-radius: 2px;
+    margin-bottom: 2em;
+}
+
+
+@media screen and (max-width: 1024px){
+
+
+}

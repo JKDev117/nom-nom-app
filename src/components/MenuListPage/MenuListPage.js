@@ -190,11 +190,11 @@ class MenuListPage extends React.Component {
                                 <li className="meal-box" key={i}>
                                     
                                     {item.in_meal_plan ? 
-                                        <>  
+                                        <>
                                             <span className="added-status">ADDED</span><br/>
                                             <label className="gray" htmlFor={`menu-item${item.id}`}>{item.name}</label>
                                             <Link className="edit-button-link" to={`/edit-menu-item/${item.id}`}>
-                                                <button>Edit</button><br />
+                                                <button className="edit-button">Edit</button><br />
                                             </Link>
                                             { item.image_url ? <img className="menu-item-image gray" src={item.image_url} alt={`${item.name}`}/> : "" }
     
@@ -204,14 +204,14 @@ class MenuListPage extends React.Component {
                                                 <div className="panel gray">
                                                     
                                                         <p className="mealplan-nutritional-info">
-                                                            <u>Calories</u>: {item.calories} &nbsp;
+                                                            <u>Calories</u>: {item.calories} &nbsp; <br/>
                                                             <u>Carbs</u>: {item.carbs}g &nbsp; 
                                                             <u>Protein</u>: {item.protein}g &nbsp;
                                                             <u>Fat</u>: {item.fat}g &nbsp;
                                                         </p>
                                                 </div><br />
                                             </div>
-                                            <button type="button" onClick={()=>this.handleRemoveFromMealPlan(item)}>Remove from today's meal plan</button>                             
+                                            <button className="removeFromMP-button" type="button" onClick={()=>this.handleRemoveFromMealPlan(item)}>Remove from today's meal plan</button>                             
                                             
                                             {/* <details className="gray">
                                                 <summary>
@@ -240,13 +240,13 @@ class MenuListPage extends React.Component {
                                                 { item.image_url ? 
                                                         <img className="menu-item-image" src={item.image_url} alt={`${item.name}`}/> : "" }  
                                                     <p className="mealplan-nutritional-info">
-                                                        <u>Calories</u>: {item.calories} &nbsp; 
+                                                        <u>Calories</u>: {item.calories} &nbsp;  <br/>
                                                         <u>Carbs</u>: {item.carbs}g &nbsp;   
                                                         <u>Protein</u>: {item.protein}g &nbsp;
                                                         <u>Fat</u>: {item.fat}g &nbsp;
                                                     </p>
                                             </div>
-                                            <button type="button" onClick={() => this.context.addToMealPlan(item.user_id, item.id)}>Add to today's meal plan</button>                             
+                                            <button className="addToMP-button" type="button" onClick={() => this.context.addToMealPlan(item.user_id, item.id)}>Add to today's meal plan</button>                             
 
                                             {/*
                                             <details>
@@ -273,7 +273,7 @@ class MenuListPage extends React.Component {
 
         return(
             <div className="MenuListPage">
-                <img src="https://image.flaticon.com/icons/png/512/289/289658.png" alt="food-menu"/>
+                <img className="food-menu" src="https://image.flaticon.com/icons/png/512/289/289658.png" alt="food-menu"/>
 
                 <h1 className="menu-list-title">My Menu List</h1>
                      
@@ -311,11 +311,11 @@ class MenuListPage extends React.Component {
 
                     <TabPanel>
                         <div id="breakfast-menu">
-                            <h2 className="breakfastLabel breakfastLabelColor">Breakfast Menu</h2>
+                            <h2 className="breakfastLabel">Breakfast Menu</h2>
                             <Link to='/add-menu-item'>
                                 <button className='add-new-menu-item-button'>+ Add New Menu Item</button>
                             </Link>
-                            <section className="menuCategory">
+                            <section className="menuCategory breakfast-menuCategory">
                                 <ul>
                                     {categories[0].list}
                                 </ul>
@@ -325,11 +325,11 @@ class MenuListPage extends React.Component {
 
                     <TabPanel>
                         <div id="lunch-menu">
-                            <h2 className="lunchLabel lunchLabelColor">Lunch Menu</h2>
+                            <h2 className="lunchLabel">Lunch Menu</h2>
                             <Link to='/add-menu-item'>
                                 <button className='add-new-menu-item-button'>+ Add New Menu Item</button>
                             </Link>
-                            <section className="menuCategory">
+                            <section className="menuCategory lunch-menuCategory">
                                 <ul>
                                     {categories[1].list}
                                 </ul>
@@ -339,11 +339,11 @@ class MenuListPage extends React.Component {
 
                     <TabPanel>
                         <div id="dinner-menu">
-                            <h2 className="dinnerLabel dinnerLabelColor">Dinner Menu</h2>
+                            <h2 className="dinnerLabel">Dinner Menu</h2>
                             <Link to='/add-menu-item'>
                                 <button className='add-new-menu-item-button'>+ Add New Menu Item</button>
                             </Link>
-                            <section className="menuCategory">
+                            <section className="menuCategory dinner-menuCategory">
                                 <ul>
                                     {categories[2].list}
                                 </ul>                 

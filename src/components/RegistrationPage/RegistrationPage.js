@@ -100,7 +100,7 @@ class RegistrationPage extends React.Component {
                     </label>
                     <input type='text' name='password' id='register_password' required/><br/>
                     
-                    <button type="submit">Create account</button>
+                    <button className="create-account-button" type="submit">Create account</button>
                 </form>
             </div>
         )

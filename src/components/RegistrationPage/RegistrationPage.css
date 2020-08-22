@@ -31,7 +31,7 @@ label {
     font-family: 'Baloo Tamma 2', cursive;
 }
 
-button {
+.create-account-button {
     font-family: 'Baloo Tamma 2', cursive;
     margin-top: 1em;
     font-size: 1.2em;

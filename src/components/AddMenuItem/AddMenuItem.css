@@ -14,6 +14,11 @@
     font-family: 'Pangolin', cursive;
 }
 
+.chef-hat {
+    width: 180px;
+    margin-bottom: 2em;
+}
+
 select#category {
     font-size: 1.3em;
     margin-left: 2px;
