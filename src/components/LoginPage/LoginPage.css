@@ -18,3 +18,11 @@
 .login-title {
     font-family: 'Pangolin', cursive;
 }
+
+.login-button {
+    font-family: 'Baloo Tamma 2', cursive;
+    margin-top: 1em;
+    font-size: 1.2em;
+    border-radius: 2px;    
+}
+

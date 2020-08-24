@@ -20,6 +20,10 @@
     font-family: 'Pangolin', cursive;
 }
 
+button {
+    cursor: pointer;
+}
+
 .add-new-menu-item-button {
     margin-bottom: 2em;
     width: 100px;
@@ -47,9 +51,6 @@
 .dinner-menuCategory{
     background-color: rgb(49, 3, 82, 0.5);
 }
-
-
-
 
 .meal-box {
     border: 1px solid black;
