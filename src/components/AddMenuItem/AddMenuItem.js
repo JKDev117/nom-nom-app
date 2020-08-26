@@ -73,20 +73,20 @@ class AddMenuItem extends React.Component {
                         <input type="text" id="image_url" name="image_url"/><br/>
 
                         <label htmlFor="calories"> Calories: </label>
-                        <input type="number" id="calories" name="calories"/><br/>
+                        <input type="number" id="calories" min="0" name="calories"/><br/>
 
                         <label htmlFor="carbs"> Carbs(g): </label>
-                        <input type="number" id="carbs" name="carbs"/><br/>
+                        <input type="number" id="carbs" min="0" name="carbs"/><br/>
 
                         <label htmlFor="protein"> Protein(g): </label>
-                        <input type="number" id="protein" name="protein"/><br/>
+                        <input type="number" id="protein" min="0" name="protein"/><br/>
 
                         <label htmlFor="fat"> Fat(g): </label>
-                        <input type="number" id="fat" name="fat"/><br/>
+                        <input type="number" id="fat" min="0" name="fat"/><br/>
 
                         <label htmlFor="category">Category: </label>
                             <select id="category" name="category" required>
-                                <option selected hidden value=""> -- select an option -- </option>
+                                <option hidden value=""> -- select an option -- </option>
                                 <option value="Breakfast">Breakfast</option>
                                 <option value="Lunch">Lunch</option>
                                 <option value="Dinner">Dinner</option>

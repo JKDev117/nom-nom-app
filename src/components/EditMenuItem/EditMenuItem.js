@@ -99,7 +99,7 @@ class EditMenuItem extends React.Component {
                 return
             })
             //.then(this.context.updateMenuItem(this.state))
-            .then(this.context.updateMenuItem(menu_item, () => this.props.history.push('/menu')))
+            .then(() => this.context.updateMenuItem(menu_item, () => this.props.history.push('/menu')))
             //.then(this.pushPath())
             .catch(error => console.log(error))
     }
@@ -144,16 +144,16 @@ class EditMenuItem extends React.Component {
                         <input type="text" id="image_url" name="image_url" value={image_url || ''} onChange={this.handleChange}/><br/>
                         
                         <label htmlFor="calories"> Calories: </label>
-                        <input type="number" id="calories" name="calories" value={calories || ''} onChange={this.handleChange}/><br/>
+                        <input type="number" id="calories" name="calories" min="0" value={calories || ''} onChange={this.handleChange}/><br/>
 
                         <label htmlFor="carbs"> Carbs(g): </label>
-                        <input type="number" id="carbs" name="carbs" value={carbs || ''} onChange={this.handleChange}/><br/>
+                        <input type="number" id="carbs" name="carbs" min="0" value={carbs || ''} onChange={this.handleChange}/><br/>
 
                         <label htmlFor="protein"> Protein(g): </label>
-                        <input type="number" id="protein" name="protein" value={protein || ''} onChange={this.handleChange}/><br/>
+                        <input type="number" id="protein" name="protein" min="0" value={protein || ''} onChange={this.handleChange}/><br/>
 
                         <label htmlFor="fat"> Fat(g): </label>
-                        <input type="number" id="fat" name="fat" value={fat || ''} onChange={this.handleChange}/><br/>
+                        <input type="number" id="fat" name="fat" min="0" value={fat || ''} onChange={this.handleChange}/><br/>
 
                         <label htmlFor="category">Category: </label>
                             <select id="category" name="category" value={category || ''} onChange={this.handleChange}>
