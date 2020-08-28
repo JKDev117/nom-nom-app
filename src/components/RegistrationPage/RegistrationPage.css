@@ -22,7 +22,7 @@ label {
     font-size: 2em;
 }
 
-[type="text"] {
+[type="text"], [type="password"] {
     font-size: 1.3em;
     border-radius: 2em;
     margin-left: 2px;
