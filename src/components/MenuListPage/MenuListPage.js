@@ -101,9 +101,8 @@ class MenuListPage extends React.Component {
         categories.forEach(
             category => category.list = menu_items.filter(item => item.category === category.category)
                         .map((item, i) =>
-                                <li className="meal-box" key={i}>
-                                    {item.in_meal_plan ? 
-                                        <>
+                                    item.in_meal_plan ? 
+                                        <li className="meal-box-added" key={i}>
                                             <span className="added-status">ADDED</span><br/>
                                             <label className="gray" htmlFor={`menu-item${item.id}`}>{item.name}</label>
                                             <Link className="edit-button-link" to={`/edit-menu-item/${item.id}`}>
@@ -121,9 +120,9 @@ class MenuListPage extends React.Component {
                                                 </div><br />
                                             </div>
                                             <button className="removeFromMP-button" type="button" onClick={()=>this.handleRemoveFromMealPlan(item)}>Remove from today's meal plan</button>                             
-                                        </>
+                                        </li>
                                     :
-                                        <>
+                                        <li className="meal-box" key={i}>
                                             <label htmlFor={`menu-item${item.id}`}>{item.name}</label>
                                             <Link className="edit-button-link" to={`/edit-menu-item/${item.id}`}>
                                                 <button className="edit-button">Edit</button><br/>
@@ -139,9 +138,7 @@ class MenuListPage extends React.Component {
                                                     </p>
                                             </div>
                                             <button className="addToMP-button" type="button" onClick={() => this.context.addToMealPlan(item.user_id, item.id)}>Add to today's meal plan</button>                             
-                                        </>
-                                    }
-                                </li>
+                                        </li>
                         )//end .map
         )
 
