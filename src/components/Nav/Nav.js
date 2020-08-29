@@ -105,6 +105,3 @@ export default function Nav() {
   }
 
 }
-
-
-//style={{'text-decoration': 'none'}}

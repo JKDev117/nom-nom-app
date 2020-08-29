@@ -13,10 +13,8 @@ import MyProvider from './MyProvider';
 import TokenService from './services/token-service';
 import AuthApiService from './services/auth-api-service';
 import IdleService from './services/idle-service';
-//import { LIST, PLAN } from '../store/store.js';
 import PrivateRoute from './components/Utils/PrivateRoute';
 import PublicOnlyRoute from './components/Utils/PublicOnlyRoute';
-import config from './config';
 
 
 class App extends React.Component {
@@ -78,7 +76,6 @@ class App extends React.Component {
 
 
   render(){
-    console.log('@App.js render')
     return (
        <main className='App'>
          <Nav />

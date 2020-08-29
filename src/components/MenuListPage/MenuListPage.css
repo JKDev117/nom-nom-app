@@ -72,18 +72,6 @@ ul {
     padding-left: 0;
 }
 
-summary {
-    font-size: 0.8em;
-}
-
-summary:focus {
-    outline: none;
-}
-
-details {
-    margin-bottom: 1.2em;
-}
-
 .menu-item-image {
     margin-top: 0.4em;
     height: 200px;
@@ -148,27 +136,11 @@ details {
 }
 
 
-/* Style the accordion panel. Note: hidden by default */
-/*
-.panel{
-    padding: 0 18px;
-    background-color: white;
-    display: none;
-    overflow: hidden;
-    transition: display 1s;
-}
-*/
-
 a {
     display: block;
 }
 
 #alert {
     color: red;
-}
-
-@media screen and (min-width: 544px){
-    
-
 }
 

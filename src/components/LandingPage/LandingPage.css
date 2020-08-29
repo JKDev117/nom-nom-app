@@ -19,6 +19,7 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: flex-end;
 }
 
 
@@ -30,6 +31,11 @@
 
 .food-icon, .food-menu {
     width: 140px;
+}
+
+.food-icon {
+    position: relative;
+    bottom: 0.38em;
 }
 
 .app-name {
@@ -44,5 +50,10 @@
     font-size: 1.6em;
 }
 
+@media screen and (max-width: 527px){
+    .landing-page-link {
+        font-size: 0.9em;
+    }
+}
 
 

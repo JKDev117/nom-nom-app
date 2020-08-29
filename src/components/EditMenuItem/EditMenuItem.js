@@ -30,7 +30,6 @@ class EditMenuItem extends React.Component {
             method: 'DELETE',
             headers:{ 
                 "content-type": "application/json",
-                //"Authorization": `Bearer ${config.REACT_APP_API_KEY}`,
                 "Authorization": `Bearer ${TokenService.getAuthToken()}`,
             }
         }
@@ -42,7 +41,6 @@ class EditMenuItem extends React.Component {
                 return;
             })
             .then(this.context.removeMenuItem(id, () => this.props.history.push('/menu')))
-            //.then(this.pushPath())
             .catch(error => console.log(error))
     }
 
@@ -83,11 +81,9 @@ class EditMenuItem extends React.Component {
         const fetchUrl = config.REACT_APP_API_BASE_URL + '/menu/' + this.props.match.params.item_id
         const options = { 
             method: 'PATCH',
-            //body: JSON.stringify(this.state),
             body: JSON.stringify(menu_item),
             headers:{ 
                 "content-type": "application/json",
-                //"Authorization": `Bearer ${config.REACT_APP_API_KEY}`,
                 "Authorization": `Bearer ${TokenService.getAuthToken()}`,
             }
         }
@@ -98,9 +94,7 @@ class EditMenuItem extends React.Component {
                 }
                 return
             })
-            //.then(this.context.updateMenuItem(this.state))
             .then(() => this.context.updateMenuItem(menu_item, () => this.props.history.push('/menu')))
-            //.then(this.pushPath())
             .catch(error => console.log(error))
     }
 
@@ -111,7 +105,6 @@ class EditMenuItem extends React.Component {
             method: 'GET',
             headers:{ 
                 "content-type": "application/json",
-                //"Authorization": `Bearer ${config.REACT_APP_API_KEY}`,
                 "Authorization": `Bearer ${TokenService.getAuthToken()}`,
             }
         }
@@ -125,7 +118,6 @@ class EditMenuItem extends React.Component {
             .then(this.loadMenuItem)
             .catch(error => 
                 console.error({ error })
-                //this.setState({ error })
             )
     }
 
@@ -136,7 +128,7 @@ class EditMenuItem extends React.Component {
                 <h1 className="edit-menu-item-title">Edit Menu Item</h1>
                 <section>
                     <form onSubmit={this.handleSubmit}>
-                        <img className="chef-hat" src="http://vignette1.wikia.nocookie.net/doom/images/4/4c/Chef-hat-png-13.png/revision/latest?cb=20170308012617" alt="chef-hat"/><br/>
+                        <img className="chef-hat" src="/images/chef-hat.png" alt="chef-hat"/><br/>
                         <label htmlFor="name"> Name: </label>
                         <input type="text" id="name" name="name" value={name || ''} onChange={this.handleChange} required/><br/>
 
@@ -171,4 +163,4 @@ class EditMenuItem extends React.Component {
     }
 }
 
-export default EditMenuItem
+export default EditMenuItem;

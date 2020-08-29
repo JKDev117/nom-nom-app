@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './MealPlanPage.css';
 import { MyContext } from '../../MyProvider';
 import config from '../../config';
@@ -10,13 +9,11 @@ class MealPlanPage extends React.Component {
     static contextType = MyContext;
     
     componentDidMount(){
-        console.log('@MealPlanPage.js [componentDidMount]')
         //GET /plan
         const url = config.REACT_APP_API_BASE_URL + '/plan';
         const options = {
           method: 'GET',
           headers: {
-            //"Authorization": `Bearer ${config.REACT_APP_API_KEY}`,
             "Authorization": `Bearer ${TokenService.getAuthToken()}`,
             "Content-Type": "application/json",
           }
@@ -26,7 +23,6 @@ class MealPlanPage extends React.Component {
             if(!res.ok){
               return res.json().then(e => Promise.reject(e))
             }
-            //console.log('res.json()', res.json())
             return res.json()
           })
           .then(this.context.setMealPlan)
@@ -34,10 +30,8 @@ class MealPlanPage extends React.Component {
     }
 
     render(){
-        console.log("@MealPlanPage.js render")
-        //const { menu_plan, removeFromMealPlan } = this.context
-        const { meal_plan, removeFromMealPlan } = this.context
-
+        const { meal_plan, removeFromMealPlan } = this.context;
+        
         //to calculate total
         let calories = 0;
         let carbs = 0;
@@ -106,10 +100,9 @@ class MealPlanPage extends React.Component {
 
         return (
             <div className="MealPlanPage">
-                <img className="food-icon" src="https://sunnybrook.ca/uploads/1/programs/schulich-heart-centre/cutlery.png" alt="food-icon"/>
+                <img className="food-icon" src="/images/cutlery.png" alt="food-icon"/>
 
                 <h1 className="meal-plan-title">Today's Meal Plan</h1>
-                {/*<p className="user-note"><u>Note</u>: The Meal Plan is currently on-device only and will not work across multiple devices. Multi-device support coming soon!</p>*/}
 
                 <section className="meal-plan-summary">
                     <p>
