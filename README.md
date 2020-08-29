@@ -34,6 +34,10 @@ Add Menu Item Page:
 
 The following technologies were used to create this app:
 
+* HTML
+  - the language in which most websites are written. HTML is used to create pages and make them functional.
+
+
 * JavaScript
   - a programming language that conforms to the ECMAScript specification.
 
