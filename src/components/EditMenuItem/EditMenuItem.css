@@ -24,4 +24,5 @@
 
 .update-button, .delete-menu-item-button {
     margin: 0.5em;
+    font-size: 1.2em;
 }

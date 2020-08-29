@@ -10,20 +10,14 @@ class EditMenuItem extends React.Component {
 
     state = { }
 
-    async pushPath() {
-        let promise = new Promise((resolve, reject) => {
-            setTimeout(() => resolve(), 1000)
-        });
-        await promise
-        this.props.history.push('/menu')
-    }
-
-    loadMenuItem = items => {
+    //to store the properties of the menu item in the state of this class
+    loadMenuItem = item => {
         this.setState({
-          ...items
+          ...item
         })
     }
 
+    //to handle deletion of the menu item from the menu
     deleteMenuItem = id => {
         const fetchUrl = config.REACT_APP_API_BASE_URL + '/menu/' + id
         const options = { 
@@ -44,6 +38,8 @@ class EditMenuItem extends React.Component {
             .catch(error => console.log(error))
     }
 
+    /* to handle any changes made to the properties of the menu item in the state of this class before
+    the user submits the changes */
     handleChange = event => {
         if(event.target.value.length === 0){
             this.setState({
@@ -60,9 +56,9 @@ class EditMenuItem extends React.Component {
         }
     }
 
+    //to handle user form submission 
     handleSubmit = event => {
         event.preventDefault()
-        
         const { name, image_url, category } = event.target
         const calories = parseInt(event.target.calories.value) || null
         const carbs = parseInt(event.target.carbs.value) || null
@@ -77,7 +73,6 @@ class EditMenuItem extends React.Component {
             fat: fat,
             category: category.value
         }
-        
         const fetchUrl = config.REACT_APP_API_BASE_URL + '/menu/' + this.props.match.params.item_id
         const options = { 
             method: 'PATCH',
@@ -98,6 +93,7 @@ class EditMenuItem extends React.Component {
             .catch(error => console.log(error))
     }
 
+    //at componentDidMount(), fetch information of the menu item from the server
     componentDidMount(){
         const item_id = this.props.match.params.item_id
         const fetchUrl = config.REACT_APP_API_BASE_URL + '/menu/' + item_id

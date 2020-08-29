@@ -74,7 +74,6 @@ class App extends React.Component {
     this.forceUpdate()
   }
 
-
   render(){
     return (
        <main className='App'>
@@ -95,9 +94,6 @@ class App extends React.Component {
     );
   }
 }
-
-
-
 
 export default App;
 

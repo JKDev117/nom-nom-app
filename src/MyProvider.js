@@ -2,7 +2,7 @@ import React from 'react';
 import config from './config';
 import TokenService from './services/token-service';
 
-const MyContext = React.createContext()
+const MyContext = React.createContext();
 
 export default class MyProvider extends React.Component {
     state = {
@@ -53,7 +53,6 @@ export default class MyProvider extends React.Component {
     }
     
     setMealPlan = items => {
-        console.log('@MyProvider.js setMealPlan')
         this.setState({
            meal_plan: items,
         })

@@ -4,19 +4,19 @@ import './RegistrationPage.css'
 
 class RegistrationPage extends React.Component {
 
-    state = {error: null}
+    //to store any error messages that occur when the user tries to register
+    state = { error: null }
 
+    //to handle a successful registration attempt
     handleRegistrationSuccess = () => {
         const { history } = this.props
         history.push('/login')
     }
     
+    //to handle when the user submits information to register
     handleSubmit = ev => {
         ev.preventDefault()
         const { first_name, last_name, user_name, password } = ev.target
-    
-        this.setState({error: null})
-
         AuthApiService.postUser({
             first_name: first_name.value,
             last_name: last_name.value,
@@ -72,4 +72,4 @@ class RegistrationPage extends React.Component {
 }
 
 
-export default RegistrationPage
+export default RegistrationPage;

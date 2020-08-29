@@ -8,6 +8,7 @@ class AddMenuItem extends React.Component {
     
     static contextType = MyContext;
  
+    //to handle user form submission of adding a new menu item to the menu
     handleSubmit = e => {
         e.preventDefault()
         const { name, image_url, category } = e.target
@@ -24,7 +25,6 @@ class AddMenuItem extends React.Component {
             fat: fat,
             category: category.value
         }
-
         const fetchUrl = config.REACT_APP_API_BASE_URL + '/menu'
         const options = {
             method: 'POST',
@@ -41,7 +41,7 @@ class AddMenuItem extends React.Component {
                 }
                 return res.json()
             })
-            .then(resJson => this.context.addMenuItem(resJson, ()=>this.props.history.push('/menu')))
+            .then(resJson => this.context.addMenuItem(resJson, () => this.props.history.push('/menu')))
             .catch(error => console.log(error))
     }
 
@@ -78,13 +78,12 @@ class AddMenuItem extends React.Component {
                                 <option value="Dinner">Dinner</option>
                             </select><br/>
                         <button className="add-to-menu-button" type='submit'>Add to Menu</button>
-                        <button className="cancel-buttton" onClick={() => this.props.history.push('/menu')}>Cancel</button>
+                        <button className="cancel-button" onClick={() => this.props.history.push('/menu')}>Cancel</button>
                     </form>
                 </section>
             </div>
         )
     }
 }
-
 
 export default AddMenuItem;

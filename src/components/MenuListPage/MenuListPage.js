@@ -12,6 +12,7 @@ class MenuListPage extends React.Component {
     
     static contextType = MyContext;
     
+    //to remove the menu item from the meal plan
     handleRemoveFromMealPlan = item => {
         const { meal_plan, removeFromMealPlan } = this.context;
         let plan_id;
@@ -23,52 +24,12 @@ class MenuListPage extends React.Component {
         }
         removeFromMealPlan(plan_id)
     }
-        
-    nutritionalInfo (e){
-        e.target.classList.toggle('active')
-            // Toggle between hiding and showing the active panel
-            let panel = e.target.nextElementSibling;
-              if(panel.style.display === 'block'){
-                panel.style.display = 'none';
-              } else {
-                panel.style.display = 'block';
-              }
-    }
-
-    expandAll(className){
-        let acc = document.getElementsByClassName(className)
-        for(let i=0; i<acc.length; i++){
-            if(acc[i].classList.contains('active')===false){
-                acc[i].classList.add('active')
-            }
-            let panel = acc[i].nextElementSibling
-            if(panel.style.display !== 'block'){
-                panel.style.display = 'block';
-            }  
-        }
-    }
-
-
-    collapseAll(className){
-        let acc = document.getElementsByClassName(className)
-
-        for(let i=0; i<acc.length; i++){
-            if(acc[i].classList.contains('active')===true){
-            acc[i].classList.remove('active')
-            }
-            let panel = acc[i].nextElementSibling
-
-            if(panel.style.display === 'block'){
-                panel.style.display = 'none';
-            }  
-        }
-    }
 
 
     componentDidMount(){
         const { checkMealPlanForItem } = this.context;
 
-        //GET /plan
+        //store endpoint url & options in variables for GET /plan
         const plan_url = config.REACT_APP_API_BASE_URL + '/plan';
         const plan_options = {
             method: 'GET',
@@ -78,7 +39,7 @@ class MenuListPage extends React.Component {
             }
         }
 
-        //GET /menu
+        //store endpoint url & options in variables for GET /menu
         const menu_url = config.REACT_APP_API_BASE_URL + '/menu';
         const menu_options = {
             method: 'GET',
@@ -88,7 +49,7 @@ class MenuListPage extends React.Component {
             }
         }
 
-        //fetch plan_url
+        //GET /plan
         fetch(plan_url, plan_options)
             .then(res => {
                 if(!res.ok){
@@ -100,7 +61,7 @@ class MenuListPage extends React.Component {
                 return this.context.setMealPlan(resJson)
             })
             .then(
-                //fetch menu_url
+                //GET /menu
                 () => fetch(menu_url, menu_options)
                 .then(res => {
                     if(!res.ok){
@@ -134,11 +95,13 @@ class MenuListPage extends React.Component {
             {category: 'Dinner', list: []}
         ]
 
+        /* store into each object in the array 'categories' all the items in the menu
+        according to their category along with their html elements; the html format of each menu item will differ depending
+        on whether the item is also included in the meal plan or if it's not */
         categories.forEach(
             category => category.list = menu_items.filter(item => item.category === category.category)
                         .map((item, i) =>
                                 <li className="meal-box" key={i}>
-                                    
                                     {item.in_meal_plan ? 
                                         <>
                                             <span className="added-status">ADDED</span><br/>
@@ -147,7 +110,6 @@ class MenuListPage extends React.Component {
                                                 <button className="edit-button">Edit</button><br />
                                             </Link>
                                             { item.image_url ? <img className="menu-item-image gray" src={item.image_url} alt={`${item.name}`}/> : "" }
-    
                                             <div className="menu-item-info"> 
                                                 <div className="panel gray">                                    
                                                         <p className="mealplan-nutritional-info">
@@ -166,7 +128,6 @@ class MenuListPage extends React.Component {
                                             <Link className="edit-button-link" to={`/edit-menu-item/${item.id}`}>
                                                 <button className="edit-button">Edit</button><br/>
                                             </Link>
-
                                             <div className="panel">
                                                 { item.image_url ? 
                                                         <img className="menu-item-image" src={item.image_url} alt={`${item.name}`}/> : "" }  
@@ -184,15 +145,11 @@ class MenuListPage extends React.Component {
                         )//end .map
         )
 
-
-
         return(
             <div className="MenuListPage">
                 <img className="food-menu" src="/images/food-menu.png" alt="food-menu"/>
 
-                <h1 className="menu-list-title">My Menu List</h1>                   
-                <br/>
-                <span id="alert"></span>
+                <h1 className="menu-list-title">My Menu List</h1><br/>
 
                 <Tabs defaultIndex={0} onSelect={index => console.log(index)}>
                     <TabList>
@@ -200,7 +157,6 @@ class MenuListPage extends React.Component {
                         <Tab>Lunch Menu</Tab>
                         <Tab>Dinner Menu</Tab>
                     </TabList>
-
                     <TabPanel>
                         <div id="breakfast-menu">
                             <h2 className="breakfastLabel">Breakfast Menu</h2>
@@ -214,7 +170,6 @@ class MenuListPage extends React.Component {
                             </section>
                         </div>
                     </TabPanel>
-
                     <TabPanel>
                         <div id="lunch-menu">
                             <h2 className="lunchLabel">Lunch Menu</h2>
@@ -228,7 +183,6 @@ class MenuListPage extends React.Component {
                             </section>
                         </div>
                     </TabPanel>
-
                     <TabPanel>
                         <div id="dinner-menu">
                             <h2 className="dinnerLabel">Dinner Menu</h2>
@@ -242,7 +196,6 @@ class MenuListPage extends React.Component {
                             </section>
                         </div>
                     </TabPanel>
-
                 </Tabs>
             </div>
         )

@@ -9,7 +9,6 @@
     background-color: white;
 }
 
-
 .add-menu-item-title {
     font-family: 'Pangolin', cursive;
 }
@@ -34,4 +33,5 @@ select, option {
 
 .add-to-menu-button, .cancel-button {
     margin: 0.5em;
+    font-size: 1.2em;
 }
