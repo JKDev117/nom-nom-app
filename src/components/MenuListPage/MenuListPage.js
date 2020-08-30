@@ -102,7 +102,7 @@ class MenuListPage extends React.Component {
             category => category.list = menu_items.filter(item => item.category === category.category)
                         .map((item, i) =>
                                     item.in_meal_plan ? 
-                                        <li className="meal-box-added" key={i}>
+                                        <li className="meal-box meal-box-added" key={i}>
                                             <span className="added-status">ADDED</span><br/>
                                             <label className="gray" htmlFor={`menu-item${item.id}`}>{item.name}</label>
                                             <Link className="edit-button-link" to={`/edit-menu-item/${item.id}`}>
@@ -122,7 +122,7 @@ class MenuListPage extends React.Component {
                                             <button className="removeFromMP-button" type="button" onClick={()=>this.handleRemoveFromMealPlan(item)}>Remove from today's meal plan</button>                             
                                         </li>
                                     :
-                                        <li className="meal-box" key={i}>
+                                        <li className="meal-box meal-box-not-added" key={i}>
                                             <label htmlFor={`menu-item${item.id}`}>{item.name}</label>
                                             <Link className="edit-button-link" to={`/edit-menu-item/${item.id}`}>
                                                 <button className="edit-button">Edit</button><br/>

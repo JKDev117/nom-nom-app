@@ -53,29 +53,26 @@ button {
     background-color: rgb(49, 3, 82, 0.5);
 }
 
-.meal-box-added {
-    border: 1px solid black;
-    list-style: none;
-    padding: 1em;
-    display: inline-block;
-    width: 300px;
-    height: 500px;
-    vertical-align: middle;
-    background-color: white;
-}
-
 .meal-box {
     border: 1px solid black;
     list-style: none;
     padding: 1em;
     display: inline-block;
     width: 300px;
-    height: 400px;
     vertical-align: middle;
     background-color: white;
 }
 
-.meal-box:hover {
+.meal-box-not-added {
+    height: 400px;
+}
+
+.meal-box-added {
+    height: 500px;
+    background-color: rgb(221, 214, 214);
+}
+
+.meal-box-not-added:hover {
     background-color: rgb(255, 255, 255, 0.8);
 }
 
@@ -124,3 +121,8 @@ a {
     display: block;
 }
 
+@media screen and (max-width:440px){
+    .meal-box{
+        max-width: 220px;
+    }
+}
