@@ -117,6 +117,15 @@ ul {
     font-size: 1em;
 }
 
+.removeFromMP-button {
+    font-family: 'Baloo Tamma 2', cursive;
+    font-size: 1.2em;
+    border-radius: 5px;
+    margin-bottom: 2em;
+    border-style: outset;
+    background:rgb(242, 241, 241);
+}
+
 a {
     display: block;
 }
@@ -125,4 +134,14 @@ a {
     .meal-box{
         max-width: 220px;
     }
+    .meal-box-added{
+        height: 550px;
+    }
+    .meal-box-not-added{
+        height: 460px;
+    }
+
+    .removeFromMP-button {
+        width: 215px;
+    }    
 }
