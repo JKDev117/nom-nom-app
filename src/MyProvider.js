@@ -9,30 +9,30 @@ export default class MyProvider extends React.Component {
         user_id: null,
         menu_items: [],
         meal_plan: [],
-    }
+    };
 
     /* MENU ITEMS METHODS --------------------------------------------- */
     setMenuItems = items => {
         this.setState({
           user_id: items[0].user_id,
           menu_items: items
-        })
-    }
+        });
+    };
 
     addMenuItem = (item, callback) => {
         this.setState({
           menu_items: [...this.state.menu_items, item]
-        }, callback)
-    }
+        }, callback);
+    };
 
     removeMenuItem = (itemId, callback) => {
         const updatedMenuItems = this.state.menu_items.filter(itm => 
           itm.id !== itemId
-        )
+        );
         this.setState({
           menu_items: updatedMenuItems
-        }, callback)
-    }
+        }, callback);
+    };
 
     updateMenuItem = (item, callback) => {
         const updatedMenuItems = this.state.menu_items.map(itm => 
@@ -40,29 +40,29 @@ export default class MyProvider extends React.Component {
             item 
               :
             itm
-          )
+          );
           this.setState({
             menu_items: updatedMenuItems
-          }, callback)
-    }
+          }, callback);
+    };
 
     /* MEAL PLAN METHODS ----------------------------------------------- */
     checkMealPlanForItem = item => {
-        const { meal_plan } = this.state
-        return meal_plan.some(element => element.menu_item_id === item.id)
-    }
+        const { meal_plan } = this.state;
+        return meal_plan.some(element => element.menu_item_id === item.id);
+    };
     
     setMealPlan = items => {
         this.setState({
            meal_plan: items,
-        })
-    }
+        });
+    };
 
     addToMealPlan = (user_id, item_id) => {
         const body = {
           id: item_id,
           user_id: user_id
-        }
+        };
         const url = config.REACT_APP_API_BASE_URL + '/plan';
         const options = {
           method: 'POST',
@@ -71,31 +71,31 @@ export default class MyProvider extends React.Component {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(body)
-        }
+        };
         fetch(url, options)
                 .then(res => {
                     if(!res.ok){
-                        return res.json().then(e => Promise.reject(e))
+                        return res.json().then(e => Promise.reject(e));
                     }
-                    return res.json()
+                    return res.json();
                 })
                 .then(resJson => {
-                    this.setState({meal_plan: [...this.state.meal_plan, resJson]})
+                    this.setState({meal_plan: [...this.state.meal_plan, resJson]});
 
-                    const { menu_items } = this.state
+                    const { menu_items } = this.state;
                     const menu_items_updated = menu_items.map(
                       item => {
                         if(this.checkMealPlanForItem(item)===true){
-                          Object.assign(item, {in_meal_plan: true})
+                          Object.assign(item, {in_meal_plan: true});
                         } else {
-                          Object.assign(item, {in_meal_plan: false})
+                          Object.assign(item, {in_meal_plan: false});
                         }
-                        return item
+                        return item;
                       }
                     )
-                    this.setState({menu_items: menu_items_updated})
+                    this.setState({menu_items: menu_items_updated});
                 })
-                .catch(error => console.log(error))
+                .catch(error => console.log(error));
     }
 
     removeFromMealPlan = id => {
@@ -111,36 +111,36 @@ export default class MyProvider extends React.Component {
         fetch(url, options)
             .then(res => {
               if(!res.ok){
-                return res.json().then(e => Promise.reject(e))
+                return res.json().then(e => Promise.reject(e));
               }
               return;
             })
             .then(() => {
-              const { meal_plan } = this.state
+              const { meal_plan } = this.state;
               for(let i=0; meal_plan[i] !== undefined; i++){
                 if(meal_plan[i].id === id){
-                  meal_plan.splice(i,1)
-                  i--
-                }
-              }
-              const { menu_items } = this.state
+                  meal_plan.splice(i,1);
+                  i--;
+                };
+              };
+              const { menu_items } = this.state;
               const menu_items_updated = menu_items.map(
                 item => {
                     if(this.checkMealPlanForItem(item)===true){
-                        Object.assign(item, {in_meal_plan: true})
+                        Object.assign(item, {in_meal_plan: true});
                     } else {
-                        Object.assign(item, {in_meal_plan: false})
+                        Object.assign(item, {in_meal_plan: false});
                     }
-                    return item
+                    return item;
                 }
-              )
+              );
               this.setState({
                 meal_plan: meal_plan,
                 menu_items: menu_items_updated               
-              })
+              });
               return;
             })
-            .catch(error => console.log(error))
+            .catch(error => console.log(error));
     }//end removeFromMenuPlan()
 
     render(){
@@ -162,8 +162,8 @@ export default class MyProvider extends React.Component {
             }}>
                 {this.props.children}
             </MyContext.Provider>
-        )
-    }
-}
+        );
+    };
+};
 
 export { MyContext };

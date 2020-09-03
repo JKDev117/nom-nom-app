@@ -17,17 +17,17 @@ class MealPlanPage extends React.Component {
             "Authorization": `Bearer ${TokenService.getAuthToken()}`,
             "Content-Type": "application/json",
           }
-        }
+        };
         fetch(url, options)
           .then(res => {
             if(!res.ok){
-              return res.json().then(e => Promise.reject(e))
+              return res.json().then(e => Promise.reject(e));
             }
-            return res.json()
+            return res.json();
           })
           .then(this.context.setMealPlan)
-          .catch(error => console.log(error))
-    }
+          .catch(error => console.log(error));
+    };
 
     render(){
         const { meal_plan, removeFromMealPlan } = this.context;
@@ -42,17 +42,14 @@ class MealPlanPage extends React.Component {
             carbs += item.carbs;
             protein += item.protein;
             fat += item.fat;
-        })
+        });
         
         //create an array to store all the breakfast items in the meal plan along with their html elements
         const breakfasts = meal_plan.filter(item => item.category === 'Breakfast')
                                            .map((item, i) => 
                                                     <li className="meal-plan-box" key={i}>
                                                         <h3 className="breakfast-item-name mealplan-item-name">{item.name}</h3> <br/>
-                                                        {item.image_url ? 
-                                                            <img className="menu-item-image" src={item.image_url} alt={`${item.name}`}/> 
-                                                                : 
-                                                            "" }
+                                                        <img className="menu-item-image" src='/images/dish-food-dome.png' alt={`${item.name}`}/>
                                                         <p className="mealplan-nutritional-info">          
                                                             <u>Calories</u>: {item.calories} <br/>
                                                             <u>Carbs</u>: {item.carbs}g {' '}  
@@ -60,18 +57,14 @@ class MealPlanPage extends React.Component {
                                                             <u>Fat</u>: {item.fat}g {' '}
                                                         </p>
                                                         <button className="removeFromMP-button" onClick={()=>removeFromMealPlan(item.id)}>Remove from Today's Meal Plan</button>
-                                                    </li>)
+                                                    </li>);
         
         //create an array to store all the lunch items in the meal plan along along with their html elements
         const lunches = meal_plan.filter(item => item.category === 'Lunch')
                                         .map((item, i) => 
                                                     <li className="meal-plan-box" key={i}>
                                                         <h3 className="lunch-item-name mealplan-item-name">{item.name}</h3> <br/>
-                                                        {item.image_url ? 
-                                                            <img className="menu-item-image" src={item.image_url} alt={`${item.name}`}/> 
-                                                                : 
-                                                            "" 
-                                                        }
+                                                        <img className="menu-item-image" src='/images/dish-food-dome.png' alt={`${item.name}`}/>
                                                         <p className="mealplan-nutritional-info">                                               
                                                             <u>Calories</u>: {item.calories} <br/>
                                                             <u>Carbs</u>: {item.carbs}g {' '}  
@@ -79,17 +72,14 @@ class MealPlanPage extends React.Component {
                                                             <u>Fat</u>: {item.fat}g {' '}                                                    
                                                         </p>
                                                         <button className="removeFromMP-button" onClick={()=>removeFromMealPlan(item.id)}>Remove from Today's Meal Plan</button>
-                                                    </li>)
+                                                    </li>);
 
         //create an array to store all the dinner items in the meal plan along with their html elements
         const dinners = meal_plan.filter(item => item.category === 'Dinner')
                                         .map((item, i) => 
                                                     <li className="meal-plan-box" key={i}>
                                                         <h3 className="dinner-item-name mealplan-item-name">{item.name}</h3> <br/>
-                                                        {item.image_url ? 
-                                                            <img className="menu-item-image" src={item.image_url} alt={`${item.name}`}/> 
-                                                                : 
-                                                            "" }
+                                                        <img className="menu-item-image" src='/images/dish-food-dome.png' alt={`${item.name}`}/>
                                                         <p className="mealplan-nutritional-info">        
                                                             <u>Calories</u>: {item.calories} <br/>
                                                             <u>Carbs</u>: {item.carbs}g {' '}  
@@ -97,7 +87,7 @@ class MealPlanPage extends React.Component {
                                                             <u>Fat</u>: {item.fat}g {' '}
                                                         </p>
                                                         <button className="removeFromMP-button" onClick={()=>removeFromMealPlan(item.id)}>Remove from Today's Meal Plan</button>
-                                                    </li>)                                                  
+                                                    </li>);                                               
 
         return (
             <div className="MealPlanPage">
@@ -130,9 +120,9 @@ class MealPlanPage extends React.Component {
                     </ul>
                 </section>
             </div>
-        )
-    }
-}
+        );
+    };
+};
 
 
 export default MealPlanPage;

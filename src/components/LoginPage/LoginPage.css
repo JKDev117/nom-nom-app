@@ -19,6 +19,14 @@
     font-family: 'Pangolin', cursive;
 }
 
+.demo-credentials{
+    font-family: 'Baloo Tamma 2', cursive;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 200px;
+    margin: 20px auto;
+}
+
 .login-button {
     font-family: 'Baloo Tamma 2', cursive;
     margin-top: 1em;

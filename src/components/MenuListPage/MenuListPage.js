@@ -18,12 +18,12 @@ class MenuListPage extends React.Component {
         let plan_id;
         for(let element of meal_plan){
             if(element.menu_item_id === item.id){
-                plan_id = element.id
+                plan_id = element.id;
                 break;
-            }
-        }
-        removeFromMealPlan(plan_id)
-    }
+            };
+        };
+        removeFromMealPlan(plan_id);
+    };
 
 
     componentDidMount(){
@@ -37,7 +37,7 @@ class MenuListPage extends React.Component {
                 "Authorization": `Bearer ${TokenService.getAuthToken()}`,
                 "Content-Type": "application/json",
             }
-        }
+        };
 
         //store endpoint url & options in variables for GET /menu
         const menu_url = config.REACT_APP_API_BASE_URL + '/menu';
@@ -47,53 +47,53 @@ class MenuListPage extends React.Component {
                 "Authorization": `Bearer ${TokenService.getAuthToken()}`,
                 "Content-Type": "application/json",
             }
-        }
+        };
 
         //GET /plan
         fetch(plan_url, plan_options)
             .then(res => {
                 if(!res.ok){
-                    return res.json().then(e => Promise.reject(e))
+                    return res.json().then(e => Promise.reject(e));
                 }
-                return res.json()
+                return res.json();
             })
             .then(resJson => {
-                return this.context.setMealPlan(resJson)
+                return this.context.setMealPlan(resJson);
             })
             .then(
                 //GET /menu
                 () => fetch(menu_url, menu_options)
                 .then(res => {
                     if(!res.ok){
-                    return res.json().then(e => Promise.reject(e))
+                        return res.json().then(e => Promise.reject(e));
                     }
-                    return res.json()
+                    return res.json();
                 })
                 .then(resJson => {
                     const menu_items_modified = resJson.map(
                         item => {
                             if(checkMealPlanForItem(item)===true){
-                                Object.assign(item, {in_meal_plan: true})
+                                Object.assign(item, {in_meal_plan: true});
                             } else {
-                                Object.assign(item, {in_meal_plan: false})
+                                Object.assign(item, {in_meal_plan: false});
                             }
-                            return item
+                            return item;
                         }
                     )
-                    return this.context.setMenuItems(menu_items_modified)
+                    return this.context.setMenuItems(menu_items_modified);
                 })           
             )
-            .catch(error =>  console.log(error))    
+            .catch(error =>  console.log(error));
     }
 
     render(){
-        const { menu_items } = this.context
+        const { menu_items } = this.context;
 
         const categories = [
             {category: 'Breakfast', list: []},
             {category: 'Lunch', list: []},
             {category: 'Dinner', list: []}
-        ]
+        ];
 
         /* store into each object in the array 'categories' all the items in the menu
         according to their category along with their html elements; the html format of each menu item will differ depending
@@ -103,33 +103,34 @@ class MenuListPage extends React.Component {
                         .map((item, i) =>
                                     item.in_meal_plan ? 
                                         <li className="meal-box meal-box-added" key={i}>
-                                            <span className="added-status">ADDED</span><br/>
-                                            <label className="gray" htmlFor={`menu-item${item.id}`}>{item.name}</label>
-                                            <Link className="edit-button-link" to={`/edit-menu-item/${item.id}`}>
-                                                <button className="edit-button">Edit</button><br />
-                                            </Link>
-                                            { item.image_url ? <img className="menu-item-image gray" src={item.image_url} alt={`${item.name}`}/> : "" }
-                                            <div className="menu-item-info"> 
-                                                <div className="panel gray">                                    
-                                                        <p className="mealplan-nutritional-info">
-                                                            <u>Calories</u>: {item.calories} &nbsp; <br/>
-                                                            <u>Carbs</u>: {item.carbs}g &nbsp; 
-                                                            <u>Protein</u>: {item.protein}g &nbsp;
-                                                            <u>Fat</u>: {item.fat}g &nbsp;
-                                                        </p>
-                                                </div><br />
+                                            <h2 className="gray menu-item-name" htmlFor={`menu-item${item.id}`}>{item.name}</h2>
+                                            <div className="panel">
+                                                    <div className="image-and-status"> 
+                                                        <img className="gray menu-item-image" src='/images/fork-spoon-circle.png' alt={`${item.name}`}/>   
+                                                        <p className="gray added-status">ADDED</p>
+                                                    </div>
+                                                    <Link className="edit-button-link" to={`/edit-menu-item/${item.id}`}>
+                                                        <br/><button className="edit-button">Edit</button><br />
+                                                    </Link>
+                                                    <p className="gray mealplan-nutritional-info">
+                                                        <u>Calories</u>: {item.calories} &nbsp; <br/>
+                                                        <u>Carbs</u>: {item.carbs}g &nbsp; 
+                                                        <u>Protein</u>: {item.protein}g &nbsp;
+                                                        <u>Fat</u>: {item.fat}g &nbsp;
+                                                    </p>
+                                                    
                                             </div>
                                             <button className="removeFromMP-button" type="button" onClick={()=>this.handleRemoveFromMealPlan(item)}>Remove from today's meal plan</button>                             
                                         </li>
                                     :
                                         <li className="meal-box meal-box-not-added" key={i}>
-                                            <label htmlFor={`menu-item${item.id}`}>{item.name}</label>
-                                            <Link className="edit-button-link" to={`/edit-menu-item/${item.id}`}>
-                                                <button className="edit-button">Edit</button><br/>
-                                            </Link>
+                                            <h2 className="menu-item-name" htmlFor={`menu-item${item.id}`}>{item.name}</h2>
                                             <div className="panel">
-                                                { item.image_url ? 
-                                                        <img className="menu-item-image" src={item.image_url} alt={`${item.name}`}/> : "" }  
+                                                    <div className="image-and-status"> 
+                                                        <img className="menu-item-image gray" src='/images/fork-spoon-circle.png' alt={`${item.name}`}/>   
+                                                    </div>                                                    <Link className="edit-button-link" to={`/edit-menu-item/${item.id}`}>
+                                                        <br/><button className="edit-button">Edit</button><br/>
+                                                    </Link>
                                                     <p className="mealplan-nutritional-info">
                                                         <u>Calories</u>: {item.calories} &nbsp;  <br/>
                                                         <u>Carbs</u>: {item.carbs}g &nbsp;   
@@ -140,7 +141,7 @@ class MenuListPage extends React.Component {
                                             <button className="addToMP-button" type="button" onClick={() => this.context.addToMealPlan(item.user_id, item.id)}>Add to today's meal plan</button>                             
                                         </li>
                         )//end .map
-        )
+        );
 
         return(
             <div className="MenuListPage">
@@ -148,7 +149,7 @@ class MenuListPage extends React.Component {
 
                 <h1 className="menu-list-title">My Menu List</h1><br/>
 
-                <Tabs defaultIndex={0} onSelect={index => console.log(index)}>
+                <Tabs defaultIndex={0}>
                     <TabList>
                         <Tab>Breakfast Menu</Tab>
                         <Tab>Lunch Menu</Tab>
@@ -195,9 +196,9 @@ class MenuListPage extends React.Component {
                     </TabPanel>
                 </Tabs>
             </div>
-        )
-    }
-}
+        );
+    };
+};
 
 
 export default MenuListPage;

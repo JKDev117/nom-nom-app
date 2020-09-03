@@ -30,6 +30,12 @@ Add Menu Item Page:
 
   - To get started the user must register for an account. After successful registration, all the user has to do is provide their username and password to log in and get started on their nom nom adventure!
 
+- To see a demo version, see 'Demo Credentials' below and use the provided login information to login and try out some of the features of the app.
+
+# Demo Credentials
+Username: dunder_mifflin  
+Password: Password1!
+
 # Technologies Used
 
 The following technologies were used to create this app:

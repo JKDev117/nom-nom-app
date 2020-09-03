@@ -10,22 +10,21 @@ class AddMenuItem extends React.Component {
  
     //to handle user form submission of adding a new menu item to the menu
     handleSubmit = e => {
-        e.preventDefault()
-        const { name, image_url, category } = e.target
-        const calories = parseInt(e.target.calories.value) || null
-        const carbs = parseInt(e.target.carbs.value) || null
-        const protein = parseInt(e.target.protein.value) || null
-        const fat = parseInt(e.target.fat.value) || null
+        e.preventDefault();
+        const { name, category } = e.target;
+        const calories = parseInt(e.target.calories.value) || null;
+        const carbs = parseInt(e.target.carbs.value) || null;
+        const protein = parseInt(e.target.protein.value) || null;
+        const fat = parseInt(e.target.fat.value) || null;
         const menu_item = {
             name: name.value,
-            image_url: image_url.value,
             calories: calories,
             carbs: carbs,
             protein: protein,
             fat: fat,
             category: category.value
-        }
-        const fetchUrl = config.REACT_APP_API_BASE_URL + '/menu'
+        };
+        const fetchUrl = config.REACT_APP_API_BASE_URL + '/menu';
         const options = {
             method: 'POST',
             body: JSON.stringify(menu_item),
@@ -33,7 +32,7 @@ class AddMenuItem extends React.Component {
                 "content-type": "application/json; charset=utf-8",
                 "Authorization": `Bearer ${TokenService.getAuthToken()}`,
             }
-        }
+        };
         fetch(fetchUrl, options)
             .then(res => {
                 if(!res.ok) {
@@ -42,8 +41,8 @@ class AddMenuItem extends React.Component {
                 return res.json()
             })
             .then(resJson => this.context.addMenuItem(resJson, () => this.props.history.push('/menu')))
-            .catch(error => console.log(error))
-    }
+            .catch(error => console.log(error));
+    };
 
     render(){
         return(
@@ -54,9 +53,6 @@ class AddMenuItem extends React.Component {
                         <img className="chef-hat" src="/images/chef-hat.png" alt="chef-hat"/><br/>
                         <label htmlFor="name"> Name: </label>
                         <input type="text" id="name" name="name" required/><br/>
-
-                        <label htmlFor="image_url"> Image URL: </label>
-                        <input type="text" id="image_url" name="image_url"/><br/>
 
                         <label htmlFor="calories"> Calories: </label>
                         <input type="number" id="calories" min="0" name="calories"/><br/>
@@ -82,8 +78,8 @@ class AddMenuItem extends React.Component {
                     </form>
                 </section>
             </div>
-        )
-    }
-}
+        );
+    };
+};
 
 export default AddMenuItem;

@@ -21,6 +21,29 @@ nav {
     overflow:hidden;
 }
 
+.landingPageNav{
+    width: 80%;
+    max-width: 821px;
+    margin: 0 auto;
+}
+
+.menuNav{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.mealPlanNav{
+    width: 80%;
+    max-width: 821px;
+    margin: 0 auto;
+}
+
+.addMenuItemNav, .defaultNav{
+    width: 80%;
+    max-width: 821px;
+    margin: 0 auto;
+}
+
 .logo {
     text-decoration: none;
     text-align: center;

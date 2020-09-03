@@ -5,15 +5,15 @@ import TokenService from '../../services/token-service';
 import IdleService from '../../services/idle-service';
 
 export default function Nav() {
-  let location = useLocation()
+  let location = useLocation();
   
   //when the user logs out
   function handleLogoutClick(){
-    TokenService.clearAuthToken()
+    TokenService.clearAuthToken();
     /* when logging out, clear the callbacks to the refresh api and idle auto logout */
-    TokenService.clearCallbackBeforeExpiry()
-    IdleService.unRegisterIdleResets()
-  }
+    TokenService.clearCallbackBeforeExpiry();
+    IdleService.unRegisterIdleResets();
+  };
 
   //Logout link
   function renderLogOutLink(){
@@ -21,21 +21,21 @@ export default function Nav() {
         <Link to="/" 
               className='logout-link' 
               onClick={()=>handleLogoutClick()}>Logout</Link>        
-    )
-  }
+    );
+  };
 
   //Login link
   function renderLogInLink(){
     return(
       <Link to="/login" className='login-link'>Login</Link>
-    )
-  }
+    );
+  };
 
   //depending on the pathname, render the Nav component as follows
   switch (location.pathname) {
     case '/':
         return (
-          <nav>
+          <nav className="landingPageNav">
               { TokenService.hasAuthToken() ? 
                   renderLogOutLink()
                     :
@@ -46,33 +46,33 @@ export default function Nav() {
                   </> 
               }
           </nav>
-        ) 
+        );
     case '/menu':
         return (
-          <nav>
+          <nav className="menuNav">
               <Link className="home-link" to="/">Home</Link>
               {" "}
               <Link className="meal-plan-link" to={'/meal-plan'}>My Meal Plan</Link>
               {" "}
               {renderLogOutLink()}
           </nav>        
-        )
+        );
     case '/meal-plan':
         return (
-          <nav>
+          <nav className="mealPlanNav">
               <Link className="home-link" to="/">Home</Link>
               {" "}
               <Link className="my-menu-link" to={'/menu'}>My Menu</Link>
               {" "}
               {renderLogOutLink()}
           </nav>        
-        )
+        );
     case '/add-menu-item':
         return (
-          <nav>
+          <nav className="addMenuItemNav">
                 {renderLogOutLink()}
           </nav>
-        )
+        );
     case '/login':
         return (
           <nav>
@@ -82,7 +82,7 @@ export default function Nav() {
               </Link>  
             </h1>
           </nav>    
-        )
+        );
     case '/register':
         return (
           <nav>
@@ -92,13 +92,13 @@ export default function Nav() {
               </Link>  
             </h1>
           </nav>    
-        )  
+        );
     default:
         return(
-          <nav>
+          <nav className="defaultNav">
                 {renderLogOutLink()}
           </nav>
-        )
-  }
+        );
+  };
 
-}
+};

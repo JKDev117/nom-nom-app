@@ -20,9 +20,9 @@ class LandingPage extends React.Component {
                     </Link>
                 </section>
             </div>
-        )
-    }
-}
+        );
+    };
+};
 
 export default LandingPage;
 
